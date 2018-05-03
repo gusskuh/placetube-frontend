@@ -5,8 +5,7 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/playlists">Playlists</router-link> | 
       <router-link to="/playlists/1">PlaylistDetails</router-link> | 
-      <router-link to="/signIn/register">Register</router-link> |
-      <router-link to="/signIn/login">Login</router-link> |
+      <router-link to="/signIn">Sign In</router-link> |
       <router-link to="/myProfile/1">MyProfile</router-link>
     </div>
     <router-view/>
