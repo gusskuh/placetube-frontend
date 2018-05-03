@@ -13,6 +13,13 @@ function getPlaylists() {
     .catch( err => console.log('no playlists', err)) 
 }
 
+function updatePlaylist(updatedPlaylist) {
+    return axios
+    .put(`${PLAYLISTS_URL}/:${updatedPlaylist._id}`, updatedPlaylist)
+    .then(res =>res.data)
+    .catch( err => console.log('updated failed', err))
+}
+
 export default {
     getPlaylists,
 }

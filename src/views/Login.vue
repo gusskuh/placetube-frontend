@@ -6,6 +6,10 @@
                 <button type="submit" :disabled="!this.user.email || !this.user.password">Log in</button>
             </form>
 
+            dont have an account?
+            <router-link to="/register">Register</router-link>
+
+
         </section>
 </template>
 
@@ -15,7 +19,7 @@ export default {
 
   data() {
     return {
-      user: { email: "Amit@gmail.com", password: "12345" }
+      user: { email: '', password: '' }
     }
   },
 
@@ -28,12 +32,12 @@ export default {
             this.$store.dispatch({type: 'login', userCredentials:this.user})
             .then(res => {
                 console.log('You have been logged-in!')
-                EventBusService.$emit(SHOW_MSG, {txt: `Welcome ${this.user.name}`});
-                this.$router.push('/chat');
+                // EventBusService.$emit(SHOW_MSG, {txt: `Welcome ${this.user.name}`});
+                this.$router.push('/');
             })
             .catch(err => {
                 console.log('Login Failed!');
-                EventBusService.$emit(SHOW_MSG, {txt: `Wrong Credentials, please try again`, type: 'danger'});
+                // EventBusService.$emit(SHOW_MSG, {txt: `Wrong Credentials, please try again`, type: 'danger'});
                 this.$refs.txtUserEmail.focus();
             })
         }
