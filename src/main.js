@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store/MainStore'
 import VueYoutube from 'vue-youtube'
+ 
+Vue.use(VueYoutube)
 import './registerServiceWorker'
 import './css/style.css'
 

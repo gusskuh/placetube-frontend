@@ -8,8 +8,10 @@ import SignIn from './views/SignIn.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import MyProfile from './views/MyProfile.vue'
-
+import VueYoutube from 'vue-youtube'
+ 
 Vue.use(Router)
+Vue.use(VueYoutube)
 
 export default new Router({
   routes: [
