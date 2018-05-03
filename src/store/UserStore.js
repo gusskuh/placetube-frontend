@@ -2,9 +2,9 @@
 
 
 export default {
-    // state: {
-    //     loggedinUser: null
-    //   },
+    state: {
+        loggedinUser: {name:'amit', playlists:[1,2,3]}
+      },
     //   mutations: {
     //     setUser(state, {user}) {
     //       state.loggedinUser = user;
@@ -13,7 +13,7 @@ export default {
     //   getters: {
     //     loggedinUser(state) {
     //       return state.loggedinUser;
-    //     }
+    //     },
     //   },
     //   actions: {
     //     login(store, {userCredentials}) {

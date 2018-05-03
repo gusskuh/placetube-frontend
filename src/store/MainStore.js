@@ -10,5 +10,10 @@ export default new Vuex.Store({
   modules: {
     UserStore,
     PlaylistStore
+  },
+  getters: {
+    print(state) {
+      console.log('ssssddddd', state.loggedInUser, state.playlists);
+    }
   }
 })
