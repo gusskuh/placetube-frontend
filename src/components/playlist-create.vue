@@ -19,16 +19,16 @@
 
 <script>
 export default {
-  props: ["selectedPlaylist"], 
+//   props: ["selectedPlaylist"], 
 
   data() {
     return {
       playlistToEdit:{
-          _id: this.selectedPlaylist._id,
-          name: this.selectedPlaylist.playlistName,
-          loc: this.selectedPlaylist.loc,
-          urls: this.selectedPlaylist.urls,
-          managers: this.selectedPlaylist.managers,
+          _id: '',
+          name: '',
+          loc: '',
+          urls: '',
+          managers: '',
           }
     }
   },

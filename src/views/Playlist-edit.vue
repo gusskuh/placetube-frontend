@@ -8,7 +8,8 @@
             managers: <input type="text" v-model="playlistToEdit.managers">
             <div>
             <button class="btn">Save</button>
-            <button @click.prevent="cancelChanges">Cancel</button>
+            <button @click="cancelChanges">Cancel</button>
+            <!-- <Button @click="backToMyProfile">Back</Button> -->
             </div>
         </form>
 
@@ -19,44 +20,46 @@
 
 <script>
 export default {
-  props: ["selectedPlaylist"], 
+  props: ["selectedPlaylist"],
 
   data() {
     return {
-      playlistToEdit:{
-          _id: this.selectedPlaylist._id,
-          name: this.selectedPlaylist.playlistName,
-          loc: this.selectedPlaylist.loc,
-          urls: this.selectedPlaylist.urls,
-          managers: this.selectedPlaylist.managers,
-          }
-    }
+      playlistToEdit: {
+        _id: 1,
+        name: 1,
+        loc: 1,
+        urls: 1,
+        managers: 1
+      }
+    };
   },
 
-  methods:{
-    savePlaylist(){
-      this.$emit('saveChanges')
-      this.$store.dispatch('saveChanges', this.playlistToEdit )
+  methods: {
+    savePlaylist() {
+      this.$emit("saveChanges");
+      this.$store.dispatch("saveChanges", this.playlistToEdit);
     },
-    cancelChanges(){
+    cancelChanges() {
       // console.log('cancellll');
-       this.$emit('cancelChanges')
+            this.$router.push(`/myProfile/1`);
+
+    },
+    backToMyProfile() {
+      this.$router.push(`/myProfile/1`);
     }
   },
   created() {
-    console.log('edtiiitttt commpppppp', this.selectedPlaylist);
+    console.log("edtiiitttt commpppppp", this.selectedPlaylist);
   },
   mounted() {
-
     this.$refs.name.focus();
-
   }
 };
 </script>
 
 <style>
 .editor {
-  margin:0 auto;
+  margin: 0 auto;
   width: 100px;
 }
 </style>

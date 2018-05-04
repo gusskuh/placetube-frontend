@@ -5,8 +5,10 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/playlists">Playlists</router-link> | 
       <router-link to="/playlists/1">PlaylistDetails</router-link> | 
-      <router-link to="/myProfile/1">MyProfile</router-link> |
-      <router-link to="/myProfile/addSongs"> Add songs </router-link>
+      <router-link to="/myProfile/addSongs"> Add songs </router-link>|
+      <router-link v-if="loggedinUser" to="/playlists/1">PlaylistDetails</router-link> | 
+      <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
+      <router-link v-if="loggedinUser" to='/myProfile/1'>MyProfile</router-link>
       <router-link v-if="!loggedinUser" style="float:right" to="/login">Log In</router-link>
       <span v-if="loggedinUser" style="float:right">{{loggedinUser.userName}}</span>
     </div>
@@ -17,21 +19,26 @@
 
 <script>
 export default {
+  created() {
+    if (localStorage.User) {
+      console.log(localStorage.User);
+      // console.log(loggedinUser);
+      this.$store.commit({ type: "setUser", user: localStorage.User });
+    }
+  },
 
   methods: {
-        logout() {
-            console.log('Logging out!');
-            this.$store.dispatch('logout').then(()=>{
-                this.$router.push('/')
-            })
-        }
-    },
-    computed: {
-        loggedinUser() {
-            return this.$store.getters.loggedinUser
-        }
+    logout() {
+      this.$router.push("/");
+      this.$store.dispatch("logout")
     }
-}
+  },
+  computed: {
+    loggedinUser() {
+      return this.$store.getters.loggedinUser;
+    }
+  }
+};
 </script>
 
 <style>
@@ -46,7 +53,7 @@ background-repeat: no-repeat;
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

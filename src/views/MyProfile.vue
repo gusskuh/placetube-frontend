@@ -5,45 +5,55 @@
       <h1>My Profile</h1>
       <button>edit</button>
     </header>
-    <div  v-if="!selectedPlaylist">
+    <div v-if="!selectedPlaylist">
     <div class="user-details">
       <img src="https://www.attractivepartners.co.uk/wp-content/uploads/2017/06/profile.jpg" alt="profile image">
       <div class="user-name">
         <h1>{{showUserName}}</h1>
-        <Button>Create Playlist</Button>
+        <Button @click="moveToEditPage">Create Playlist</Button>
       </div>
       
     </div>
     
       <ul>
         <li v-for="playlist in PlayListsByUserId" :key="playlist._id">
-        <playlist-preview @editPlaylist="editPlaylist" :playlist="playlist"></playlist-preview>
+        <playlist-preview :playlist="playlist"></playlist-preview>
         </li>
       </ul> 
 
     </div>
 
+
+    <!-- <playlist-create @saveChanges="saveChanges" 
+                    @cancelChanges="cancelChanges"
+                    v-if="showCreateNewPlaylist" 
+                    :selectedPlaylist="selectedPlaylist">
+    </playlist-create>
+
     <playlist-edit @saveChanges="saveChanges" 
                     @cancelChanges="cancelChanges"
                     v-if="selectedPlaylist" 
                     :selectedPlaylist="selectedPlaylist">
-    </playlist-edit>
+    </playlist-edit> -->
 
   </section>
 </template>
 
 <script>
 import playlistPreview from "../components/playlist-preview";
-import playlistEdit from "../components/playlist-edit";
+import playlistEdit from "../views/Playlist-edit";
+import playlistCreate from "../components/playlist-create";
 
 export default {
   components: {
     playlistPreview,
-    playlistEdit
+    playlistEdit,
+    playlistCreate
   },
+
   data() {
     return {
-      selectedPlaylist: null
+      selectedPlaylist: null,
     };
   },
   created() {
@@ -61,28 +71,20 @@ export default {
     cancelChanges() {
       console.log("Cancel!");
       this.selectedPlaylist = false;
+    },
+    moveToEditPage() {
+                this.$router.push("/playlist/edit");
+
+
     }
   },
   computed: {
     showUserName() {
-      return "Samantha";
-      // return this.$store.getters.loggedinUser;
+      return this.$store.getters.loggedinUser.userName;
     },
 
     PlayListsByUserId() {
-      return [
-        { 
-          _id:123,
-          name: "playlist#1",
-          loc: "natanya",
-          urls: "www.www",
-          managers: ["adas", "dasd"]
-        },
-        { name: "playlist#2" },
-        { name: "playlist#3" },
-        { name: "playlist#4" }
-      ];
-      // return this.$store.getters.getPlaylistsByUser;
+      return this.$store.getters.getPlaylistsByUser;
     }
   }
 };
