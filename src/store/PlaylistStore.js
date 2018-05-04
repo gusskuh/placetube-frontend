@@ -16,9 +16,11 @@ export default {
       });
       state.playlists.splice(playlistIdx, 1, updatedPlaylist);
     },
-    deletePlaylist(state , { playlistToDelete }) {
-      var playlistToDel = state.playlists.findIndex(playlist => playlist._id === playlistToDelete._id)
-      state.playlists.splice(playlistToDel, 1)
+    deletePlaylist(state, { playlistToDelete }) {
+      var playlistToDel = state.playlists.findIndex(
+        playlist => playlist._id === playlistToDelete._id
+      );
+      state.playlists.splice(playlistToDel, 1);
     }
   },
 
@@ -30,8 +32,7 @@ export default {
       if (!rootState.UserStore.loggedinUser) return state.playlists;
       else {
         let loggedUserId = rootState.UserStore.loggedinUser._id;
-        let playlists = state.playlists;
-        return playlists.filter(playlist => {
+        return state.playlists.filter(playlist => {
           return playlist.adminId === loggedUserId;
         });
       }
@@ -52,11 +53,11 @@ export default {
     },
     deletePlaylist(store, playlistToDelete) {
       // console.log('playlist to delete!', playlistToDelete);
-      return PlaylistsService.deletePlaylist(playlistToDelete)
-      .then(updatedPlaylists => {
-          store.commit({type:'deletePlaylist', playlistToDelete});
-      })
-      
+      return PlaylistsService.deletePlaylist(playlistToDelete).then(
+        updatedPlaylists => {
+          store.commit({ type: "deletePlaylist", playlistToDelete });
+        }
+      );
     }
   }
 };

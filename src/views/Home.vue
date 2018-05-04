@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png">
-    <h1>Welcome to PlaceTube!</h1>
-    <h2>Conneting Places With Music!</h2>
+    <div class="short-desc">
+      <h1>Welcome to PlaceTube!</h1>
+      <h2>Conneting Places With Music!</h2>
+    </div>
     <ul>
       <li v-for="playlist in showPlaylists" :key="playlist._id">{{playlist}}</li>
     </ul>
@@ -25,3 +26,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.short-desc{
+  height: 80px;
+}
+</style>
