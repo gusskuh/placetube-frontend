@@ -1,6 +1,7 @@
 <template>
   <section>
-        {{playlist}} <button @click="editPlaylist(playlist)">Edit</button><button>Del</button>
+        {{playlist.playlistName}} <button @click="editPlaylist(playlist)">Edit</button>
+        <button @click="deletePlaylist(playlist)">Del</button>
   </section>
 </template>
 
@@ -10,7 +11,11 @@ export default {
   methods:{
       editPlaylist(playlist){
           this.$emit('editPlaylist', playlist)
-      }
+      },
+        deletePlaylist(playlist){
+            // console.log(playlist);
+            this.$store.dispatch('deletePlaylist', playlist)
+        }
   }
 };
 </script>

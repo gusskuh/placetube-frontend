@@ -65,24 +65,14 @@ export default {
   },
   computed: {
     showUserName() {
-      return "Samantha";
-      // return this.$store.getters.loggedinUser;
+      // return "Samantha";
+      // console.log(this.$store.getters.loggedinUser,'aaaa');
+      
+      return this.$store.getters.loggedinUser.userName;
     },
 
     PlayListsByUserId() {
-      return [
-        { 
-          _id:123,
-          name: "playlist#1",
-          loc: "natanya",
-          urls: "www.www",
-          managers: ["adas", "dasd"]
-        },
-        { name: "playlist#2" },
-        { name: "playlist#3" },
-        { name: "playlist#4" }
-      ];
-      // return this.$store.getters.getPlaylistsByUser;
+       return this.$store.getters.getPlaylistsByUser;
     }
   }
 };

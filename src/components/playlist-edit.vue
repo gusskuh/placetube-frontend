@@ -25,7 +25,7 @@ export default {
     return {
       playlistToEdit:{
           _id: this.selectedPlaylist._id,
-          name: this.selectedPlaylist.name,
+          name: this.selectedPlaylist.playlistName,
           loc: this.selectedPlaylist.loc,
           urls: this.selectedPlaylist.urls,
           managers: this.selectedPlaylist.managers,
