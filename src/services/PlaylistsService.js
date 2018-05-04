@@ -22,4 +22,5 @@ function updatePlaylist(updatedPlaylist) {
 
 export default {
     getPlaylists,
+    updatePlaylist
 }

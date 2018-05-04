@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Playlists from './views/Playlists.vue'
 import PlaylistDetails from './views/PlaylistDetails.vue'
+import PlaylistEdit from './views/Playlist-edit.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import MyProfile from './views/MyProfile.vue'
@@ -34,7 +35,11 @@ export default new Router({
       name: 'playlistDetails',
       component: PlaylistDetails
     },
-
+    {
+      path: '/playlist/edit/:playlistId?',
+      name: 'playlistEdit',
+      component: PlaylistEdit
+    },
     {
       path: '/register',
       name: 'register',

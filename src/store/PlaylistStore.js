@@ -23,10 +23,13 @@ export default {
           return state.playlists
         },
         getPlaylistsByUser(state, getters, rootState) {
+          if(!rootState.UserStore.loggedinUser) return state.playlists;
+          else {
           let loggedUserId = rootState.UserStore.loggedinUser._id
-          return playlists.filter(playlist => {
+          return state.playlists.filter(playlist => {
             return playlist.adminId === loggedUserId;
           })
+        }
         }
 
       },

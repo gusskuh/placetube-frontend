@@ -7,6 +7,10 @@ export default {
       mutations: {
         setUser(state, {user}) {
           state.loggedinUser = user;
+        },
+        try() {
+          console.log(1);
+          
         }
       },
       getters: {

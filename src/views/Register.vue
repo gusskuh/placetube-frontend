@@ -2,7 +2,7 @@
   <section class="register-page">
         <h1>Register:</h1>
         <form @submit.prevent="register">
-            <input type="text" placeholder="Username" v-model="user.name" />
+            <input type="text" placeholder="Username" v-model="user.userName" />
             <input type="email" placeholder="Email address" v-model="user.email" />
             <input type="password" placeholder="Password" v-model="user.password" />
             <button type="submit">Register</button>
@@ -18,7 +18,7 @@ export default {
   name: "Register",
   data() {
     return {
-      user: { name: "", email: "", password: "" }
+      user: { userName: "", email: "", password: "" }
     };
   },
 
