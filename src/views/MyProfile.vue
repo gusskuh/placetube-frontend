@@ -65,9 +65,6 @@ export default {
   },
   computed: {
     showUserName() {
-      // return "Samantha";
-      // console.log(this.$store.getters.loggedinUser,'aaaa');
-      
       return this.$store.getters.loggedinUser.userName;
     },
 
