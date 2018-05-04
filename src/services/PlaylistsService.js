@@ -14,13 +14,26 @@ function getPlaylists() {
 }
 
 function updatePlaylist(updatedPlaylist) {
+    console.log('*********************');
+
     return axios
     .put(`${PLAYLISTS_URL}/:${updatedPlaylist._id}`, updatedPlaylist)
     .then(res =>res.data)
     .catch( err => console.log('updated failed', err))
 }
 
+function deletePlaylist(playlistToDelete) {
+    console.log('playlist to delet form service!', `${PLAYLISTS_URL}/${playlistToDelete._id}`)
+    return axios
+    .delete(`${PLAYLISTS_URL}/${playlistToDelete._id}`)
+    .then(res => res.data)
+    .catch( err => console.log('could not delete!!'))
+    
+    
+}
+
 export default {
     getPlaylists,
-    updatePlaylist
+    updatePlaylist,
+    deletePlaylist
 }

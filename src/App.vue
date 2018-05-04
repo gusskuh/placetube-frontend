@@ -6,7 +6,7 @@
       <router-link to="/playlists">Playlists</router-link> |
       <router-link v-if="loggedinUser" to="/playlists/1">PlaylistDetails</router-link> | 
       <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
-      <router-link v-if="loggedinUser" to='/myProfile/5ae9afe4c5ace0fc73517ee7'>MyProfile</router-link>
+      <router-link v-if="loggedinUser" to='/myProfile/1'>MyProfile</router-link>
       <router-link v-if="!loggedinUser" style="float:right" to="/login">Log In</router-link>
       <span v-if="loggedinUser" style="float:right">{{loggedinUser.userName}}</span>
     </div>
