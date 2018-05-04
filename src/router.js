@@ -7,6 +7,7 @@ import PlaylistDetails from './views/PlaylistDetails.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import MyProfile from './views/MyProfile.vue'
+import AddSongs from './views/AddSongs.vue'
 import VueYoutube from 'vue-youtube'
  
 Vue.use(Router)
@@ -46,9 +47,14 @@ export default new Router({
       component: Login
     },
     {
+      path: '/myProfile/addSongs',
+      name: 'addSongs',
+      component: AddSongs
+      },
+    {
       path: '/myProfile/:userId',
       name: 'myProfile',
       component: MyProfile
-    },
+    }
   ]
 })

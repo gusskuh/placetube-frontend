@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="956px" height="868px" viewBox="0 0 956 868" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #001514;">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>preview</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#D9C9F0" offset="0%"></stop>
+            <stop stop-color="#B298DC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#D29CE8" offset="0%"></stop>
+            <stop stop-color="#A663CC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#ECB5FD" offset="0%"></stop>
+            <stop stop-color="#D47EFB" offset="100%"></stop>
+        </linearGradient>
+        <radialGradient cx="100%" cy="100%" fx="100%" fy="100%" r="128.132304%" gradientTransform="translate(1.000000,1.000000),scale(0.857708,1.000000),rotate(-139.562764),translate(-1.000000,-1.000000)" id="radialGradient-4">
+            <stop stop-color="#001514" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#7303C2" stop-opacity="0.505038496" offset="49.3235171%"></stop>
+            <stop stop-color="#001514" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="preview">
+            <g id="Circles">
+                <ellipse id="Oval-Copy-3" fill="url(#linearGradient-1)" style="mix-blend-mode: hard-light;" cx="292" cy="273" rx="292" ry="273"></ellipse>
+                <ellipse id="Oval-Copy" fill="url(#linearGradient-2)" style="mix-blend-mode: hard-light;" cx="804.5" cy="726.5" rx="151.5" ry="141.5"></ellipse>
+                <ellipse id="Oval-Copy-8" fill="url(#linearGradient-3)" style="mix-blend-mode: hard-light;" cx="338" cy="552" rx="68" ry="63"></ellipse>
+                <path d="M557,191 C519.444637,191 489,162.793939 489,128 C489,93.2060608 519.444637,65 557,65 C594.555363,65 625,93.2060608 625,128 C625,162.793939 594.555363,191 557,191 Z M658,928.441176 C603.32381,928.441176 559,887.37647 559,836.720588 C559,786.064706 603.32381,745 658,745 C712.67619,745 757,786.064706 757,836.720588 C757,887.37647 712.67619,928.441176 658,928.441176 Z" id="Oval-Copy-8" fill="url(#linearGradient-3)" style="mix-blend-mode: hard-light;"></path>
+            </g>
+            <rect id="Background-Overlay" fill="url(#radialGradient-4)" x="0" y="0" width="1012" height="868"></rect>
+            <rect id="Background-Overlay-Copy" fill-opacity="0.6" fill="#001514" x="-23" y="0" width="1018" height="868"></rect>
+        </g>
+    </g>
+</svg>
