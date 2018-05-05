@@ -14,8 +14,6 @@ function getPlaylists() {
 }
 
 function updatePlaylist(updatedPlaylist) {
-    console.log('*********************');
-
     return axios
     .put(`${PLAYLISTS_URL}/:${updatedPlaylist._id}`, updatedPlaylist)
     .then(res =>res.data)
@@ -28,12 +26,21 @@ function deletePlaylist(playlistToDelete) {
     .delete(`${PLAYLISTS_URL}/${playlistToDelete._id}`)
     .then(res => res.data)
     .catch( err => console.log('could not delete!!'))
-    
-    
+}
+
+function _getPlaylistUrl(playlistId) {
+    return `${PLAYLISTS_URL}/${playlistId}`;
+}
+
+function getPlaylistById (playlistId){
+    return axios
+    .get(_getPlaylistUrl(playlistId))
+    .then(res => res.data)
 }
 
 export default {
     getPlaylists,
+    getPlaylistById,
     updatePlaylist,
     deletePlaylist
 }
