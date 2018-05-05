@@ -23,32 +23,17 @@
 
     </div>
 
-
-    <!-- <playlist-create @saveChanges="saveChanges" 
-                    @cancelChanges="cancelChanges"
-                    v-if="showCreateNewPlaylist" 
-                    :selectedPlaylist="selectedPlaylist">
-    </playlist-create>
-
-    <playlist-edit @saveChanges="saveChanges" 
-                    @cancelChanges="cancelChanges"
-                    v-if="selectedPlaylist" 
-                    :selectedPlaylist="selectedPlaylist">
-    </playlist-edit> -->
-
   </section>
 </template>
 
 <script>
 import playlistPreview from "../components/playlist-preview";
 import playlistEdit from "../views/Playlist-edit";
-import playlistCreate from "../components/playlist-create";
 
 export default {
   components: {
     playlistPreview,
     playlistEdit,
-    playlistCreate
   },
 
   data() {
@@ -56,9 +41,7 @@ export default {
       selectedPlaylist: null,
     };
   },
-  created() {
-    // console.log(testGetter2());
-  },
+
   methods: {
     editPlaylist(playlist) {
       this.selectedPlaylist = playlist;
@@ -73,6 +56,7 @@ export default {
       this.selectedPlaylist = false;
     },
     moveToEditPage() {
+      
                 this.$router.push("/playlist/edit");
 
 

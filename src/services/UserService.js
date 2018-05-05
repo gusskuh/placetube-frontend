@@ -6,9 +6,10 @@ function login(user) {
   return axios
     .post(`${BASE_URL}/login`, user)
     .then(res => {
+      console.log(res.data.user);
+      
       localStorage.User = JSON.stringify(res.data.user);
 
-      // sessionStorage.user = JSON.stringify(res.data.user)
       return res.data.user
     })
     .catch(err => {throw new Error('Login Failed')})

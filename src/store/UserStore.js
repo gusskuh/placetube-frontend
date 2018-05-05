@@ -8,10 +8,6 @@ export default {
         setUser(state, {user}) {
           state.loggedinUser = user;
         },
-        try() {
-          console.log(1);
-          
-        }
       },
       getters: {
         loggedinUser(state) {

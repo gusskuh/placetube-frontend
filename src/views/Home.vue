@@ -16,9 +16,9 @@
 export default {
   name: "home",
   components: {},
-  created() {
-    this.$store.dispatch({ type: "loadPlaylists" });
-  },
+  // created() {
+  //   this.$store.dispatch({ type: "loadPlaylists" });
+  // },
   computed: {
     showPlaylists() {
       return this.$store.getters.playlistsForDisplay;

@@ -4,7 +4,6 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/playlists">Playlists</router-link> | 
-      <router-link to="/playlists/1">PlaylistDetails</router-link> | 
       <router-link to="/myProfile/addSongs"> Add songs </router-link>|
       <router-link v-if="loggedinUser" to="/playlists/1">PlaylistDetails</router-link> | 
       <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
@@ -21,10 +20,10 @@
 export default {
   created() {
     if (localStorage.User) {
-      console.log(localStorage.User);
       // console.log(loggedinUser);
-      this.$store.commit({ type: "setUser", user: localStorage.User });
+      this.$store.commit({ type: "setUser", user: JSON.parse(localStorage.User)});
     }
+    this.$store.dispatch({ type: "loadPlaylists" });
   },
 
   methods: {

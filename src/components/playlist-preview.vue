@@ -22,7 +22,6 @@ export default {
             this.$store.dispatch('deletePlaylist', playlist)
         },
     moveToEditPage(playlist) {
-      console.log(playlist);
       this.$router.push(`/playlist/edit/${playlist._id}`);
     },
   }

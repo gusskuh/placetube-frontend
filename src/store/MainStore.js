@@ -11,9 +11,4 @@ export default new Vuex.Store({
     UserStore,
     PlaylistStore
   },
-  getters: {
-    print(state) {
-      console.log('ssssddddd', state.loggedInUser, state.playlists);
-    }
-  }
 })
