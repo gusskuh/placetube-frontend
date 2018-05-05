@@ -40,12 +40,22 @@ function deletePlaylist(playlistToDelete) {
   return axios
     .delete(`${PLAYLISTS_URL}/${playlistToDelete._id}`)
     .then(res => res.data)
-    .catch(err => console.log("could not delete!!"));
+    .catch( err => console.log('could not delete!!'))
+}
+
+function _getPlaylistUrl(playlistId) {
+    return `${PLAYLISTS_URL}/${playlistId}`;
+}
+
+function getPlaylistById (playlistId){
+    return axios
+    .get(_getPlaylistUrl(playlistId))
+    .then(res => res.data)
 }
 
 export default {
-  getPlaylists,
-  updatePlaylist,
-  addPlaylist,
-  deletePlaylist
-};
+    getPlaylists,
+    getPlaylistById,
+    updatePlaylist,
+    deletePlaylist
+}

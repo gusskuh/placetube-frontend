@@ -3,9 +3,7 @@
     <div class="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/playlists">Playlists</router-link> | 
       <router-link to="/myProfile/addSongs"> Add songs </router-link>|
-      <router-link v-if="loggedinUser" to="/playlists/1">PlaylistDetails</router-link> | 
       <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
       <router-link v-if="loggedinUser" to='/myProfile/1'>MyProfile</router-link>
       <router-link v-if="!loggedinUser" style="float:right" to="/login">Log In</router-link>
@@ -43,10 +41,11 @@ export default {
 <style>
 
 body{
-background-image: url("./img/background1.svg");
+/* background-image: url("./img/background1.svg");
 background-position: center;
-background-size: cover;
-background-color: #0e05029e;
+background-size: cover; */
+/* background-color: #0e05029e; */
+background-color:#150f2f;
 background-blend-mode: color;
 background-repeat: no-repeat;
 }
@@ -56,7 +55,7 @@ background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
 }
 .nav {
   padding: 30px;

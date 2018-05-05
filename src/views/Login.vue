@@ -1,8 +1,8 @@
 <template>
 <section class="login-page">
             <form @submit.prevent="checkLogin">
-                <input ref="txtUserEmail" type="email" placeholder="Email address" v-model="user.email" />
-                <input type="password" placeholder="Password" v-model="user.password"/>
+                <input ref="txtUserEmail" type="email" placeholder="Email address" v-model="user.email"  />
+                <input type="password" placeholder="Password" v-model="user.password" />
                 <button type="submit" :disabled="!this.user.email || !this.user.password">Log in</button>
             </form>
 
@@ -19,7 +19,7 @@ export default {
 
   data() {
     return {
-      user: { email: '', password: '' }
+      user: { email: "harifi@gmail.com" , password: '1234' }
     }
   },
 

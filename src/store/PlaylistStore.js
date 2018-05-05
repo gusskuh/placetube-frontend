@@ -33,6 +33,10 @@ export default {
       ) 
       ROOT_STATE.UserStore.loggedinUser.playlistsIds.splice(userPlaylistToDelIdx, 1);;
       
+    },
+    selectedPlaylist(state, {selectedPlaylist}) {
+      state.selectedPlaylist = selectedPlaylist;
+      console.log(selectedPlaylist);
     }
   },
 
@@ -50,6 +54,9 @@ export default {
         });
       }
     },
+    playlistForDisplay(state, getters) {
+      return state.selectedPlaylist;
+    }
   },
 
   actions: {
@@ -79,6 +86,14 @@ export default {
       return PlaylistsService.deletePlaylist(playlistToDelete).then(
         updatedPlaylists => {
           store.commit({ type: "deletePlaylist", playlistToDelete});
+        }
+      );
+    },
+    loadPlaylist(store, playlistId) {
+      return PlaylistsService.getPlaylistById(playlistId.store)
+      .then(selectedPlaylist => {
+          store.commit({ type: "selectedPlaylist", selectedPlaylist });
+          return selectedPlaylist 
         }
       );
     }
