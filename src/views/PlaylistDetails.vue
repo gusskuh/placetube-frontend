@@ -1,25 +1,26 @@
 <template>
  <div class="playlist">
-   <h2>put here playlist name</h2>
+   <div class="top-page">
+     <h2>playlist name: {{playlist.playlistName}}</h2>
+   </div>
    <div class="playingSong">
   <img :src='selectedSong.url' alt="">
   <h1>{{selectedSong.title}}</h1>
   </div>
-  <youtube height="0" width="0" :video-id="selectedSong.videoId" :player-vars="playerVars" @ended="ended" ref="youtube" @paused="isPlaying('stop playing')" @playing="isPlaying" @ready="startPlay"></youtube>
-   <ul>
-     <li v-for="(song, idx) in playlist.songs" :key="song.id" @click="playSong(idx)">
-       {{song.title}}
+  <youtube height="0" width="0" ref="youtube" :video-id="selectedSong.videoId" :player-vars="playerVars" @ready="startPlay" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+   <ul class="songs-list">
+     <li v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
+       <p @click="playSong(idx)">{{song.title}}</p>
        <button>▲</button>
        <button>▼</button>
-       <button>delete</button>
+       <button @click="deleteSong(idx)">delete</button>
        </li>
    </ul>
-   <div class="control-panel">
+    <div class="control-panel">
      <button @click="play">play</button>
      <button @click="stop">pause</button>
      <button @click="playSong(currSongNum+1)">next</button>
      <button @click="playSong(currSongNum-1)">prev</button>
-     <button @click="count()">time</button>
    </div>
   </div>
 </template>
@@ -33,23 +34,25 @@ export default {
         autoplay: 1
       },
       currSongNum: 0,
-      selectedSong: {id:323 ,videoId: 'lG0Ys-2d4MA', title: 'madona', url:'https://i.pinimg.com/originals/79/d1/3e/79d13edc13f8675e6232a7143069a905.jpg'},
+      selectedSong: {},
       playlist:[]
     }
   },
    created() {
-        if (!this.playlistId) return;
-        playlistService.getPlaylistById(this.playlistId)
-            .then(playlist => {
-                this.playlist = playlist;
-            })
+        console.log('got playlist id',this.playlistId);
+        this.$store.dispatch({ type: "loadPlaylist" , store: this.playlistId})
+        .then(
+        selectedPlaylist => {
+          this.playlist = selectedPlaylist;
+        }
+      );
     },
-  mounted() {
-   this.player.setSize(0, 0)
-  },
   computed: {
     player () {
       return this.$refs.youtube.player
+    },
+    showPlaylist () {
+       return this.$store.getters.playlistForDisplay;
     }
   },
   methods: {
@@ -60,18 +63,18 @@ export default {
       this.player.playVideo()
      },
     ended() {
-       if(this.currSongNum+1 <= this.songs.length){
-       this.selectedSong = this.songs[this.currSongNum+1];
+       if(this.currSongNum+1 <= this.playlist.songs.length-1){
+       this.selectedSong = this.playlist.songs[this.currSongNum+1];
        this.currSongNum = this.currSongNum+1;
        } else {
-        this.selectedSong = this.songs[0];
+        this.selectedSong = this.playlist.songs[0];
         this.currSongNum = 0;
        }
     },
     playSong(songIdx) {
       if(songIdx < 0) return;
-      if(songIdx > this.songs.length-1) return;
-      this.selectedSong = this.songs[songIdx];
+      if(songIdx > this.playlist.songs.length-1) return;
+      this.selectedSong = this.playlist.songs[songIdx];
       this.currSongNum = songIdx;
     },
     getTime(){
@@ -81,24 +84,18 @@ export default {
       console.log('playing!!!')
     },
     startPlay(){
-      console.log('ready!!!')
+       this.selectedSong = this.playlist.songs[0];
     },
     deleteSong(songId) {
-      this.$store.dispatch({ type: "deleteToy", toyId }).then(() => {
-        // eventBus.$emit(USR_MSG_DISPLAY, {
-        //   txt: "Todo Deleted",
-        //   type: "success"
-        // });
-      });
+      console.log('delete song',songId)
+      // this.$store.dispatch({ type: "deleteSong", songId }).then(() => { });
     }
   }
 }
 </script>
 
 <style scoped>
-.control-panel{
-  background: black;
-}
+
 
 h1{
   align-self: flex-start;
@@ -117,10 +114,22 @@ li{
   border-bottom: 1px solid black;
 }
 
+
 .playingSong{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.control-panel{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  background:#2d2727;
 }
 
 </style>

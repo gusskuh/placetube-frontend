@@ -21,6 +21,10 @@ export default {
         playlist => playlist._id === playlistToDelete._id
       );
       state.playlists.splice(playlistToDel, 1);
+    },
+    selectedPlaylist(state, {selectedPlaylist}) {
+      state.selectedPlaylist = selectedPlaylist;
+      console.log(selectedPlaylist);
     }
   },
 
@@ -36,6 +40,9 @@ export default {
           return playlist.adminId === loggedUserId;
         });
       }
+    },
+    playlistForDisplay(state, getters) {
+      return state.selectedPlaylist;
     }
   },
 
@@ -56,6 +63,14 @@ export default {
       return PlaylistsService.deletePlaylist(playlistToDelete).then(
         updatedPlaylists => {
           store.commit({ type: "deletePlaylist", playlistToDelete });
+        }
+      );
+    },
+    loadPlaylist(store, playlistId) {
+      return PlaylistsService.getPlaylistById(playlistId.store)
+      .then(selectedPlaylist => {
+          store.commit({ type: "selectedPlaylist", selectedPlaylist });
+          return selectedPlaylist 
         }
       );
     }

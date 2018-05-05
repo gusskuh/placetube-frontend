@@ -44,10 +44,11 @@ export default {
 <style>
 
 body{
-background-image: url("./img/background1.svg");
+/* background-image: url("./img/background1.svg");
 background-position: center;
-background-size: cover;
-background-color: #0e05029e;
+background-size: cover; */
+/* background-color: #0e05029e; */
+background-color:#150f2f;
 background-blend-mode: color;
 background-repeat: no-repeat;
 }
