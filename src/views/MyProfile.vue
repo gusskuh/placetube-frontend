@@ -35,7 +35,6 @@
             Change profile pic<input type="file" @change="onFileSelected">
             <button @click="onUpload">Upload</button>
          
-            
                 Name: <input type="text" ref="name"/> 
                 <button>Save</button>
                 <button @click="cancelChanges">Cancel</button>

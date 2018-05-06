@@ -18,7 +18,7 @@ export default {
   name: "Register",
   data() {
     return {
-      user: { userName: "", email: "", password: "", profileImg: "https://nush.sg/img/default-profile.png", playlistIds:[] }
+      user: { userName: "", email: "", password: "", profileImg: "https://nush.sg/img/default-profile.png", playlistsIds:[] }
     };
   },
 

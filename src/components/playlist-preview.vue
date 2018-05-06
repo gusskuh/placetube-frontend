@@ -2,9 +2,11 @@
   <section>
       <div class="playlist-cont"> 
         <h1 @click="showPlaylist(playlist)">{{playlist.playlistName}}</h1>
-        <img @click="showPlaylist(playlist)" :src='playlist.logo' alt="">
-        <Button @click="moveToEditPage(playlist)">Edit</Button>
-        <button @click="deletePlaylist(playlist)">Del</button>
+        <img class="playlist-image" @click="showPlaylist(playlist)" :src='playlist.logo' alt="">
+        <div>
+            <button @click="moveToEditPage(playlist)">Edit</button>
+            <button @click="deletePlaylist(playlist)">Del</button>
+        </div>
       </div>
   </section>
 </template>
@@ -36,7 +38,12 @@ export default {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    width: 150px;
+    width: 250px;
+    height: 150px;
     cursor: pointer;
+}
+.playlist-image {
+    width: 250px;
+    height: 150px;
 }
 </style>
