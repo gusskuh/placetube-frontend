@@ -29,7 +29,7 @@ export default {
         adminId: this.$store.getters.loggedinUser._id,
         loc: "",
         createdAt: Date.now(),
-        logo: null,
+        logo: 'https://hits.radiotransilvania.com/news/wp-content/uploads/2018/01/playlist.jpg',
         managers: [],
         urls: [],
         views: 0,

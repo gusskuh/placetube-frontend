@@ -14,6 +14,8 @@ function getPlaylists() {
 }
 
 function updatePlaylist(updatedPlaylist) {
+    console.log(updatedPlaylist);
+    
 
   return axios
     .put(`${PLAYLISTS_URL}/${updatedPlaylist._id}`, updatedPlaylist)
@@ -67,9 +69,12 @@ function deleteSong(playlist ,videoId) {
   function addSong (playlist , song) {
       var newSong = {videoId:song.id.videoId ,title:song.snippet.title, url: song.snippet.thumbnails.default.url}
       var newPlaylist = playlist;
+      console.log(playlist);
+      
       newPlaylist.songs.push(newSong);
-      return updatePlaylist(newPlaylist).then(playlist => {
-        return playlist;
+      return updatePlaylist(newPlaylist).then(playlist => {   
+                 
+        return newSong;
       });
   }
 
