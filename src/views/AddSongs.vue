@@ -34,9 +34,18 @@ export default {
       timeoutId:''
     }
   },
+  created() {
+    
+         console.log(this.selectedPlaylist);
+  
+  },
    computed: {
         player () {
          return this.$refs.youtube.player
+       },
+       selectedPlaylist() {
+         return this.$store.getters.playlistForDisplay;
+         
        }
   },
    methods: {

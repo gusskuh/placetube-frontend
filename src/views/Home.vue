@@ -5,13 +5,9 @@
       <h2>Conneting Places With Music!</h2>
     </div>
     <div class="playlist-container">
-      
         <div v-for="playlist in showPlaylists" :key="playlist._id">
           <playlist-homeprev :playlist="playlist"></playlist-homeprev>
-          
         </div>
-        
-      
     </div>
   </div>
 </template>
@@ -44,13 +40,19 @@ export default {
   height: 80px;
 }
 
+.home {
+  display: flex; 
+  align-items: center;
+  flex-direction: column;
+
+}
+
 .playlist-container {
-   margin-top: 35px;
     display: flex;
+    margin-top: 50px;
     flex-wrap:wrap;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
     width: 400px;
     cursor: pointer;
 }
