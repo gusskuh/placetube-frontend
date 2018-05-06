@@ -5,7 +5,7 @@
       <h1>My Profile</h1>
       <button @click="isEditing = !isEditing">edit</button>
     </header>
-    <div v-if="!isEditing">
+    <div v-if="!isEditing && showUserName">
       <div v-if="!selectedPlaylist">
         <div class="user-details">
         <div class="profile-pic">
@@ -62,6 +62,15 @@ export default {
       isEditing: null,
       selectedFile: null,
     };
+  },
+
+  created() {
+    loggedinUser: {
+      if(!this.$store.getters.loggedinUser) {
+            this.$router.push("/login");
+      }
+    }
+    
   },
 
   methods: {

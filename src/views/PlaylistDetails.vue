@@ -6,10 +6,10 @@
    </div>
    <div v-if="selectedSong" class="cont">
    <div class="playingSong">
-  <img :src='selectedSong.url' alt="">
-  <h1>{{selectedSong.title}}</h1>
+  <img v-if="selectedSong" :src='selectedSong.url' alt="">
+  <h1 v-if="selectedSong">{{selectedSong.title}}</h1>
   </div>
-  <youtube height="0" width="0" ref="youtube" :video-id="selectedSong.videoId" :player-vars="playerVars" @ready="startPlay" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+  <youtube v-if="selectedSong" height="0" width="0" ref="youtube" :video-id="selectedSong.videoId" :player-vars="playerVars" @ready="startPlay" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
    <ul class="songs-list">
      <li v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
        <p @click="playSong(idx)">{{song.title}}</p>
@@ -42,7 +42,7 @@ export default {
     };
   },
   created() {
-    console.log("got playlist id", this.playlistId);
+    
     this.$store
       .dispatch({ type: "loadPlaylist", store: this.playlistId })
       .then(selectedPlaylist => {

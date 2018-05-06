@@ -33,7 +33,7 @@ export default {
             .then(res => {
                 console.log('You have been logged-in!')
                 // EventBusService.$emit(SHOW_MSG, {txt: `Welcome ${this.user.name}`});
-                this.$router.push('/myProfile/1');
+                this.$router.push('/myProfile');
             })
             .catch(err => {
                 console.log('Login Failed!');

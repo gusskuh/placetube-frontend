@@ -4,6 +4,7 @@ export default {
   state: {
     playlists: [],
     selectedPlaylist: {
+<<<<<<< HEAD
       _id:'',
       adminId: '',
       createdAt: 0,
@@ -11,11 +12,20 @@ export default {
       loc: '',
       logo:'', 
       songs:[]
+=======
+      _id: "",
+      adminId: "",
+      createdAt: 0,
+      currViewers: 0,
+      loc: "",
+      logo: "",
+      songs: []
+>>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
     }
   },
-  
+
   mutations: {
-    setPlaylists(state, { playlists }) {     
+    setPlaylists(state, { playlists }) {
       state.playlists = playlists;
     },
     pushUpdatedPlaylist(state, { updatedPlaylist }) {
@@ -24,11 +34,18 @@ export default {
       });
       state.playlists.splice(playlistIdx, 1, updatedPlaylist);
     },
+<<<<<<< HEAD
     pushAddedPlaylist(state, {addedPlaylist}) {
        console.log('root state!!!', ROOT_STATE); 
+=======
+    pushAddedPlaylist(state, { addedPlaylist }) {
+      console.log("root state!!!", ROOT_STATE);
+
+>>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
       state.playlists.push(addedPlaylist);
-      ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id)
+      ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id);
     },
+<<<<<<< HEAD
     pushAddedSong(state, {addedSong}) {
       console.log('amittyyyyyyyyyyyyyyyyyyyyy;llllll',addedSong);
       // state.playlists.find();
@@ -40,26 +57,36 @@ export default {
         
     },
     
+=======
+
+>>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
     deletePlaylist(state, { playlistToDelete }) {
       var playlistToDelIdx = state.playlists.findIndex(
         playlist => playlist._id === playlistToDelete._id
       );
-      
+
       state.playlists.splice(playlistToDelIdx, 1);
 
       var userPlaylistToDelIdx = ROOT_STATE.UserStore.loggedinUser.playlistsIds.findIndex(
         playlistId => playlistId === playlistToDelete._id
-      ) 
-      ROOT_STATE.UserStore.loggedinUser.playlistsIds.splice(userPlaylistToDelIdx, 1);;
-      
+      );
+      ROOT_STATE.UserStore.loggedinUser.playlistsIds.splice(
+        userPlaylistToDelIdx,
+        1
+      );
     },
-    selectedPlaylist(state, {selectedPlaylist}) {
+    selectedPlaylist(state, { selectedPlaylist }) {
       state.selectedPlaylist = selectedPlaylist;
+<<<<<<< HEAD
       console.log('set selected playlist',selectedPlaylist);
     },
     // updateSelected(state, { playlist} ){
     //   state.selectedPlaylist = playlist;
     // }
+=======
+      console.log("set selected playlist", selectedPlaylist);
+    }
+>>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
   },
 
   getters: {
@@ -67,7 +94,7 @@ export default {
       return state.playlists;
     },
     getPlaylistsByUser(state, getters, rootState) {
-      ROOT_STATE = rootState; 
+      ROOT_STATE = rootState;
       if (!rootState.UserStore.loggedinUser) return state.playlists;
       else {
         let loggedUserId = rootState.UserStore.loggedinUser._id;
@@ -88,7 +115,6 @@ export default {
       });
     },
     saveChanges(store, updatedPlaylist) {
-      
       console.log("updatedPlaylist", updatedPlaylist);
       if (updatedPlaylist._id) {
         return PlaylistsService.updatePlaylist(updatedPlaylist).then(
@@ -97,28 +123,27 @@ export default {
           }
         );
       } else {
-        PlaylistsService.addPlaylist(updatedPlaylist).then(
-          addedPlaylist => {
-        store.commit({ type: "pushAddedPlaylist", addedPlaylist});
-          }
-        );
+        PlaylistsService.addPlaylist(updatedPlaylist).then(addedPlaylist => {
+          store.commit({ type: "pushAddedPlaylist", addedPlaylist });
+        });
       }
     },
     deletePlaylist(store, playlistToDelete) {
       return PlaylistsService.deletePlaylist(playlistToDelete).then(
         updatedPlaylists => {
-          store.commit({ type: "deletePlaylist", playlistToDelete});
+          store.commit({ type: "deletePlaylist", playlistToDelete });
         }
       );
     },
     loadPlaylist(store, playlistId) {
-      return PlaylistsService.getPlaylistById(playlistId.store)
-      .then(selectedPlaylist => {
+      return PlaylistsService.getPlaylistById(playlistId.store).then(
+        selectedPlaylist => {
           store.commit({ type: "selectedPlaylist", selectedPlaylist });
-          return selectedPlaylist 
+          return selectedPlaylist;
         }
       );
     },
+<<<<<<< HEAD
     deleteSong(store , {videoId}) {
        var selectedPlaylist = JSON.parse(JSON.stringify(store.state.selectedPlaylist));
       return PlaylistsService.deleteSong(selectedPlaylist ,videoId).then(
@@ -161,5 +186,36 @@ export default {
      
      
   //  }
+=======
+    deleteSong(store, { videoId }) {
+      var selectedPlaylist = JSON.parse(
+        JSON.stringify(store.state.selectedPlaylist)
+      );
+      return PlaylistsService.deleteSong(selectedPlaylist, videoId).then(
+        playlist => {
+          console.log("testing deleted confirmistion");
+        }
+      );
+    },
+    addSong(store, { song }) {
+      console.log(song.id.videoId);
+      
+      var filtered = store.state.selectedPlaylist.songs.filter(currSong => {
+        console.log('currSong',currSong.videoId);
+        return currSong.videoId === song.id.videoId 
+        
+      })
+      console.log(filtered);
+      
+      var selectedPlaylist = JSON.parse(
+        JSON.stringify(store.state.selectedPlaylist)
+      );
+      return PlaylistsService.addSong(selectedPlaylist, song).then(newSong => {
+        console.log(newSong);
+
+        console.log("testing adding song confirmistion");
+      });
+    }
+>>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
   }
 };

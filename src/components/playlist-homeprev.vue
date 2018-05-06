@@ -19,10 +19,10 @@ export default {
   props: ["playlist"],
   methods: {
     
-    showPlaylist(playlist) {
-      console.log('dsadasdasdsdsa',this.playlist);
-      // this.$store.dispatch('updateSelected', this.playlist)
+    showPlaylist() {
+      console.log(this.playlist._id);
       this.$router.push(`/playlists/${this.playlist._id}`);
+
     },
   }
 };
