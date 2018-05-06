@@ -34,9 +34,18 @@ export default {
       timeoutId:''
     }
   },
+  created() {
+    
+         console.log(this.selectedPlaylist);
+  
+  },
    computed: {
         player () {
          return this.$refs.youtube.player
+       },
+       selectedPlaylist() {
+         return this.$store.getters.playlistForDisplay;
+         
        }
   },
    methods: {
@@ -52,6 +61,9 @@ export default {
             },
             addSong(song){
               console.log('song to add',song);
+              console.log('videoId:',song.id.videoId);
+              console.log('thumbnail:',song.snippet.thumbnails.default.url);
+              console.log('title:',song.snippet.title);
             },
             playPreview(song){
               if(this.selectedSong === song){
