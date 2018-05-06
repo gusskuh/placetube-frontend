@@ -20,7 +20,7 @@ export default {
        console.log('root state!!!', ROOT_STATE);
        
       state.playlists.push(addedPlaylist);
-      ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id)
+      // ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id)
     },
     
     deletePlaylist(state, { playlistToDelete }) {
@@ -77,6 +77,7 @@ export default {
           }
         );
       } else {
+        
         PlaylistsService.addPlaylist(updatedPlaylist).then(
           addedPlaylist => {
         store.commit({ type: "pushAddedPlaylist", addedPlaylist});

@@ -24,6 +24,7 @@ function updatePlaylist(updatedPlaylist) {
 
 
 function addPlaylist(updatedPlaylist) {
+    
     return axios
       .put(PLAYLISTS_URL, updatedPlaylist)
       .then(res => {
@@ -33,6 +34,7 @@ function addPlaylist(updatedPlaylist) {
   }
 
 function deletePlaylist(playlistToDelete) {
+   
   console.log(
     "playlist to delet form service!",
     `${PLAYLISTS_URL}/${playlistToDelete._id}`
