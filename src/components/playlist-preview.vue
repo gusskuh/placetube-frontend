@@ -83,4 +83,8 @@ p{
 h4{
  color: #F77062;
 }
+.playlist-image {
+    width: 250px;
+    height: 150px;
+}
 </style>

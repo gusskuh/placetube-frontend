@@ -30,7 +30,6 @@
             Change profile pic<input type="file" @change="onFileSelected">
             <button @click="onUpload">Upload</button>
          
-            
                 Name: <input type="text" ref="name"/> 
                 <button>Save</button>
                 <button @click="cancelChanges">Cancel</button>
@@ -65,6 +64,15 @@ export default {
        this.$router.push("/login")
      }
    }
+  },
+
+  created() {
+    loggedinUser: {
+      if(!this.$store.getters.loggedinUser) {
+            this.$router.push("/login");
+      }
+    }
+    
   },
 
   methods: {

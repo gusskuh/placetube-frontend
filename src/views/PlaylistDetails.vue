@@ -6,12 +6,13 @@
      <h2>{{playlist.playlistName}}</h2>
      <span></span>
    </div>
+
    <div class="playingSong">
-  <img :src='selectedSong.url' alt="">
-  <h1>{{selectedSong.title}}</h1>
+  <img  v-if="selectedSong" :src='selectedSong.url' alt="">
+  <h1  v-if="selectedSong" >{{selectedSong.title}}</h1>
   <router-link to="/myProfile/addSongs">add songs </router-link>
   </div>
-  <youtube height="0" width="0" ref="youtube" :video-id="selectedSong.videoId" :player-vars="playerVars" @ready="startPlay" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+  <youtube v-if="selectedSong" height="0" width="0" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
   <div class="songs-list">
      <div v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
        <p @click="playSong(idx)">{{song.title}}</p>
@@ -46,12 +47,11 @@ export default {
         autoplay: 1
       },
       currSongNum: 0,
-      selectedSong: {},
+      selectedSong: true,
       playlist: []
     };
   },
   created() {
-    console.log("got playlist id", this.playlistId);
     this.$store
       .dispatch({ type: "loadPlaylist", store: this.playlistId })
       .then(selectedPlaylist => {
@@ -63,6 +63,11 @@ export default {
       return this.$refs.youtube.player;
     },
     showPlaylist() {
+      console.log(
+        "selectedPLayListttttttt",
+        this.$store.getters.playlistForDisplay
+      );
+
       return this.$store.getters.playlistForDisplay;
     }
   },
@@ -98,9 +103,12 @@ export default {
       this.selectedSong = this.playlist.songs[0];
     },
     deleteSong(videoId) {
-        console.log('delete song', videoId);
-        this.$store.dispatch({ type: "deleteSong", videoId})
-        .then( selectedPlaylist => {console.log('song deleted')});
+      console.log("delete song", videoId);
+      this.$store
+        .dispatch({ type: "deleteSong", videoId })
+        .then(selectedPlaylist => {
+          console.log("song deleted");
+        });
     }
   }
 };
