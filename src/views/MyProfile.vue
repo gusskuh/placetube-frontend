@@ -1,29 +1,24 @@
 <template>
   <section>
-    <header class="profile-header">
+    <div class="profile-header">
       <button>back</button>
       <h1>My Profile</h1>
-      <button @click="isEditing = !isEditing">edit</button>
-    </header>
-    <div v-if="!isEditing">
-      <div v-if="!selectedPlaylist">
-        <div class="user-details">
-        <div class="profile-pic">
-          <img :src='showUserName.profileImg' alt="profile image">
-         
-        </div>
+       <button  @click="logout">Logout</button>
+    </div>
+    <div class="user-details">
+      <section class="details">
+          <img class="user-pic" :src='showUserName.profileImg' alt="profile image">
         <div class="user-name">
           <h1>{{showUserName.userName}}</h1>
           <Button @click="moveToEditPage">Create Playlist</Button>
         </div>
-      
-      </div>
+        </section>
+    </div>
+    <div class="profile-content" v-if="!isEditing && showUserName">
+      <div class="profile" v-if="!selectedPlaylist">
     
-        <ul>
-          <li v-for="playlist in PlayListsByUserId" :key="playlist._id">
-          <playlist-preview :playlist="playlist"></playlist-preview>
-          </li>
-        </ul> 
+      <playlist-preview v-for="playlist in PlayListsByUserId" :key="playlist._id" :playlist="playlist"></playlist-preview>
+      
 
       </div>
     </div>
@@ -64,6 +59,13 @@ export default {
       selectedFile: null,
     };
   },
+  created() {
+   loggedinUser: {
+     if(!this.$store.getters.loggedinUser) {
+       this.$router.push("/login")
+     }
+   }
+  },
 
   methods: {
     editPlaylist(playlist) {
@@ -92,6 +94,10 @@ export default {
       fd.append('image', this.selectedFile, this.selectedFile.name)
       console.log(fd);
       
+    },
+      logout() {
+      this.$router.push("/");
+      this.$store.dispatch("logout")
     }
   },
   computed: {
@@ -103,36 +109,59 @@ export default {
       return this.$store.getters.getPlaylistsByUser;
     }
   }
-};
+}
+
 </script>
 
-<style>
+<style scoped>
 .profile-header {
-  margin: 0 auto;
-  width: 400px;
+  position: absolute;
+  width: 100%;
   height: 50px;
   background-color: black;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-around;
+   top:0
 }
 
+.profile-content {
+  margin: 20px;
+  margin-top: 80px;
+}
+
+
 .user-details {
-  margin: 0 auto;
-  width: 400px;
+  position: sticky;
+  padding: 10px;
+  top:50px;
+  background: #0e0921f5;
   display: flex;
+  justify-content: center;
+}
+
+.details{
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+   justify-content: flex-start;
+}
+
+.user-name{
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
 
 ul {
   list-style: none;
 }
 
-img {
+.user-pic{
   width: 150px;
   height: 150px;
+  border-radius: 50%;
 }
 
 .profile-pic{
@@ -149,4 +178,5 @@ img {
   align-items: center; 
   margin: 0 auto;
 }
+
 </style>

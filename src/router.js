@@ -51,7 +51,7 @@ export default new Router({
       component: AddSongs
       },
     {
-      path: '/myProfile/:userId',
+      path: '/myProfile',
       name: 'myProfile',
       component: MyProfile
     }

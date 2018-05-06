@@ -51,14 +51,14 @@ export default {
   methods: {
     savePlaylist() {
       this.$store.dispatch("saveChanges", this.playlistToEdit);
-      this.$router.push(`/myProfile/1`);
+      this.$router.push(`/myProfile`);
     },
     cancelChanges() {
       // console.log('cancellll');
-      this.$router.push(`/myProfile/1`);
+      this.$router.push(`/myProfile`);
     },
     backToMyProfile() {
-      this.$router.push(`/myProfile/1`);
+      this.$router.push(`/myProfile`);
     }
   },
   created() {

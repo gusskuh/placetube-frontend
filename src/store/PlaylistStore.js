@@ -3,7 +3,7 @@ let ROOT_STATE;
 export default {
   state: {
     playlists: [],
-    selectedPlaylist: null
+    selectedPlaylist: {}
   },
   
   mutations: {

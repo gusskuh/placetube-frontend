@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
+  <div class="app">
+    <div class="main-content">
+       <router-view/>
+    </div>
     <div class="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
-      <router-link v-if="loggedinUser" to='/myProfile/1'>MyProfile</router-link>
-      <router-link v-if="!loggedinUser" style="float:right" to="/login">Log In</router-link>
+      <router-link to='/myProfile'>MyProfile</router-link>
       <span v-if="loggedinUser" style="float:right">{{loggedinUser.userName}}</span>
     </div>
-      <button v-if="loggedinUser" @click="logout">Logout</button>
-    <router-view/>
   </div>
 </template>
 
@@ -24,10 +24,7 @@ export default {
   },
 
   methods: {
-    logout() {
-      this.$router.push("/");
-      this.$store.dispatch("logout")
-    }
+  
   },
   computed: {
     loggedinUser() {
@@ -49,7 +46,7 @@ background-blend-mode: color;
 background-repeat: no-repeat;
 }
 
-#app {
+.app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -61,6 +58,7 @@ background-repeat: no-repeat;
   padding: 30px;
   height: 60px;
   background: #00000047;
+  bottom:0;
   /* box-shadow: 2px 4px 10px 5px #0000005c; */
 }
 

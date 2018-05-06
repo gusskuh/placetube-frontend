@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <div class="short-desc">
-      <h1>Welcome to PlaceTube!</h1>
-      <h2>Conneting Places With Music!</h2>
+      <h1>Place tube</h1>
     </div>
     <div class="playlist-container">
         <div v-for="playlist in showPlaylists" :key="playlist._id">
@@ -38,22 +37,23 @@ export default {
 <style scoped >
 .short-desc {
   height: 80px;
+  width: 100%;
+  background:#000000cf;
+  position: absolute;
 }
 
 .home {
   display: flex; 
   align-items: center;
   flex-direction: column;
-
 }
 
 .playlist-container {
     display: flex;
-    margin-top: 50px;
+    margin-top: 90px;
     flex-wrap:wrap;
     align-items: center;
     justify-content: center;
-    width: 400px;
     cursor: pointer;
 }
 </style>
