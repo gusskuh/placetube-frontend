@@ -3,7 +3,15 @@ let ROOT_STATE;
 export default {
   state: {
     playlists: [],
-    selectedPlaylist: null
+    selectedPlaylist: {
+      _id:'',
+      adminId: '',
+      createdAt: 0,
+      currViewers: 0,
+      loc: '',
+      logo:'', 
+      songs:[]
+    }
   },
   
   mutations: {
@@ -17,10 +25,19 @@ export default {
       state.playlists.splice(playlistIdx, 1, updatedPlaylist);
     },
     pushAddedPlaylist(state, {addedPlaylist}) {
-       console.log('root state!!!', ROOT_STATE);
-       
+       console.log('root state!!!', ROOT_STATE); 
       state.playlists.push(addedPlaylist);
       ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id)
+    },
+    pushAddedSong(state, {addedSong}) {
+      console.log('amittyyyyyyyyyyyyyyyyyyyyy;llllll',addedSong);
+      // state.playlists.find();
+      var playlistToUpdate = state.playlists.find(
+        playlist => playlist._id === state.selectedPlaylist._id)
+        playlistToUpdate.songs.push(addedSong)
+
+        console.log('poooooooooooooooooooooooooooooooooooooouuuuu', playlistToUpdate);
+        
     },
     
     deletePlaylist(state, { playlistToDelete }) {
@@ -39,7 +56,10 @@ export default {
     selectedPlaylist(state, {selectedPlaylist}) {
       state.selectedPlaylist = selectedPlaylist;
       console.log('set selected playlist',selectedPlaylist);
-    }
+    },
+    // updateSelected(state, { playlist} ){
+    //   state.selectedPlaylist = playlist;
+    // }
   },
 
   getters: {
@@ -100,20 +120,46 @@ export default {
       );
     },
     deleteSong(store , {videoId}) {
-       var selectedPlaylist = store.state.selectedPlaylist;
+       var selectedPlaylist = JSON.parse(JSON.stringify(store.state.selectedPlaylist));
       return PlaylistsService.deleteSong(selectedPlaylist ,videoId).then(
        playlist => {
           console.log('testing deleted confirmistion')
+          // store.commit({ type: "pushAddedSong", addedSong});
         }
       );
     },
     addSong(store , {song}) {
-      var selectedPlaylist = store.state.selectedPlaylist;
-     return PlaylistsService.addSong(selectedPlaylist ,song).then(
-      playlist => {
-         console.log('testing adding song confirmistion')
-       }
-     );
-   }
+      
+      var selectedPlaylist = JSON.parse(JSON.stringify(store.state.selectedPlaylist));
+      let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
+        // console.log('currSong',currSong.videoId);
+        // console.log('song',song.id.videoId);
+         return  currSong.videoId === song.id.videoId;
+      })
+      console.log('song****************',filtered);
+      
+      if(filtered.length) {
+      console.log('filtered was found!!!!');
+      return
+      
+      }
+      else{
+
+        return PlaylistsService.addSong(selectedPlaylist , song).then(
+         addedSong => {
+            console.log('testing adding song confirmistion', addedSong)
+            store.commit({ type: "pushAddedSong", addedSong});
+          }
+        );
+      }
+   },
+
+  //  updateSelected(store, playlist ) {
+  //    console.log( 'hahahahahahahaha!!!!!' , playlist);
+  //    console.log(store.state.selectedPlaylist);
+  //    store.commit({type: 'updateSelected', playlist})
+     
+     
+  //  }
   }
 };

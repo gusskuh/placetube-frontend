@@ -4,6 +4,7 @@
      <h2>playlist name: {{playlist.playlistName}}</h2>
      <router-link to="/myProfile/addSongs"> Add songs </router-link>
    </div>
+   <div v-if="selectedSong" class="cont">
    <div class="playingSong">
   <img :src='selectedSong.url' alt="">
   <h1>{{selectedSong.title}}</h1>
@@ -23,6 +24,7 @@
      <button @click="playSong(currSongNum+1)">next</button>
      <button @click="playSong(currSongNum-1)">prev</button>
    </div>
+   </div>
   </div>
 </template>
 
@@ -35,7 +37,7 @@ export default {
         autoplay: 1
       },
       currSongNum: 0,
-      selectedSong: {},
+      selectedSong: null,
       playlist: []
     };
   },
@@ -52,6 +54,11 @@ export default {
       return this.$refs.youtube.player;
     },
     showPlaylist() {
+      console.log(
+        "selectedPLayListttttttt",
+        this.$store.getters.playlistForDisplay
+      );
+
       return this.$store.getters.playlistForDisplay;
     }
   },
@@ -87,9 +94,12 @@ export default {
       this.selectedSong = this.playlist.songs[0];
     },
     deleteSong(videoId) {
-        console.log('delete song', videoId);
-        this.$store.dispatch({ type: "deleteSong", videoId})
-        .then( selectedPlaylist => {console.log('song deleted')});
+      console.log("delete song", videoId);
+      this.$store
+        .dispatch({ type: "deleteSong", videoId })
+        .then(selectedPlaylist => {
+          console.log("song deleted");
+        });
     }
   }
 };

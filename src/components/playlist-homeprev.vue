@@ -21,7 +21,7 @@ export default {
     
     showPlaylist(playlist) {
       console.log('dsadasdasdsdsa',this.playlist);
-      
+      // this.$store.dispatch('updateSelected', this.playlist)
       this.$router.push(`/playlists/${this.playlist._id}`);
     },
   }
