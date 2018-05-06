@@ -38,7 +38,7 @@ export default {
     },
     selectedPlaylist(state, {selectedPlaylist}) {
       state.selectedPlaylist = selectedPlaylist;
-      console.log(selectedPlaylist);
+      console.log('set selected playlist',selectedPlaylist);
     }
   },
 
@@ -99,6 +99,22 @@ export default {
           return selectedPlaylist 
         }
       );
-    }
+    },
+    deleteSong(store , {videoId}) {
+       var selectedPlaylist = store.state.selectedPlaylist;
+      return PlaylistsService.deleteSong(selectedPlaylist ,videoId).then(
+       playlist => {
+          console.log('testing deleted confirmistion')
+        }
+      );
+    },
+    addSong(store , {song}) {
+      var selectedPlaylist = store.state.selectedPlaylist;
+     return PlaylistsService.addSong(selectedPlaylist ,song).then(
+      playlist => {
+         console.log('testing adding song confirmistion')
+       }
+     );
+   }
   }
 };

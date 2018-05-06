@@ -60,9 +60,11 @@ export default {
             })
             },
             addSong(song){
-              console.log('videoId:',song.id.videoId);
-              console.log('thumbnail:',song.snippet.thumbnails.default.url);
-              console.log('title:',song.snippet.title);
+              console.log('song to add',song);
+              this.$store.dispatch({ type: "addSong", song})
+             .then( playlist => {
+               console.log('song added')
+               });
             },
             playPreview(song){
               if(this.selectedSong === song){
