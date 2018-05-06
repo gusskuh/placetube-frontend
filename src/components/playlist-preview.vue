@@ -1,12 +1,15 @@
 <template>
   <section>
-  <h1 @click="showPlaylist(playlist)">{{playlist.playlistName}}</h1>
-  <Button @click="moveToEditPage(playlist)">Edit</Button>
-  <button @click="deletePlaylist(playlist)">Del</button>
+      <div class="playlist-cont"> 
+        <h1 @click="showPlaylist(playlist)">{{playlist.playlistName}}</h1>
+        <img @click="showPlaylist(playlist)" :src='playlist.logo' alt="">
+        <Button @click="moveToEditPage(playlist)">Edit</Button>
+        <button @click="deletePlaylist(playlist)">Del</button>
+      </div>
   </section>
 </template>
 
-<script>
+<script scoped>
 export default {
   props: ["playlist"],
   methods: {
@@ -29,5 +32,11 @@ export default {
 </script>
 
 <style>
-
+.playlist-cont{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    cursor: pointer;
+}
 </style>

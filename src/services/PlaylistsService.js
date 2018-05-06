@@ -57,5 +57,6 @@ export default {
     getPlaylists,
     getPlaylistById,
     updatePlaylist,
-    deletePlaylist
+    deletePlaylist,
+    addPlaylist
 }
