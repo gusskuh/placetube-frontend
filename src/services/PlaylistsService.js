@@ -53,9 +53,31 @@ function getPlaylistById (playlistId){
     .then(res => res.data)
 }
 
+function deleteSong(playlist ,videoId) {
+    var newPlaylist = playlist;
+    var newSongsArr = playlist.songs.filter(song => song.videoId !== videoId);
+    newPlaylist.songs = newSongsArr;
+    return updatePlaylist(newPlaylist).then(playlist => {
+        return playlist;
+      });
+  }
+
+  function addSong (playlist , song) {
+      var newSong = {videoId:song.id.videoId ,title:song.snippet.title, url: song.snippet.thumbnails.default.url}
+      var newPlaylist = playlist;
+      newPlaylist.songs.push(newSong);
+      return updatePlaylist(newPlaylist).then(playlist => {
+        return playlist;
+      });
+  }
+
+
 export default {
     getPlaylists,
     getPlaylistById,
     updatePlaylist,
-    deletePlaylist
+    deletePlaylist,
+    addPlaylist,
+    deleteSong,
+    addSong
 }

@@ -2,6 +2,7 @@
  <div class="playlist">
    <div class="top-page">
      <h2>playlist name: {{playlist.playlistName}}</h2>
+     <router-link to="/myProfile/addSongs"> Add songs </router-link>
    </div>
    <div class="playingSong">
   <img :src='selectedSong.url' alt="">
@@ -13,7 +14,7 @@
        <p @click="playSong(idx)">{{song.title}}</p>
        <button>▲</button>
        <button>▼</button>
-       <button @click="deleteSong(idx)">delete</button>
+       <button @click="deleteSong(song.videoId)">delete</button>
        </li>
    </ul>
     <div class="control-panel">
@@ -86,9 +87,10 @@ export default {
     startPlay(){
        this.selectedSong = this.playlist.songs[0];
     },
-    deleteSong(songId) {
-      console.log('delete song',songId)
-      // this.$store.dispatch({ type: "deleteSong", songId }).then(() => { });
+    deleteSong(videoId) {
+        console.log('delete song', videoId);
+        this.$store.dispatch({ type: "deleteSong", videoId})
+        .then( selectedPlaylist => {console.log('song deleted')});
     }
   }
 }
