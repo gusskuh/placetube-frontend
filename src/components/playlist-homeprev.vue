@@ -1,12 +1,14 @@
 <template>
   <section>
   <!-- {{playlist.playlistName}} -->
-  
+
+  <div class="playlist-preview" @click="showPlaylist">
       <img class="logo" :src='playlist.logo'  alt="">
       <div class="playlist-footer">
         {{playlist.playlistName}}
        <p>views: {{playlist.views}}</p> 
-        </div>
+      </div>
+  </div>
  
   </section>
 </template>
@@ -18,7 +20,9 @@ export default {
   methods: {
     
     showPlaylist(playlist) {
-      this.$router.push(`/playlists/${playlist._id}`);
+      console.log('dsadasdasdsdsa',this.playlist);
+      
+      this.$router.push(`/playlists/${this.playlist._id}`);
     },
   }
 };
@@ -35,6 +39,12 @@ ul {
 .playlist-footer{
   height: 50px;
   background-color: rgba(37, 126, 84, 0.897)
+}
+
+.playlist-preview{
+  display: flex;
+  flex-direction: column;
+
 }
 
 

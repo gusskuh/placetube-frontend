@@ -60,7 +60,6 @@ export default {
             })
             },
             addSong(song){
-              console.log('song to add',song);
               console.log('videoId:',song.id.videoId);
               console.log('thumbnail:',song.snippet.thumbnails.default.url);
               console.log('title:',song.snippet.title);

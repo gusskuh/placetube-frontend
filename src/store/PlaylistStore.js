@@ -17,6 +17,8 @@ export default {
       state.playlists.splice(playlistIdx, 1, updatedPlaylist);
     },
     pushAddedPlaylist(state, {addedPlaylist}) {
+       console.log('root state!!!', ROOT_STATE);
+       
       state.playlists.push(addedPlaylist);
       ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id)
     },
