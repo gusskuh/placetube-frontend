@@ -72,14 +72,8 @@ function deleteSong(playlist ,videoId) {
       console.log(playlist);
       
       newPlaylist.songs.push(newSong);
-<<<<<<< HEAD
-      return updatePlaylist(newPlaylist).then(playlist => {
-          console.log('newww song form service!!!!1', newSong);
-          
-=======
       return updatePlaylist(newPlaylist).then(playlist => {   
                  
->>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
         return newSong;
       });
   }

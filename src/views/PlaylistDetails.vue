@@ -4,8 +4,7 @@
      <h2>playlist name: {{playlist.playlistName}}</h2>
      <router-link to="/myProfile/addSongs"> Add songs </router-link>
    </div>
-   <div v-if="selectedSong" class="cont">
-   <div class="playingSong">
+  <div class="playingSong">
   <img v-if="selectedSong" :src='selectedSong.url' alt="">
   <h1 v-if="selectedSong">{{selectedSong.title}}</h1>
   </div>
@@ -23,7 +22,6 @@
      <button @click="stop">pause</button>
      <button @click="playSong(currSongNum+1)">next</button>
      <button @click="playSong(currSongNum-1)">prev</button>
-   </div>
    </div>
   </div>
 </template>

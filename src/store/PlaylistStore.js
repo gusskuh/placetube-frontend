@@ -4,15 +4,6 @@ export default {
   state: {
     playlists: [],
     selectedPlaylist: {
-<<<<<<< HEAD
-      _id:'',
-      adminId: '',
-      createdAt: 0,
-      currViewers: 0,
-      loc: '',
-      logo:'', 
-      songs:[]
-=======
       _id: "",
       adminId: "",
       createdAt: 0,
@@ -20,7 +11,6 @@ export default {
       loc: "",
       logo: "",
       songs: []
->>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
     }
   },
 
@@ -34,32 +24,20 @@ export default {
       });
       state.playlists.splice(playlistIdx, 1, updatedPlaylist);
     },
-<<<<<<< HEAD
-    pushAddedPlaylist(state, {addedPlaylist}) {
-       console.log('root state!!!', ROOT_STATE); 
-=======
     pushAddedPlaylist(state, { addedPlaylist }) {
       console.log("root state!!!", ROOT_STATE);
-
->>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
       state.playlists.push(addedPlaylist);
       ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id);
     },
-<<<<<<< HEAD
-    pushAddedSong(state, {addedSong}) {
-      console.log('amittyyyyyyyyyyyyyyyyyyyyy;llllll',addedSong);
+    pushAddedSong(state, { addedSong }) {
+      console.log("amittyyyyyyyyyyyyyyyyyyyyy;llllll", addedSong);
       // state.playlists.find();
       var playlistToUpdate = state.playlists.find(
-        playlist => playlist._id === state.selectedPlaylist._id)
-        playlistToUpdate.songs.push(addedSong)
-
-        console.log('poooooooooooooooooooooooooooooooooooooouuuuu', playlistToUpdate);
-        
+        playlist => playlist._id === state.selectedPlaylist._id
+      );
+      playlistToUpdate.songs.push(addedSong);
     },
-    
-=======
 
->>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
     deletePlaylist(state, { playlistToDelete }) {
       var playlistToDelIdx = state.playlists.findIndex(
         playlist => playlist._id === playlistToDelete._id
@@ -77,16 +55,22 @@ export default {
     },
     selectedPlaylist(state, { selectedPlaylist }) {
       state.selectedPlaylist = selectedPlaylist;
-<<<<<<< HEAD
-      console.log('set selected playlist',selectedPlaylist);
+      console.log("set selected playlist", selectedPlaylist);
     },
+    deleteSong(state, { videoId }) {
+      // console.log('***&&&$$$$$&#&#&#&#&#&#&&##', videoId);
+      let playlistToUpdate = state.playlists.find(
+        playlist => playlist._id === state.selectedPlaylist._id
+      );
+      let songToDeleteIdx = playlistToUpdate.songs.findIndex(
+        song => song.videoId === videoId
+      );    
+      playlistToUpdate.songs.splice(songToDeleteIdx, 1);
+      state.selectedPlaylist.songs.splice(songToDeleteIdx, 1);
+    }
     // updateSelected(state, { playlist} ){
     //   state.selectedPlaylist = playlist;
     // }
-=======
-      console.log("set selected playlist", selectedPlaylist);
-    }
->>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
   },
 
   getters: {
@@ -143,79 +127,43 @@ export default {
         }
       );
     },
-<<<<<<< HEAD
-    deleteSong(store , {videoId}) {
-       var selectedPlaylist = JSON.parse(JSON.stringify(store.state.selectedPlaylist));
-      return PlaylistsService.deleteSong(selectedPlaylist ,videoId).then(
-       playlist => {
-          console.log('testing deleted confirmistion')
-          // store.commit({ type: "pushAddedSong", addedSong});
-        }
-      );
-    },
-    addSong(store , {song}) {
-      
-      var selectedPlaylist = JSON.parse(JSON.stringify(store.state.selectedPlaylist));
-      let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
-        // console.log('currSong',currSong.videoId);
-        // console.log('song',song.id.videoId);
-         return  currSong.videoId === song.id.videoId;
-      })
-      console.log('song****************',filtered);
-      
-      if(filtered.length) {
-      console.log('filtered was found!!!!');
-      return
-      
-      }
-      else{
-
-        return PlaylistsService.addSong(selectedPlaylist , song).then(
-         addedSong => {
-            console.log('testing adding song confirmistion', addedSong)
-            store.commit({ type: "pushAddedSong", addedSong});
-          }
-        );
-      }
-   },
-
-  //  updateSelected(store, playlist ) {
-  //    console.log( 'hahahahahahahaha!!!!!' , playlist);
-  //    console.log(store.state.selectedPlaylist);
-  //    store.commit({type: 'updateSelected', playlist})
-     
-     
-  //  }
-=======
     deleteSong(store, { videoId }) {
       var selectedPlaylist = JSON.parse(
         JSON.stringify(store.state.selectedPlaylist)
       );
       return PlaylistsService.deleteSong(selectedPlaylist, videoId).then(
         playlist => {
-          console.log("testing deleted confirmistion");
+          // console.log("testing deleted confirmistion");
+          store.commit({ type: "deleteSong", videoId});
         }
       );
     },
     addSong(store, { song }) {
-      console.log(song.id.videoId);
-      
-      var filtered = store.state.selectedPlaylist.songs.filter(currSong => {
-        console.log('currSong',currSong.videoId);
-        return currSong.videoId === song.id.videoId 
-        
-      })
-      console.log(filtered);
-      
       var selectedPlaylist = JSON.parse(
         JSON.stringify(store.state.selectedPlaylist)
       );
-      return PlaylistsService.addSong(selectedPlaylist, song).then(newSong => {
-        console.log(newSong);
-
-        console.log("testing adding song confirmistion");
+      let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
+        return currSong.videoId === song.id.videoId;
       });
+      console.log("song****************", filtered);
+      if (filtered.length) {
+        console.log("filtered was found!!!!");
+        return;
+      } else {
+        return PlaylistsService.addSong(selectedPlaylist, song).then(
+          addedSong => {
+            console.log("testing adding song confirmistion", addedSong);
+            store.commit({ type: "pushAddedSong", addedSong });
+          }
+        );
+      }
     }
->>>>>>> c91f4f1b799353d6c3760e7498684f4e8e8f18f7
+
+    //  updateSelected(store, playlist ) {
+    //    console.log( 'hahahahahahahaha!!!!!' , playlist);
+    //    console.log(store.state.selectedPlaylist);
+    //    store.commit({type: 'updateSelected', playlist})
+
+    //  }
   }
 };
