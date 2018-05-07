@@ -9,6 +9,10 @@
          <div class="control">
         <Button @click="moveToEditPage(playlist)">Edit</Button>
         <button @click="deletePlaylist(playlist)">Del</button>
+         <!-- <div class="btn-group mr-2" role="group" aria-label="Second group">
+          <button type="button" class="btn btn-secondary">Delete</button>
+          <button type="button" class="btn btn-secondary">Edit</button>
+        </div> -->
         </div>
         </div>
       </div>

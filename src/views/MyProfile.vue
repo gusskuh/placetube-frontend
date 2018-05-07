@@ -3,14 +3,16 @@
     <div class="profile-header">
       <button class="demo-btn">demo</button>
       <h1>My Playlists</h1>
-       <button  @click="logout">Logout</button>
+       <!-- <button  @click="logout">Logout</button> -->
+       <button  @click="logout" type="button" class="btn btn-outline-secondary btn-sm">Logout</button>
     </div>
     <div class="user-details">
       <section class="details">
           <img class="user-pic" :src='showUserName.profileImg' alt="profile image">
         <div class="user-name">
           <h1>{{showUserName.userName}}</h1>
-          <Button @click="moveToEditPage">Create Playlist</Button>
+          <!-- <Button @click="moveToEditPage">Create Playlist</Button> -->
+          <button  @click="moveToEditPage" type="button" class="btn btn-danger">Create Playlist</button>
         </div>
         </section>
     </div>
@@ -135,11 +137,15 @@ export default {
 }
 
 .user-name > button {
-  background: red;
-  color: white;
-  border: none;
-  height: 20px;
-  border-radius: 10px;
+  border-radius: 20px;
+  height: 30px;
+  line-height: 10px;
+}
+
+.profile-header > button {
+   border-radius: 20px;
+  height: 30px;
+  line-height: 10px;
 }
 
 .profile-content {

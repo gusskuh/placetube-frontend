@@ -30,9 +30,12 @@
   </div>
     <div class="control-panel">
        <img class="skip-btns" @click.stop="playSong(currSongNum-1)" src="../img/prev-btn.svg" alt="">
+       <div class="main-btns">
       <img class="main-btn"  @click.stop="play()" src="../img/play-btn.svg" alt="">
       <img  class="main-btn" @click.stop="stop" src="../img/stop-btn.svg" alt="">
+        </div>
       <img class="skip-btns" @click.stop="playSong(currSongNum+1)" src="../img/next-btn.svg" alt="">
+      
    </div>
   </div>
 </template>
@@ -170,12 +173,18 @@ export default {
 .control-panel {
   position: absolute;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 60px;
   bottom: 0;
   background: #2d2727;
+}
+
+.main-btns {
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
 }
 
 .control-panel > img {
@@ -193,8 +202,10 @@ export default {
 }
 
 .skip-btns {
-  height: 30px;
+  height: 20px;
   width: auto;
+  margin-left: 20px;
+   margin-right: 20px;
 }
 
 .back-to {
