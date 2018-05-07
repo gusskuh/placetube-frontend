@@ -4,11 +4,12 @@
        <router-view/>
     </div>
     <div class="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
+      <router-link to="/"><img class="btn" src="./img/home-btn.svg" alt=""><br/><p>Home</p></router-link> 
+        <router-link to='/search'><img class="btn" src="./img/search-btn.svg" alt=""><br/><p>Search</p></router-link>
       <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
-      <router-link to='/myProfile'>MyProfile</router-link>
-      <span v-if="loggedinUser" style="float:right">{{loggedinUser.userName}}</span>
+      <router-link to='/myProfile'><img class="btn" src="./img/profile-btn.svg" alt=""><br/><p>Profile</p></router-link>
+       <router-link to="/about"><img class="btn" src="./img/about-btn.svg" alt=""><br/><p>About</p></router-link> 
+      <!-- <span v-if="loggedinUser" style="float:right">{{loggedinUser.userName}}</span> -->
     </div>
   </div>
 </template>
@@ -37,11 +38,11 @@ export default {
 <style>
 
 body{
-/* background-image: url("./img/background1.svg");
+background-image: url("./img/background1.svg");
 background-position: center;
-background-size: cover; */
-/* background-color: #0e05029e; */
-background-color:#150f2f;
+background-size: cover;
+background-color: #0e05029e;
+/* background-color:#150f2f; */
 background-blend-mode: color;
 background-repeat: no-repeat;
 }
@@ -55,9 +56,12 @@ background-repeat: no-repeat;
   height: 100%;
 }
 .nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   padding: 30px;
   height: 60px;
-  background: #00000047;
+  background: #333333;
   bottom:0;
   /* box-shadow: 2px 4px 10px 5px #0000005c; */
 }
@@ -69,5 +73,14 @@ background-repeat: no-repeat;
 
 .nav a.router-link-exact-active {
   color: #42b983;
+}
+
+p{
+  margin: 0;
+  font-size: 14px;
+}
+
+.btn {
+  height: 24px;
 }
 </style>

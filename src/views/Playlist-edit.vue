@@ -1,20 +1,22 @@
 <template>
   <section class="editor">
-        <h1>playlist Edit page</h1>
-        <form @submit.prevent="savePlaylist">
-            Name: <input type="text" ref="name" v-model="playlistToEdit.playlistName"/> 
-            Location: <input type="text" v-model="playlistToEdit.loc" >
-            urls: <input type="text" v-model="playlistToEdit.urls">
-            managers: <input type="text" v-model="playlistToEdit.managers">
+    <form class="add-playlist" @submit.prevent="savePlaylist">
+          <div class="top">
+            <button class="demo-btn"></button>
+             <h1>Add playlist</h1>
+             <img class="close-btn" @click="cancelChanges" src="../img/close-btn.svg" alt="">
+          </div>
+          <div class="inputs">
+            <input type="text" ref="name" v-model="playlistToEdit.playlistName" placeholder="Name"/> 
+            <input type="text" v-model="playlistToEdit.loc" placeholder="Location:">
+            <input type="text" placeholder="description">
+            <input type="text" v-model="playlistToEdit.urls" placeholder="links">
+            <input type="text" v-model="playlistToEdit.managers" placeholder="mangers">
+          </div>
             <div>
-            <button class="btn">Save</button>
-            <button @click="cancelChanges">Cancel</button>
-            <!-- <Button @click="backToMyProfile">Back</Button> -->
-            </div>
-        </form>
-
-        
-        
+            <button class="save-btn">Save</button>
+          </div>
+       </form>
   </section>
 </template>
 
@@ -29,7 +31,7 @@ export default {
         adminId: this.$store.getters.loggedinUser._id,
         loc: "",
         createdAt: Date.now(),
-        logo: 'https://hits.radiotransilvania.com/news/wp-content/uploads/2018/01/playlist.jpg',
+        logo: 'http://diylogodesigns.com/blog/wp-content/uploads/2016/03/Donuts-shop-logo-design.png',
         managers: [],
         urls: [],
         views: 0,
@@ -77,9 +79,62 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .editor {
   margin: 0 auto;
-  width: 100px;
+  margin-top: 30px;
+  width: 94%;
+  height: 90%;
+}
+
+.close-btn{
+  cursor: pointer;
+  height: 20px;
+}
+
+.add-playlist{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  height: 100%;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+input{
+padding-left: 6px;
+width: 100%;
+height: 5vh;
+margin-bottom: 20px;
+border-radius: 6px;
+border: 2px solid black;
+}
+
+.demo-btn{
+  visibility: hidden;
+}
+
+.top{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+h1{
+  margin: 0px;
+  padding: 10px;
+  color: black;
+}
+
+.save-btn{
+width: 100%;
+height: 3em;
+border-radius: 6px;
+background:#4a4d4e;
+border: none;
+color: white;
+font-size: 14px;
 }
 </style>

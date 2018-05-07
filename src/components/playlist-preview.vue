@@ -41,13 +41,13 @@ export default {
 .playlist-content{
     display: flex;
     max-width: 600px;
-    max-height: 200px;
+    height: 10%;
     cursor: pointer;
     margin: 0 auto;
-    margin-bottom: 40px;
-    justify-content: space-between;
+    margin-bottom: 20px;
+    justify-content: flex-start;
     background:#FFFFFF;
-    border-radius: 4px;
+    /* border-radius: 4px; */
     padding: 10px;
 }
 
@@ -57,30 +57,35 @@ button {
 
 .info {
   display: flex;
-  width: 55%;
-  align-items: flex-start;
+  width: 70%;
+  max-height: 200px;
   justify-content: space-between;
+  margin-left: 8px;
 }
 
 .txt {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-around;
 }
 
 img {
   width: 30%;
   height: 100%;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   object-fit: cover;
   overflow: hidden;
 }
 
 p{
+  margin: 0;
   color: #878787;
 }
 
 h4{
+ margin: 0;
  color: #F77062;
 }
 .playlist-image {

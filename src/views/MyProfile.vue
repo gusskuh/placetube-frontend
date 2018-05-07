@@ -1,8 +1,8 @@
 <template>
   <section>
     <div class="profile-header">
-      <button>back</button>
-      <h1>My Profile</h1>
+      <button class="demo-btn">demo</button>
+      <h1>My Playlists</h1>
        <button  @click="logout">Logout</button>
     </div>
     <div class="user-details">
@@ -134,15 +134,27 @@ export default {
    top:0
 }
 
+.user-name > button {
+  background: red;
+  color: white;
+  border: none;
+  height: 20px;
+  border-radius: 10px;
+}
+
 .profile-content {
   margin: 20px;
-  margin-top: 80px;
+  margin-top: 70px;
+}
+
+h1{
+  margin: 0;
 }
 
 
 .user-details {
   position: sticky;
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
   top:50px;
   background: #0e0921f5;
   display: flex;
@@ -159,7 +171,9 @@ export default {
 .user-name{
   display: flex;
   flex-direction: column;
+  align-items:flex-start;
   justify-content: space-around;
+  margin-left: 10px;
 }
 
 ul {
@@ -167,8 +181,8 @@ ul {
 }
 
 .user-pic{
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
 }
 
@@ -185,6 +199,10 @@ ul {
   flex-direction: column;
   align-items: center; 
   margin: 0 auto;
+}
+
+.demo-btn{
+  visibility: hidden;
 }
 
 </style>

@@ -10,6 +10,14 @@
       </div>
   </div>
  
+<!-- <div class="card" style="width: 18rem;">
+  <img class="card-img-top" :src="playlist.logo" alt="Card image cap">
+  <div class="card-body">
+     {{playlist.playlistName}}
+    <p class="card-text">views: {{playlist.views}}</p>
+  </div>
+</div> -->
+
   </section>
 </template>
 

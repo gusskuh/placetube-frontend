@@ -2,15 +2,16 @@
 <div class="add-songs">
   <h1>add songs</h1>
   <form @submit.prevent="search">
-  <input type="text" v-model="searchInput">
-  <button>Search</button>
+  <input type="text" v-model="searchInput" placeholder="search songs...">
   </form>
-  <ul v-if="songs">
-    <li v-for="song in songs" :key="song.title">
-      <button @click="playPreview(song.id.videoId)">preview</button>
-      {{song.snippet.title}}
-      <img :src="song.snippet.thumbnails.default.url" alt="">
-      <button @click="addSong(song)">+</button>
+  <ul class="songs" v-if="songs">
+    <li class="song-preview" v-for="song in songs" :key="song.title">
+       <img class="prev" :src="song.snippet.thumbnails.default.url" alt="">
+       <p>{{song.snippet.title}}</p>
+       <div class="btns">
+      <img @click="playPreview(song.id.videoId)" src="../img/preview-btn.svg" alt="">
+      <img @click="addSong(song)" src="../img/add-btn.svg" alt="">
+      </div>
     </li>
  </ul>
  <div>
@@ -94,6 +95,61 @@ export default {
     }
 </script>
 
-<style>
+<style scoped>
+
+.add-songs{
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+h1{
+  margin:8px;
+}
+
+p{
+  color: black;
+  width: 30%;
+  height: 90px;
+  overflow: hidden;
+}
+
+input{
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.prev{
+  height: 90%;
+  width: 30%;
+}
+
+.btns{
+  background: white;
+  width: 25%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.songs{
+  background: white;
+  height: 85%;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.song-preview{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 10px;
+  border-bottom: 1px solid black;
+}     
 
 </style>

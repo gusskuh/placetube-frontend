@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="29px" viewBox="0 0 29 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>disc-full</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="profile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-297.000000, -613.000000)" fill-opacity="0.52">
+        <g id="disc-full" transform="translate(297.000000, 613.000000)" fill="#000000">
+            <path d="M14.5,0 C6.525,0 0,6.525 0,14.5 C0,22.475 6.525,29 14.5,29 C22.475,29 29,22.475 29,14.5 C29,6.525 22.475,0 14.5,0 L14.5,0 Z M14.5,18.125 C12.50625,18.125 10.875,16.49375 10.875,14.5 C10.875,12.50625 12.50625,10.875 14.5,10.875 C16.49375,10.875 18.125,12.50625 18.125,14.5 C18.125,16.49375 16.49375,18.125 14.5,18.125 L14.5,18.125 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
