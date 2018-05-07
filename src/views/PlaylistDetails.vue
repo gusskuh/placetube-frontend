@@ -1,10 +1,10 @@
 <template>
  <div class="playlist">
-   <div class="top-page">
-     <!-- <button @click="$router.go(-1)">go back</button> -->
+   <section class="top-page"> 
+   <div class="playlist-header">
      <img class="back-to" @click="$router.go(-1)" src="../img/goback-btn.svg" alt="">
      <h2>{{playlist.playlistName}}</h2>
-     <span></span>
+     <span class="demo-span"></span>
    </div>
 
    <div class="playingSong">
@@ -12,24 +12,27 @@
   <h1  v-if="selectedSong" >{{selectedSong.title}}</h1>
   <router-link to="/myProfile/addSongs">add songs </router-link>
   </div>
+  </section>
+
   <youtube v-if="selectedSong" height="0" width="0" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
   <div class="songs-list">
-     <div v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
+     <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
+       <div class="song-left">
+        <img class="songImg" :src="song.url" alt="">
        <p @click="playSong(idx)">{{song.title}}</p>
+       </div>
+       <div class="song-right">
        <button>▲</button>
        <button>▼</button>
        <button @click="deleteSong(song.videoId)">delete</button>
        </div>
+       </div>
   </div>
     <div class="control-panel">
-       <img class="prev" @click.stop="playSong(currSongNum-1)" src="../img/prev-btn.svg" alt="">
-      <img class="play"  @click.stop="play()" src="../img/play-btn.svg" alt="">
-      <img  class="stop" @click.stop="stop" src="../img/stop-btn.svg" alt="">
-      <img class="next" @click.stop="playSong(currSongNum+1)" src="../img/next-btn.svg" alt="">
-     <!-- <button @click="play">play</button>
-     <button @click="stop">pause</button> -->
-     <!-- <button @click="playSong(currSongNum+1)">next</button>
-     <button @click="playSong(currSongNum-1)">prev</button> -->
+       <img class="skip-btns" @click.stop="playSong(currSongNum-1)" src="../img/prev-btn.svg" alt="">
+      <img class="main-btn"  @click.stop="play()" src="../img/play-btn.svg" alt="">
+      <img  class="main-btn" @click.stop="stop" src="../img/stop-btn.svg" alt="">
+      <img class="skip-btns" @click.stop="playSong(currSongNum+1)" src="../img/next-btn.svg" alt="">
    </div>
   </div>
 </template>
@@ -116,61 +119,62 @@ export default {
 
 <style scoped>
 
-.playlist{
-  display: grid;
-  grid-template-rows: repeat(1,1fr);
-  grid-template-rows: repeat(1,1fr);
+.playlist-header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.song-preview{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 0 8px 0 8px;
+  font-size: 12px
+}
+
+.playlist{ 
+ height: 100vh;
+ width: 100vw;
+ position: absolute;
+ margin: 0 auto;
+ overflow: hidden; 
+  background: linear-gradient(to bottom, #000099 0%, #0066cc 100%);
 }
 
 .top-page{
-grid-row: 1/ span 1;
-grid-column: 1 / span 12;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding-left: 10px;
-padding-right: 10px;
+ height: 30vh;
 }
 
-.playingSong {
-  grid-row: 2/ span 4;
-  grid-column: 1 / span 12;
+.song-left{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  text-overflow: clip (default);
+  overflow-y: hidden;
+  width: 50%;
+  height: 60px;
+  text-align: left;
 }
 
-.songs-list{
-  grid-row: 9/ span 3;
-  grid-column: 1 / span 12;
+.songImg {
+  height: 50px;
+  padding-right: 10px;
 }
 
-h1 {
-  align-self: flex-start;
+.song-left p{
+  text-overflow: clip (default);
+  height: 60px;
+  text-align: left;
 }
-
-img {
-  height: 250px;
-  width: 250px;
-}
-
-ul {
-  list-style: none;
-}
-
-li {
-  border-bottom: 1px solid black;
-}
-
 
 .control-panel {
   position: absolute;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  bottom: 0;
-  height: 80px;
   width: 100%;
+  height: 60px;
+  bottom: 0;
   background: #2d2727;
 }
 
@@ -178,21 +182,17 @@ li {
   cursor: pointer;
 }
 
-.stop {
+.songs-list{
+  height: 60vh;
+  overflow: scroll;
+}
+
+.main-btn{
   height: 50px;
   width: auto;
 }
 
-.play {
-  height: 50px;
-  width: auto;
-}
-
-.next {
-  height: 30px;
-  width: auto;
-}
-.prev {
+.skip-btns {
   height: 30px;
   width: auto;
 }

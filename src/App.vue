@@ -4,11 +4,11 @@
        <router-view/>
     </div>
     <div class="nav">
-      <router-link to="/"><img class="btn" src="./img/home-btn.svg" alt=""><br/><p>Home</p></router-link> 
-        <router-link to='/search'><img class="btn" src="./img/search-btn.svg" alt=""><br/><p>Search</p></router-link>
+      <router-link to="/"><img class="nav-btn" src="./img/home-btn.svg" alt=""><br/><p>Home</p></router-link> 
+        <router-link to='/search'><img class="nav-btn" src="./img/search-btn.svg" alt=""><br/><p>Search</p></router-link>
       <!-- <router-link v-if="loggedinUser" :to="'/myProfile/' + loggedinUser.email" >MyProfile</router-link> -->
-      <router-link to='/myProfile'><img class="btn" src="./img/profile-btn.svg" alt=""><br/><p>Profile</p></router-link>
-       <router-link to="/about"><img class="btn" src="./img/about-btn.svg" alt=""><br/><p>About</p></router-link> 
+      <router-link to='/myProfile'><img class="nav-btn" src="./img/profile-btn.svg" alt=""><br/><p>Profile</p></router-link>
+       <router-link to="/about"><img class="nav-btn" src="./img/about-btn.svg" alt=""><br/><p>About</p></router-link> 
       <!-- <span v-if="loggedinUser" style="float:right">{{loggedinUser.userName}}</span> -->
     </div>
   </div>
@@ -80,7 +80,7 @@ p{
   font-size: 14px;
 }
 
-.btn {
+.nav-btn {
   height: 24px;
 }
 </style>
