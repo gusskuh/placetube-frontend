@@ -12,6 +12,8 @@
             <input type="text" placeholder="description">
             <input type="text" v-model="playlistToEdit.urls" placeholder="links">
             <input type="text" v-model="playlistToEdit.managers" placeholder="mangers">
+            <input type="file" accept="image/*" class="form-control" v-on:change="upload($event.target.files)"/>
+
           </div>
             <div>
             <button class="save-btn">Save</button>
@@ -21,6 +23,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: ["selectedPlaylist"],
 
@@ -31,12 +34,18 @@ export default {
         adminId: this.$store.getters.loggedinUser._id,
         loc: "",
         createdAt: Date.now(),
-        logo: 'http://diylogodesigns.com/blog/wp-content/uploads/2016/03/Donuts-shop-logo-design.png',
+        logo:
+          "http://diylogodesigns.com/blog/wp-content/uploads/2016/03/Donuts-shop-logo-design.png",
         managers: [],
         urls: [],
         views: 0,
         currViewers: 0,
         songs: []
+      },
+      cloudinary: {
+        uploadPreset: "btaf97mm",
+        apiKey: "818678564481898",
+        cloudName: "ddl7apozj"
       }
     };
   },
@@ -47,6 +56,11 @@ export default {
     },
     loggedinUser() {
       return this.$store.getters.loggedinUser;
+    },
+    clUrl() {
+      return `https://api.cloudinary.com/v1_1/${
+        this.cloudinary.cloudName
+      }/upload`;
     }
   },
 
@@ -61,6 +75,24 @@ export default {
     },
     backToMyProfile() {
       this.$router.push(`/myProfile`);
+    },
+    upload(file) {
+      const formData = new FormData();
+      formData.append("file", file[0]);
+      formData.append("upload_preset", this.cloudinary.uploadPreset);
+      formData.append("tags", "gs-vue,gs-vue-uploaded");
+      console.log(file[0], formData);
+      // For debug purpose only
+      // Inspects the content of formData
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+      axios.post(this.clUrl, formData).then(res => {
+       
+        this.playlistToEdit.logo = res.data.secure_url;
+        console.log('logo is updated!');
+        
+      });
     }
   },
   created() {
@@ -80,7 +112,6 @@ export default {
 </script>
 
 <style scoped>
-
 .editor {
   margin: 0 auto;
   margin-top: 30px;
@@ -88,12 +119,12 @@ export default {
   height: 90%;
 }
 
-.close-btn{
+.close-btn {
   cursor: pointer;
   height: 20px;
 }
 
-.add-playlist{
+.add-playlist {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -103,38 +134,38 @@ export default {
   border-radius: 6px;
 }
 
-input{
-padding-left: 6px;
-width: 100%;
-height: 5vh;
-margin-bottom: 20px;
-border-radius: 6px;
-border: 2px solid black;
+input {
+  padding-left: 6px;
+  width: 100%;
+  height: 5vh;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 2px solid black;
 }
 
-.demo-btn{
+.demo-btn {
   visibility: hidden;
 }
 
-.top{
-display: flex;
-align-items: center;
-justify-content: space-between;
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-h1{
+h1 {
   margin: 0px;
   padding: 10px;
   color: black;
 }
 
-.save-btn{
-width: 100%;
-height: 3em;
-border-radius: 6px;
-background:#4a4d4e;
-border: none;
-color: white;
-font-size: 14px;
+.save-btn {
+  width: 100%;
+  height: 3em;
+  border-radius: 6px;
+  background: #4a4d4e;
+  border: none;
+  color: white;
+  font-size: 14px;
 }
 </style>

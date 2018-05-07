@@ -1,24 +1,11 @@
 <template>
-  <section>
-  <!-- {{playlist.playlistName}} -->
-
   <div class="playlist-preview" @click="showPlaylist">
       <img class="logo" :src='playlist.logo'  alt="">
-      <div class="playlist-footer">
-        {{playlist.playlistName}}
+      <section class="playlist-info">
+       <h5>{{playlist.playlistName}}</h5>
        <p>views: {{playlist.views}}</p> 
-      </div>
+       </section>
   </div>
- 
-<!-- <div class="card" style="width: 18rem;">
-  <img class="card-img-top" :src="playlist.logo" alt="Card image cap">
-  <div class="card-body">
-     {{playlist.playlistName}}
-    <p class="card-text">views: {{playlist.views}}</p>
-  </div>
-</div> -->
-
-  </section>
 </template>
 
 <script>
@@ -33,28 +20,39 @@ export default {
 
     },
   }
-};
+}
 </script>
 
-<style >
-.logo {
+<style scoped>
+/* .logo {
   width:150px;
   height: 150px;
 }
 ul {
   list-style: none;
-}
-.playlist-footer{
-  height: 50px;
+} */
+
+.playlist-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
   background-color: rgba(37, 126, 84, 0.897)
 }
 
-.playlist-preview{
-  display: flex;
-  flex-direction: column;
-
+img{
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  overflow: hidden;
 }
 
-
+.playlist-preview{
+ width: 100%;
+ height: 100%;
+ grid-column: span 4;
+ grid-row: span 2;
+} 
 
 </style>

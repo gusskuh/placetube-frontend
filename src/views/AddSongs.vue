@@ -2,7 +2,12 @@
 <div class="add-songs">
   <h1>add songs</h1>
   <form @submit.prevent="search">
-  <input type="text" v-model="searchInput" placeholder="search songs...">
+  <input type="text" v-model="searchInput" @input="autoComplete" placeholder="search songs...">
+  <ul class="search-auto-complete">
+    <li  @click="searchFromOps(idx)" v-for="(search,idx) in searchOps" :key="search">
+        {{search}}
+    </li>
+  </ul>
   </form>
   <ul class="songs" v-if="songs">
     <li class="song-preview" v-for="song in songs" :key="song.title">
@@ -31,6 +36,7 @@ export default {
     return {
       songs: null,
       searchInput: "",
+      searchOps: [],
       selectedSong: null,
       playerVars: {
         autoplay: 1
@@ -60,15 +66,31 @@ export default {
           console.log("Search Failed!");
         });
     },
+    searchFromOps(songIdx) {
+      YoutubeService.getSearchResults(this.searchOps[songIdx])
+        .then(res => {
+          this.songs = res.items;
+          this.searchOps = [];
+        })
+        .catch(err => {
+          console.log("Search Failed!");
+        });
+    },
     addSong(song) {
       console.log("song to add", song);
-      this.$store.dispatch({ type: "addSong", song })
-      // EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" });
-       .then( playlist => {
-         console.log('song added')
-               EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" });
-         })
-  
+      this.$store.dispatch({ type: "addSong", song });
+      //  .then( playlist => {
+      //    console.log('song added')
+      //    });
+    },
+    autoComplete() {
+      if (this.searchInput === "") return (this.searchOps = []);
+      else {
+        YoutubeService.getAutoComplete(this.searchInput).then(res => {
+          console.log("autocomplete search results", res[1]);
+          this.searchOps = res[1];
+        });
+      }
     },
     playPreview(song) {
       if (this.selectedSong === song) {
@@ -101,6 +123,18 @@ export default {
 </script>
 
 <style scoped>
+.search-auto-complete {
+  position: absolute;
+  background: white;
+  color: black;
+  width: 90%;
+  border: 1px solid black;
+}
+
+.search-auto-complete > li {
+  cursor: pointer;
+}
+
 .add-songs {
   width: 90%;
   height: 100%;

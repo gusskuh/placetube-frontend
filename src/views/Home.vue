@@ -4,9 +4,7 @@
       <h1>Place tube</h1>
     </div>
     <div class="playlist-container">
-        <div v-for="playlist in showPlaylists" :key="playlist._id">
-          <playlist-homeprev :playlist="playlist"></playlist-homeprev>
-        </div>
+       <playlist-homeprev class="playlist-preview" v-for="playlist in showPlaylists" :key="playlist._id" :playlist="playlist"></playlist-homeprev>
     </div>
   </div>
 </template>
@@ -35,9 +33,9 @@ export default {
   }
 };
 </script>
-<style scoped >
+<style scoped>
+
 .short-desc {
-  height: 80px;
   width: 100%;
   background:#000000cf;
   position: absolute;
@@ -50,11 +48,18 @@ export default {
 }
 
 .playlist-container {
-    display: flex;
+    display: grid;
     margin-top: 90px;
-    flex-wrap:wrap;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: calc ((100vw - 330px) / 12);
+    grid-gap: 30px;
+    height: 100%;
+    width: 94%;
 }
+
+/* .playlist-preview {
+  grid-row: span 3;
+  grid-column-end: span 3;
+} */
+
 </style>
