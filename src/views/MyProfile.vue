@@ -1,7 +1,7 @@
 <template>
   <section>
-    <div class="profile-header">
-      <button class="demo-btn">demo</button>
+    <div @click="isEditing = !isEditing" class="profile-header">
+      <button class="">Edit</button>
       <h1>My Playlists</h1>
        <!-- <button  @click="logout">Logout</button> -->
        <button  @click="logout" type="button" class="btn btn-outline-secondary btn-sm">Logout</button>
@@ -24,41 +24,32 @@
 
       </div>
     </div>
-    <div class="edit-profile-details" v-if="isEditing">
-      <h1>Edit Your Profile</h1>
-       <form class="edit-userDetails" @submit.prevent="savePlaylist">
-        
-            <img :src='showUserName.profileImg' alt="profile image">
-            Change profile pic<input type="file" @change="onFileSelected">
-            <button @click="onUpload">Upload</button>
-         
-                Name: <input type="text" ref="name"/> 
-                <button>Save</button>
-                <button @click="cancelChanges">Cancel</button>
-                <!-- <Button @click="backToMyProfile">Back</Button> -->
-            
-        </form>
-    </div>
-
+    <edit-profile :user="showUserName" v-if="isEditing"></edit-profile>
+  
   </section>
 </template>
 
 <script>
 import playlistPreview from "../components/playlist-preview";
+import editProfile from "../components/edit-profile";
 import playlistEdit from "../views/Playlist-edit";
+
 
 export default {
   components: {
     playlistPreview,
-    playlistEdit
+    playlistEdit,
+    editProfile
+    
   },
 
   data() {
+    
     return {
       selectedPlaylist: null,
       isEditing: null,
       selectedFile: null,
-    };
+    }
   },
   created() {
    loggedinUser: {
@@ -70,6 +61,8 @@ export default {
 
   created() {
     loggedinUser: {
+      console.log(this.$store.getters.loggedinUser);
+      
       if(!this.$store.getters.loggedinUser) {
             this.$router.push("/login");
       }
@@ -100,9 +93,11 @@ export default {
       
     },
     onUpload() {
-      const fd = new FormData();
-      fd.append('image', this.selectedFile, this.selectedFile.name)
-      console.log(fd);
+      // const cl = new cloudinary.Cloudinary({cloud_name: "ddl7apozj", secure: true});
+      // const fd = new FormData();
+      // fd.append('image', this.selectedFile, this.selectedFile.name)
+      // console.log(fd);
+      // cloudinary.uploader.upload(fd, function(result) { console.log(result) })
       
     },
       logout() {
@@ -112,6 +107,7 @@ export default {
   },
   computed: {
     showUserName() {
+      
       return this.$store.getters.loggedinUser;
     },
 
@@ -207,8 +203,6 @@ ul {
   margin: 0 auto;
 }
 
-.demo-btn{
-  visibility: hidden;
-}
+
 
 </style>

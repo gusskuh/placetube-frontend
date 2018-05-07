@@ -12,6 +12,7 @@
 <script>
 // @ is an alias to /src
   import playlistHomeprev from '../components/playlist-homeprev';
+  import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
 
 export default {
   
@@ -27,7 +28,7 @@ export default {
   },
   computed: {
     showPlaylists() {
-      return this.$store.getters.playlistsForDisplay;
+      return this.$store.getters.homePlaylistsForDisplay;
     }
   }
 };
