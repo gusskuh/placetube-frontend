@@ -8,6 +8,7 @@ import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import MyProfile from './views/MyProfile.vue'
 import AddSongs from './views/AddSongs.vue'
+import SearchPage from './views/SearchPage.vue'
 import VueYoutube from 'vue-youtube'
  
 Vue.use(Router)
@@ -54,6 +55,11 @@ export default new Router({
       path: '/myProfile',
       name: 'myProfile',
       component: MyProfile
-    }
+    },
+    {
+      path: '/search',
+      name: 'searchPage',
+      component: SearchPage
+      },
   ]
 })

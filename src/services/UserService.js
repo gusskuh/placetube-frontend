@@ -12,14 +12,19 @@ function login(user) {
 
       return res.data.user
     })
-    .catch(err => {throw new Error('Login Failed')})
+    .catch(err => {
+      console.log(err);
+      
+      throw new Error('Login Failed')})
 }
 
 function register(user) {
   return axios
     .post(`${BASE_URL}/register`, user)
     .then(res => console.log(res.data))
-    .catch(err => {throw new Error('Register Failed')})
+    .catch(err => {
+      console.log(err)
+      throw new Error('Registration Failed')})
 }
 
 function logout() {

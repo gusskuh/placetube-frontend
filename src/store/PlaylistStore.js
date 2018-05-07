@@ -4,6 +4,7 @@ export default {
   state: {
     playlists: [],
     selectedPlaylist: {
+      playlistName: "",
       _id: "",
       adminId: "",
       createdAt: 0,
@@ -11,6 +12,9 @@ export default {
       loc: "",
       logo: "",
       songs: []
+    },
+    filterBy: {
+      txt: ""
     }
   },
 
@@ -18,6 +22,11 @@ export default {
     setPlaylists(state, { playlists }) {
       state.playlists = playlists;
     },
+
+    setPlaylistFilter(state, { filter }) {
+      state.filterBy = filter;
+    },
+
     pushUpdatedPlaylist(state, { updatedPlaylist }) {
       let playlistIdx = state.playlists.findIndex(currPlaylist => {
         return currPlaylist._id === updatedPlaylist._id;
@@ -64,7 +73,7 @@ export default {
       );
       let songToDeleteIdx = playlistToUpdate.songs.findIndex(
         song => song.videoId === videoId
-      );    
+      );
       playlistToUpdate.songs.splice(songToDeleteIdx, 1);
       state.selectedPlaylist.songs.splice(songToDeleteIdx, 1);
     }
@@ -74,9 +83,20 @@ export default {
   },
 
   getters: {
-    playlistsForDisplay(state, getters) {
+    homePlaylistsForDisplay(state, getters) {
       return state.playlists;
     },
+    filteredPlaylistsForDisplay(state, getters) {
+      if (!state.filterBy.txt) {        
+        return [];
+      } else {
+        let filteredPlaylists = state.playlists.filter(playlist => {
+          return playlist.playlistName.toLowerCase().includes(state.filterBy.txt.toLowerCase());
+        });
+        return filteredPlaylists;
+      }
+    },
+
     getPlaylistsByUser(state, getters, rootState) {
       ROOT_STATE = rootState;
       if (!rootState.UserStore.loggedinUser) return state.playlists;
@@ -95,7 +115,19 @@ export default {
   actions: {
     loadPlaylists(store) {
       return PlaylistsService.getPlaylists().then(playlists => {
-        store.commit({ type: "setPlaylists", playlists });
+        if (!store.state.filterBy.txt) {
+          // console.log('no filter');
+          store.commit({ type: "setPlaylists", playlists });
+        } else {
+          let filteredPlaylists = playlists.filter(playlist => {
+            return playlist.playlistName
+              .toLowerCase()
+              .includes(store.state.filterBy.txt.toLowerCase());
+          });
+          // console.log(filteredPlaylists);
+
+          store.commit({ type: "setPlaylists", playlists: filteredPlaylists });
+        }
       });
     },
     saveChanges(store, updatedPlaylist) {
@@ -134,7 +166,7 @@ export default {
       return PlaylistsService.deleteSong(selectedPlaylist, videoId).then(
         playlist => {
           // console.log("testing deleted confirmistion");
-          store.commit({ type: "deleteSong", videoId});
+          store.commit({ type: "deleteSong", videoId });
         }
       );
     },
@@ -145,7 +177,6 @@ export default {
       let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
         return currSong.videoId === song.id.videoId;
       });
-      console.log("song****************", filtered);
       if (filtered.length) {
         console.log("filtered was found!!!!");
         return;
@@ -154,8 +185,7 @@ export default {
           addedSong => {
             console.log("testing adding song confirmistion", addedSong);
             store.commit({ type: "pushAddedSong", addedSong });
-          }
-        );
+          })
       }
     }
 

@@ -20,7 +20,7 @@ function updatePlaylist(updatedPlaylist) {
   return axios
     .put(`${PLAYLISTS_URL}/${updatedPlaylist._id}`, updatedPlaylist)
     .then(res => res.data)
-    .catch(err => console.log("updated failed", err));
+    .catch(err => err)
 }
 
 
@@ -72,10 +72,9 @@ function deleteSong(playlist ,videoId) {
       console.log(playlist);
       
       newPlaylist.songs.push(newSong);
-      return updatePlaylist(newPlaylist).then(playlist => {   
-                 
+      return updatePlaylist(newPlaylist).then(playlist => {      
         return newSong;
-      });
+      })
   }
 
 

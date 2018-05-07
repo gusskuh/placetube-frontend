@@ -15,7 +15,7 @@ ul{
 }
 
 .alert {
-    color:white;
+    color:black;
     padding: 10px;
     font-size: 1.4em;
     position: absolute;
@@ -26,7 +26,7 @@ ul{
 }
 
 .alert-success {
-    background-color: rgb(15, 122, 15);
+    background-color:white;
 }
 .alert-danger {
     background-color: rgb(122, 11, 11);
