@@ -19,11 +19,11 @@
      <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
        <div class="song-left">
         <img class="songImg" :src="song.url" alt="">
-       <p @click="playSong(idx)">{{song.title}}</p>
+       <p @click="playSong(song, idx)">{{song.title}}</p>
        </div>
        <div class="song-right">
-       <button>▲</button>
-       <button>▼</button>
+       <button @click="moveSong(song, idx, -1)">▲</button>
+       <button @click="moveSong(song, idx, 1)">▼</button>
        <button @click="deleteSong(song.videoId)">delete</button>
        </div>
        </div>
@@ -91,6 +91,8 @@ export default {
       }
     },
     playSong(songIdx) {
+      // console.log(songIdx - 1);
+      
       if (songIdx < 0) return;
       if (songIdx > this.playlist.songs.length - 1) return;
       this.selectedSong = this.playlist.songs[songIdx];
@@ -112,6 +114,10 @@ export default {
         .then(selectedPlaylist => {
           console.log("song deleted");
         });
+    },
+    moveSong(song, idx, param){
+      this.$store.dispatch({ type: "moveSong", song, idx, param }) 
+
     }
   }
 };

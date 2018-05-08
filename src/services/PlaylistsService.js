@@ -14,29 +14,25 @@ function getPlaylists() {
 }
 
 function updatePlaylist(updatedPlaylist) {
-    console.log(updatedPlaylist);
-    
+  console.log(updatedPlaylist);
 
   return axios
     .put(`${PLAYLISTS_URL}/${updatedPlaylist._id}`, updatedPlaylist)
     .then(res => res.data)
-    .catch(err => err)
+    .catch(err => err);
 }
 
-
-
 function addPlaylist(updatedPlaylist) {
-    
-    return axios
-      .put(PLAYLISTS_URL, updatedPlaylist)
-      .then(res => {
-          console.log(res.data);
-          return res.data})
-      .catch(err => console.log("add failed", err));
-  }
+  return axios
+    .put(PLAYLISTS_URL, updatedPlaylist)
+    .then(res => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch(err => console.log("add failed", err));
+}
 
 function deletePlaylist(playlistToDelete) {
-   
   console.log(
     "playlist to delet form service!",
     `${PLAYLISTS_URL}/${playlistToDelete._id}`
@@ -44,46 +40,47 @@ function deletePlaylist(playlistToDelete) {
   return axios
     .delete(`${PLAYLISTS_URL}/${playlistToDelete._id}`)
     .then(res => res.data)
-    .catch( err => console.log('could not delete!!'))
+    .catch(err => console.log("could not delete!!"));
 }
 
 function _getPlaylistUrl(playlistId) {
-    return `${PLAYLISTS_URL}/${playlistId}`;
+  return `${PLAYLISTS_URL}/${playlistId}`;
 }
 
-function getPlaylistById (playlistId){
-    return axios
-    .get(_getPlaylistUrl(playlistId))
-    .then(res => res.data)
+function getPlaylistById(playlistId) {
+  return axios.get(_getPlaylistUrl(playlistId)).then(res => res.data);
 }
 
-function deleteSong(playlist ,videoId) {
-    var newPlaylist = playlist;
-    var newSongsArr = playlist.songs.filter(song => song.videoId !== videoId);
-    newPlaylist.songs = newSongsArr;
-    return updatePlaylist(newPlaylist).then(playlist => {
-        return playlist;
-      });
-  }
+function deleteSong(playlist, videoId) {
+  var newPlaylist = playlist;
+  var newSongsArr = playlist.songs.filter(song => song.videoId !== videoId);
+  newPlaylist.songs = newSongsArr;
+  return updatePlaylist(newPlaylist).then(playlist => {
+    return playlist;
+  });
+}
 
-  function addSong (playlist , song) {
-      var newSong = {videoId:song.id.videoId ,title:song.snippet.title, url: song.snippet.thumbnails.default.url}
-      var newPlaylist = playlist;
-      console.log(playlist);
-      
-      newPlaylist.songs.push(newSong);
-      return updatePlaylist(newPlaylist).then(playlist => {      
-        return newSong;
-      })
-  }
+function addSong(playlist, song) {
+  var newSong = {
+    videoId: song.id.videoId,
+    title: song.snippet.title,
+    url: song.snippet.thumbnails.default.url
+  };
+  var newPlaylist = playlist;
+  console.log(playlist);
 
+  newPlaylist.songs.push(newSong);
+  return updatePlaylist(newPlaylist).then(playlist => {
+    return newSong;
+  });
+}
 
 export default {
-    getPlaylists,
-    getPlaylistById,
-    updatePlaylist,
-    deletePlaylist,
-    addPlaylist,
-    deleteSong,
-    addSong
-}
+  getPlaylists,
+  getPlaylistById,
+  updatePlaylist,
+  deletePlaylist,
+  addPlaylist,
+  deleteSong,
+  addSong,
+};

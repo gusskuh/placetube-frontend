@@ -77,11 +77,14 @@ export default {
         });
     },
     addSong(song) {
+      // if (this.selectedPlaylist.songs.includes(song)) console.log(1);
+      
       console.log("song to add", song);
-      this.$store.dispatch({ type: "addSong", song });
-      //  .then( playlist => {
-      //    console.log('song added')
-      //    });
+      this.$store.dispatch({ type: "addSong", song })
+       .then( playlist => {
+         console.log('song added', playlist)
+         });
+      // EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" })
     },
     autoComplete() {
       if (this.searchInput === "") return (this.searchOps = []);
