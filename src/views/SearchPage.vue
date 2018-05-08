@@ -60,10 +60,10 @@ export default {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100%;
   width: 90%;
+  height: 100%;
 }
 
 .sign-in {
@@ -77,6 +77,7 @@ export default {
 .inputs {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 input {
@@ -85,6 +86,7 @@ input {
   border-radius: 6px;
   padding-left: 6px;
   font-size: 14px;
+  width: 90vw;
 }
 
 button {

@@ -16,7 +16,8 @@
 
   <youtube v-if="selectedSong" height="0" width="0" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
   <div class="songs-list">
-     <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
+     <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId"
+     :class="{firstSong: idx === 0}">
        <div class="song-left">
         <img class="songImg" :src="song.url" alt="">
        <p @click="playSong(idx)">{{song.title}}</p>
@@ -212,6 +213,10 @@ export default {
   height: 40px;
   width: auto;
   cursor: pointer;
+}
+
+.firstSong{
+  background: grey;
 }
 
 </style>

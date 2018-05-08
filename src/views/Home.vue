@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <div class="short-desc">
-      <h1>Place tube</h1>
+       <img src="../img/giphy1.gif" alt="">
+      <!-- <h1>Jukebox</h1> -->
+      <div class="app-info">
+       <h1> Connecting music with places</h1>
+    </div>
     </div>
     <div class="playlist-container">
        <playlist-homeprev class="playlist-preview" v-for="playlist in showPlaylists" :key="playlist._id" :playlist="playlist"></playlist-homeprev>
@@ -35,10 +39,23 @@ export default {
 </script>
 <style scoped>
 
+h1{
+  margin: 0;
+}
+
 .short-desc {
   width: 100%;
   background:#000000cf;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.short-desc > img{
+  height: 60px;
 }
 
 .home {
@@ -47,15 +64,23 @@ export default {
   flex-direction: column;
 }
 
+.app-info > h1 {
+  margin-top: 8px;
+ font-size: 1em;
+}
+
 .playlist-container {
+   margin-top: 130px;
+   margin-bottom: 20px;
     display: grid;
-    margin-top: 90px;
     grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: calc ((100vw - 330px) / 12);
+    grid-auto-rows: calc((100vh -330px) / 12);
     grid-gap: 30px;
     height: 100%;
-    width: 94%;
+    width: 100%;
+    padding: 20px;
 }
+
 
 /* .playlist-preview {
   grid-row: span 3;

@@ -1,7 +1,7 @@
 <template>
   <section>
-    <div @click="isEditing = !isEditing" class="profile-header">
-      <button class="">Edit</button>
+    <div class="profile-header">
+       <button  @click="isEditing = !isEditing" type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
       <h1>My Playlists</h1>
        <!-- <button  @click="logout">Logout</button> -->
        <button  @click="logout" type="button" class="btn btn-outline-secondary btn-sm">Logout</button>
@@ -10,7 +10,7 @@
       <section class="details">
           <img class="user-pic" :src='showUserName.profileImg' alt="profile image">
         <div class="user-name">
-          <h1>{{showUserName.userName}}</h1>
+          <h2>{{showUserName.userName}}</h2>
           <!-- <Button @click="moveToEditPage">Create Playlist</Button> -->
           <button  @click="moveToEditPage" type="button" class="btn btn-danger">Create Playlist</button>
         </div>
@@ -151,7 +151,14 @@ export default {
 
 h1{
   margin: 0;
+  font-size: 1rem;
 }
+
+h2{
+  margin: 0;
+  font-size:1.4rem;
+}
+
 
 
 .user-details {

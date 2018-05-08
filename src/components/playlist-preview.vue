@@ -42,6 +42,12 @@ export default {
 
 <style scoped>
 
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .playlist-content{
     display: flex;
     max-width: 600px;
@@ -86,12 +92,16 @@ img {
 p{
   margin: 0;
   color: #878787;
+  font-size: 0.8rem;
 }
 
 h4{
  margin: 0;
  color: #F77062;
+ font-size: 1.2rem;
 }
+
+
 .playlist-image {
     width: 250px;
     height: 150px;

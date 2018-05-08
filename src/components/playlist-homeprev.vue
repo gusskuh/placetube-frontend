@@ -37,13 +37,13 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 30%;
+  height: 20%;
   background-color: rgba(37, 126, 84, 0.897)
 }
 
 img{
   width: 100%;
-  height: 70%;
+  height: 80%;
   object-fit: cover;
   overflow: hidden;
 }
@@ -51,8 +51,8 @@ img{
 .playlist-preview{
  width: 100%;
  height: 100%;
- grid-column: span 4;
- grid-row: span 2;
+ grid-column: span 12;
+ grid-row: span 4;
 } 
 
 </style>

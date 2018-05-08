@@ -135,6 +135,10 @@ export default {
   cursor: pointer;
 }
 
+.search-auto-complete > li:hover {
+  background:#29212182;
+}
+
 .add-songs {
   width: 90%;
   height: 100%;
@@ -182,7 +186,7 @@ input {
 
 .song-preview {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   margin: 10px;

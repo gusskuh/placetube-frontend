@@ -60,7 +60,7 @@ background-repeat: no-repeat;
   justify-content: space-around;
   align-items: center;
   padding: 30px;
-  height: 60px;
+  height: 80px;
   background: #333333;
   bottom:0;
   /* box-shadow: 2px 4px 10px 5px #0000005c; */
@@ -69,6 +69,11 @@ background-repeat: no-repeat;
 .nav a {
   font-weight: bold;
   color: #2c3e50;
+}
+
+.nav img {
+  height: 30px;
+  margin-bottom: 4px;
 }
 
 .nav a.router-link-exact-active {
@@ -83,4 +88,6 @@ p{
 .nav-btn {
   height: 24px;
 }
+
+
 </style>
