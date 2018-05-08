@@ -57,14 +57,25 @@ export default {
       selectedSong: 1,
       playlist: [],
       currSongTime: 0,
-      timeInterval: 0
+      timeInterval: 0,
+      isAdmin: false
     };
   },
   created() {
+    // console.log(this.$socket);
+
     this.$store
       .dispatch({ type: "loadPlaylist", store: this.playlistId })
       .then(selectedPlaylist => {
         this.playlist = selectedPlaylist;
+        if (
+          this.loggedInUser &&
+          this.loggedInUser._id === this.playlist.adminId
+        ) {
+          this.isAdmin = true;
+        } else {
+          this.$socket.emit("userJoined");
+        }
       });
   },
 
@@ -73,12 +84,11 @@ export default {
       return this.$refs.youtube.player;
     },
     showPlaylist() {
-      console.log(
-        "selectedPLayListttttttt",
-        this.$store.getters.playlistForDisplay
-      );
-
       return this.$store.getters.playlistForDisplay;
+    },
+
+    loggedInUser() {
+      return this.$store.getters.loggedinUser;
     }
   },
   methods: {
@@ -95,9 +105,7 @@ export default {
       // let currSong = this.selectedSong;
       this.playNextSong();
     },
-    created() {
-      // this.$socket.emit("playing_New_Song");
-    },
+
     playNextSong() {
       this.$store
         .dispatch({ type: "updateSongz", currSong: this.playlist.songs[0] })
@@ -122,22 +130,10 @@ export default {
         // console.log(this.currSongTime);
       });
     },
-    isPlaying(input) {
-      console.log("playing!!!");
-    },
+    isPlaying(input) {},
     startPlay() {
-      console.log(this.currSongTime);
-      
-      
       // if (!this.currSongTime) {
       this.selectedSong = this.playlist.songs[0];
-<<<<<<< HEAD
-      console.log();
-      
-      // this.player.loadVideoById(this.selectedSong.videoId, 40, "small");
-=======
-      console.log(this.selectedSong.videoId);
-
       this.player.loadVideoById(
         this.selectedSong.videoId,
         this.currSongTime,
@@ -154,7 +150,6 @@ export default {
       // }
 
       // this.getTime();
->>>>>>> c3229a6c904f8a9f915006923cc00ff6db5b9a66
     },
     deleteSong(videoId) {
       console.log("delete song", videoId);
@@ -191,6 +186,18 @@ export default {
       console.log(currSongTime);
 
       // this.player.loadVideoById(this.selectedSong, currSongTime, "small");
+    },
+
+    userJoined() {
+      if (this.isAdmin) {
+        this.player.getCurrentTime().then(currTime => {
+          this.$socket.emit("startPlay", currTime);
+        });
+      }
+    },
+    startPlay(currSongTime) {
+      this.currSongTime = currSongTime;
+      this.startPlay();
     }
   }
 };

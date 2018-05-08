@@ -29,7 +29,7 @@ export default {
   },
   created() {
     this.$store.dispatch({ type: "loadPlaylists" });
-    this.$socket.emit("mavet_lesoket");
+    
   },
   computed: {
     showPlaylists() {
@@ -37,9 +37,7 @@ export default {
     }
   },
   sockets: {
-    mavet_lesoket() {
-      console.log("mavet_lesoket*********");
-    }
+    
   }
 };
 </script>
