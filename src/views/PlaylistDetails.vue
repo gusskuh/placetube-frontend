@@ -88,7 +88,12 @@ export default {
     ended() {
       let currSong = this.selectedSong;
       this.$store.dispatch({type:"updateSongz", currSong});
+      this.$socket.emit("playing_New_Song", currSong);
+      
       this.startPlay();
+    },
+    created() {
+        // this.$socket.emit("playing_New_Song");
     },
 
     playSong(songIdx) {
@@ -117,9 +122,20 @@ export default {
         });
     },
     moveSong(song, idx, param){
-      this.$store.dispatch({ type: "moveSong", song, idx, param }) 
+      this.$store.dispatch({ type: "moveSong", song, idx, param })
+      // this.$socket.emit("playing_New_Song");
+
 
     }
+  },
+  
+  sockets: {
+    playing_New_Song(currSong) {
+      console.log("new song playing!!!");
+     this.$store.dispatch({type:"updateSongz", currSong});      
+      this.startPlay();
+    }
+
   }
 };
 </script>
