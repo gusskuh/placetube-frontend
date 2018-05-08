@@ -123,20 +123,24 @@ export default {
     },
     moveSong(song, idx, param){
       this.$store.dispatch({ type: "moveSong", song, idx, param })
-      // this.$socket.emit("playing_New_Song");
-
+      this.$socket.emit("moveSong", {song, idx, param});
+ 
 
     }
   },
-  
-  sockets: {
+    sockets: {
+    moveSong(songInfo) {
+      console.log(songInfo);
+      this.$store.dispatch({ type: "moveSong", song: songInfo.song, idx: songInfo.idx, param: songInfo.param })
+
+    },
     playing_New_Song(currSong) {
       console.log("new song playing!!!");
      this.$store.dispatch({type:"updateSongz", currSong});      
       this.startPlay();
     }
-
-  }
+  },
+  
 };
 </script>
 
