@@ -117,7 +117,16 @@ export default {
         });
     },
     moveSong(song, idx, param){
-      this.$store.dispatch({ type: "moveSong", song, idx, param }) 
+      this.$store.dispatch({ type: "moveSong", song, idx, param })
+      this.$socket.emit("moveSong", {song, idx, param});
+ 
+
+    }
+  },
+    sockets: {
+    moveSong(songInfo) {
+      console.log(songInfo);
+      this.$store.dispatch({ type: "moveSong", song: songInfo.song, idx: songInfo.idx, param: songInfo.param })
 
     }
   }
