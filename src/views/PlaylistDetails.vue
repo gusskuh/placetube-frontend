@@ -112,6 +112,9 @@ export default {
     },
     startPlay() {
       this.selectedSong = this.playlist.songs[0];
+      console.log();
+      
+      // this.player.loadVideoById(this.selectedSong.videoId, 40, "small");
     },
     deleteSong(videoId) {
       console.log("delete song", videoId);
