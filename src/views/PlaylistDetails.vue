@@ -14,7 +14,7 @@
   </div>
   </section>
 
-  <youtube v-if="selectedSong" height="0" width="0" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+  <youtube v-if="selectedSong" height="100" width="100" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
   <div class="songs-list">
      <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId">
        <div class="song-left">
@@ -82,14 +82,11 @@ export default {
       this.player.playVideo();
     },
     ended() {
-      if (this.currSongNum + 1 <= this.playlist.songs.length - 1) {
-        this.selectedSong = this.playlist.songs[this.currSongNum + 1];
-        this.currSongNum = this.currSongNum + 1;
-      } else {
-        this.selectedSong = this.playlist.songs[0];
-        this.currSongNum = 0;
-      }
+      let currSong = this.selectedSong;
+      this.$store.dispatch({type:"updateSongz", currSong});
+      this.startPlay();
     },
+
     playSong(songIdx) {
       if (songIdx < 0) return;
       if (songIdx > this.playlist.songs.length - 1) return;

@@ -76,7 +76,13 @@ export default {
       );
       playlistToUpdate.songs.splice(songToDeleteIdx, 1);
       state.selectedPlaylist.songs.splice(songToDeleteIdx, 1);
-    }
+    },
+
+    updateSongs(state, { currSong }) {
+      console.log('Mutationnnnnnnnnnnnnnnnnnnnnnnnnnn!!!!!!');
+        state.selectedPlaylist.songs.shift()
+        state.selectedPlaylist.songs.push(currSong)
+      }
     // updateSelected(state, { playlist} ){
     //   state.selectedPlaylist = playlist;
     // }
@@ -113,6 +119,18 @@ export default {
   },
 
   actions: {
+    updateSongz(store, {currSong}) {
+
+      console.log('actionnnnnnnnnnnnnnnnn!!!!!!', currSong);
+      
+      store.commit({ type: "updateSongs", currSong })
+      let updatedPlaylist = store.state.selectedPlaylist
+      return PlaylistsService.updatePlaylist(updatedPlaylist).then(playlist => {
+        console.log('song updated in db!!');
+        
+      })
+    },
+
     loadPlaylists(store) {
       return PlaylistsService.getPlaylists().then(playlists => {
         if (!store.state.filterBy.txt) {

@@ -14,8 +14,9 @@ function getPlaylists() {
 }
 
 function updatePlaylist(updatedPlaylist) {
-    console.log(updatedPlaylist);
+
     
+    console.log('upppdddaattteeeddddd',updatedPlaylist);
 
   return axios
     .put(`${PLAYLISTS_URL}/${updatedPlaylist._id}`, updatedPlaylist)
