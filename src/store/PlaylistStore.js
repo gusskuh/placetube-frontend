@@ -76,7 +76,26 @@ export default {
       );
       playlistToUpdate.songs.splice(songToDeleteIdx, 1);
       state.selectedPlaylist.songs.splice(songToDeleteIdx, 1);
-    }
+    },
+    moveSong(state, payload) {
+      let playlistToUpdate = state.playlists.find(
+        playlist => playlist._id === state.selectedPlaylist._id
+      );
+
+      // update all playlists
+      playlistToUpdate.songs.splice(payload.songIdx, 1);
+      playlistToUpdate.songs.splice(payload.songIdx + 1 * payload.parameter,0,payload.song);
+
+      // update selected playlists
+      state.selectedPlaylist.songs.splice(payload.songIdx, 1);
+      state.selectedPlaylist.songs.splice(payload.songIdx + 1 * payload.parameter,0,payload.song);
+    },
+
+    updateSongs(state, { currSong }) {
+      console.log('Mutationnnnnnnnnnnnnnnnnnnnnnnnnnn!!!!!!');
+        state.selectedPlaylist.songs.shift()
+        state.selectedPlaylist.songs.push(currSong)
+      }
     // updateSelected(state, { playlist} ){
     //   state.selectedPlaylist = playlist;
     // }
@@ -87,11 +106,13 @@ export default {
       return state.playlists;
     },
     filteredPlaylistsForDisplay(state, getters) {
-      if (!state.filterBy.txt) {        
+      if (!state.filterBy.txt) {
         return [];
       } else {
         let filteredPlaylists = state.playlists.filter(playlist => {
-          return playlist.playlistName.toLowerCase().includes(state.filterBy.txt.toLowerCase());
+          return playlist.playlistName
+            .toLowerCase()
+            .includes(state.filterBy.txt.toLowerCase());
         });
         return filteredPlaylists;
       }
@@ -113,6 +134,18 @@ export default {
   },
 
   actions: {
+    updateSongz(store, {currSong}) {
+
+      console.log('actionnnnnnnnnnnnnnnnn!!!!!!', currSong);
+      
+      store.commit({ type: "updateSongs", currSong })
+      let updatedPlaylist = store.state.selectedPlaylist
+      return PlaylistsService.updatePlaylist(updatedPlaylist).then(playlist => {
+        console.log('song updated in db!!');
+        
+      })
+    },
+
     loadPlaylists(store) {
       return PlaylistsService.getPlaylists().then(playlists => {
         if (!store.state.filterBy.txt) {
@@ -177,6 +210,8 @@ export default {
       let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
         return currSong.videoId === song.id.videoId;
       });
+      console.log(filtered);
+      
       if (filtered.length) {
         console.log("filtered was found!!!!");
         return;
@@ -185,8 +220,19 @@ export default {
           addedSong => {
             console.log("testing adding song confirmistion", addedSong);
             store.commit({ type: "pushAddedSong", addedSong });
-          })
+          }
+        );
       }
+    },
+
+    moveSong(store, payload) {
+      store.commit({type: "moveSong",song: payload.song,songIdx: payload.idx, parameter: payload.param });
+      // console.log(payload.song, payload.idx );
+      return PlaylistsService.updatePlaylist(store.state.selectedPlaylist)
+      .then(updatedPlaylist => {
+        console.log('Successfully updated');
+        
+      });
     }
 
     //  updateSelected(store, playlist ) {

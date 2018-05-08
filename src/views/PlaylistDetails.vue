@@ -14,17 +14,17 @@
   </div>
   </section>
 
-  <youtube v-if="selectedSong" height="0" width="0" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+  <youtube v-if="selectedSong" height="100" width="100" ref="youtube" @ready="startPlay" :video-id="selectedSong.videoId" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
   <div class="songs-list">
      <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId"
      :class="{firstSong: idx === 0}">
        <div class="song-left">
         <img class="songImg" :src="song.url" alt="">
-       <p @click="playSong(idx)">{{song.title}}</p>
+       <p @click="playSong(song, idx)">{{song.title}}</p>
        </div>
        <div class="song-right">
-       <button>▲</button>
-       <button>▼</button>
+       <button @click="moveSong(song, idx, -1)">▲</button>
+       <button @click="moveSong(song, idx, 1)">▼</button>
        <button @click="deleteSong(song.videoId)">delete</button>
        </div>
        </div>
@@ -86,15 +86,14 @@ export default {
       this.player.playVideo();
     },
     ended() {
-      if (this.currSongNum + 1 <= this.playlist.songs.length - 1) {
-        this.selectedSong = this.playlist.songs[this.currSongNum + 1];
-        this.currSongNum = this.currSongNum + 1;
-      } else {
-        this.selectedSong = this.playlist.songs[0];
-        this.currSongNum = 0;
-      }
+      let currSong = this.selectedSong;
+      this.$store.dispatch({type:"updateSongz", currSong});
+      this.startPlay();
     },
+
     playSong(songIdx) {
+      // console.log(songIdx - 1);
+      
       if (songIdx < 0) return;
       if (songIdx > this.playlist.songs.length - 1) return;
       this.selectedSong = this.playlist.songs[songIdx];
@@ -116,6 +115,10 @@ export default {
         .then(selectedPlaylist => {
           console.log("song deleted");
         });
+    },
+    moveSong(song, idx, param){
+      this.$store.dispatch({ type: "moveSong", song, idx, param }) 
+
     }
   }
 };

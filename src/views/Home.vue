@@ -15,24 +15,30 @@
 
 <script>
 // @ is an alias to /src
-  import playlistHomeprev from '../components/playlist-homeprev';
-  import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
+import playlistHomeprev from "../components/playlist-homeprev";
+import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
+import SocketService from "../services/SocketService.js";
 
 export default {
-  
   name: "home",
   components: {
-    playlistHomeprev,
+    playlistHomeprev
   },
   data() {
     return {};
   },
   created() {
     this.$store.dispatch({ type: "loadPlaylists" });
+    this.$socket.emit("mavet_lesoket");
   },
   computed: {
     showPlaylists() {
       return this.$store.getters.homePlaylistsForDisplay;
+    }
+  },
+  sockets: {
+    mavet_lesoket() {
+      console.log("mavet_lesoket*********");
     }
   }
 };
@@ -45,7 +51,7 @@ h1{
 
 .short-desc {
   width: 100%;
-  background:#000000cf;
+  background: #000000cf;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -59,7 +65,7 @@ h1{
 }
 
 .home {
-  display: flex; 
+  display: flex;
   align-items: center;
   flex-direction: column;
 }
@@ -86,5 +92,4 @@ h1{
   grid-row: span 3;
   grid-column-end: span 3;
 } */
-
 </style>
