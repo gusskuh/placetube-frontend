@@ -12,6 +12,28 @@
   <h1  v-if="selectedSong" >{{selectedSong.title}}</h1>
   <router-link to="/myProfile/addSongs">add songs </router-link>
   </div>
+
+
+         <social-sharing url="https://vuejs.org/"
+                      title="The Progressive JavaScript Framework"
+                      description="Intuitive, Fast and Composable MVVM for building interactive interfaces."
+                      quote="Vue is a progressive framework for building user interfaces."
+                      hashtags="vuejs,javascript,framework"
+                      twitter-user="vuejs"
+                      inline-template>
+  <div>
+
+      <network network="facebook">
+        <i class="fa fa-facebook"></i> Facebook
+      </network>
+      <network network="whatsapp">
+        <i class="fa fa-whatsapp"></i> Whatsapp
+      </network>
+  </div>
+  </social-sharing>
+
+
+
   </section>
 
   <youtube height="100" width="100" ref="youtube" @ready="startPlay" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
@@ -23,9 +45,9 @@
        <p @click="playSong(song, idx)">{{song.title}}</p>
        </div>
        <div class="song-right">
-       <button @click="moveSong(song, idx, -1)">▲</button>
-       <button @click="moveSong(song, idx, 1)">▼</button>
-       <button @click="deleteSong(song.videoId)">delete</button>
+       <button v-if="idx !== 0" :disabled="idx === 1" @click="moveSong(song, idx, -1)">▲</button>
+       <button v-if="idx !== 0" :disabled="idx === showPlaylist.songs.length-1" @click="moveSong(song, idx, 1)">▼</button>
+       <button v-if="isAdmin && idx !== 0" @click="deleteSong(song.videoId)">delete</button>
        </div>
        </div>
   </div>
