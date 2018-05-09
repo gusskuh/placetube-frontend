@@ -228,16 +228,15 @@ export default {
       let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
         return currSong.videoId === song.id.videoId;
       });
-      console.log("filterrrrrrr", filtered);
 
       if (filtered.length) {
         console.log("filtered was found!!!!");
-        return;
+        return false;
       } else {
         return PlaylistsService.addSong(selectedPlaylist, song).then(
           addedSong => {
-            console.log("testing adding song confirmistion", addedSong);
-            store.commit({ type: "pushAddedSong", addedSong });
+            store.commit({ type: "pushAddedSong", addedSong })
+            return true;
           }
         );
       }

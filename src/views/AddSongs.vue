@@ -44,9 +44,7 @@ export default {
       timeoutId: ""
     };
   },
-  created() {
-    console.log(this.selectedPlaylist);
-  },
+  created() {},
   computed: {
     player() {
       return this.$refs.youtube.player;
@@ -78,13 +76,13 @@ export default {
     },
     addSong(song) {
       // if (this.selectedPlaylist.songs.includes(song)) console.log(1);
-      
+
       // console.log("song to add", song);
-      this.$store.dispatch({ type: "addSong", song })
-       .then( song => {
-        //  console.log('song added', song)
-         });
-      // EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" })
+      this.$store.dispatch({ type: "addSong", song }).then(isUpdated => {
+        if (isUpdated) {
+          EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" })
+        }
+      });
     },
     autoComplete() {
       if (this.searchInput === "") return (this.searchOps = []);
@@ -139,7 +137,7 @@ export default {
 }
 
 .search-auto-complete > li:hover {
-  background:#29212182;
+  background: #29212182;
 }
 
 .add-songs {
