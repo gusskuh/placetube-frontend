@@ -1,5 +1,5 @@
 <template>
-  <section class="my-profile">
+  <section class="my-profile" v-if="showUserName">
     <div class="profile-header">
        <button  @click="isEditing = !isEditing" type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
       <h1>My Playlists</h1>
@@ -60,9 +60,7 @@ export default {
   },
 
   created() {
-    loggedinUser: {
-      console.log(this.$store.getters.loggedinUser);
-      
+    loggedinUser: {      
       if(!this.$store.getters.loggedinUser) {
             this.$router.push("/login");
       }

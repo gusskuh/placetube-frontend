@@ -31,18 +31,26 @@ export default {
     return {};
   },
   created() {
-    this.$store.dispatch({ type: "loadPlaylists" });
-    this.$socket.emit("mavet_lesoket");
+    this.$store.dispatch({ type: "loadPlaylists" }).then(()=>{
+
+      console.log("popopooooo",this.getListByViews);
+    
+    }) 
+  },
+  mounted() {
+    
   },
   computed: {
     showPlaylists() {
       return this.$store.getters.homePlaylistsForDisplay;
-    }
+    },
+     getListByViews(){
+      return this.$store.getters.getListByViews;
+     }
+    
   },
   sockets: {
-    mavet_lesoket() {
-      console.log("mavet_lesoket*********");
-    }
+    
   }
 };
 </script>

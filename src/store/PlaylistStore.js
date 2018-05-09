@@ -39,12 +39,12 @@ export default {
       ROOT_STATE.UserStore.loggedinUser.playlistsIds.push(addedPlaylist._id);
     },
     pushAddedSong(state, { addedSong }) {
-      console.log("amittyyyyyyyyyyyyyyyyyyyyy;llllll", addedSong);
       // state.playlists.find();
       var playlistToUpdate = state.playlists.find(
         playlist => playlist._id === state.selectedPlaylist._id
       );
       playlistToUpdate.songs.push(addedSong);
+      state.selectedPlaylist.songs.push(addedSong);
     },
 
     deletePlaylist(state, { playlistToDelete }) {
@@ -84,18 +84,26 @@ export default {
 
       // update all playlists
       playlistToUpdate.songs.splice(payload.songIdx, 1);
-      playlistToUpdate.songs.splice(payload.songIdx + 1 * payload.parameter,0,payload.song);
+      playlistToUpdate.songs.splice(
+        payload.songIdx + 1 * payload.parameter,
+        0,
+        payload.song
+      );
 
       // update selected playlists
       state.selectedPlaylist.songs.splice(payload.songIdx, 1);
-      state.selectedPlaylist.songs.splice(payload.songIdx + 1 * payload.parameter,0,payload.song);
+      state.selectedPlaylist.songs.splice(
+        payload.songIdx + 1 * payload.parameter,
+        0,
+        payload.song
+      );
     },
 
     updateSongs(state, { currSong }) {
-      console.log('Mutationnnnnnnnnnnnnnnnnnnnnnnnnnn!!!!!!');
-        state.selectedPlaylist.songs.shift()
-        state.selectedPlaylist.songs.push(currSong)
-      }
+      console.log("Mutationnnnnnnnnnnnnnnnnnnnnnnnnnn!!!!!!");
+      state.selectedPlaylist.songs.shift();
+      state.selectedPlaylist.songs.push(currSong);
+    }
     // updateSelected(state, { playlist} ){
     //   state.selectedPlaylist = playlist;
     // }
@@ -130,20 +138,30 @@ export default {
     },
     playlistForDisplay(state, getters) {
       return state.selectedPlaylist;
+    },
+    getListByViews(state, getters) {
+      let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
+      return selectedPlaylists.sort((a, b) => {
+        return b.views - a.views;
+      });
+    },
+    getListByLoc(state, getters, loc) {
+      let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
+      return selectedPlaylists.sort((a, b) => {
+        return b.views - a.views;
+      });
     }
-  },
+},
 
   actions: {
-    updateSongz(store, {currSong}) {
+    updateSongz(store, { currSong }) {
+      console.log("actionnnnnnnnnnnnnnnnn!!!!!!", currSong);
 
-      console.log('actionnnnnnnnnnnnnnnnn!!!!!!', currSong);
-      
-      store.commit({ type: "updateSongs", currSong })
-      let updatedPlaylist = store.state.selectedPlaylist
+      store.commit({ type: "updateSongs", currSong });
+      let updatedPlaylist = store.state.selectedPlaylist;
       return PlaylistsService.updatePlaylist(updatedPlaylist).then(playlist => {
-        console.log('song updated in db!!');
-        
-      })
+        console.log("song updated in db!!");
+      });
     },
 
     loadPlaylists(store) {
@@ -210,29 +228,33 @@ export default {
       let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
         return currSong.videoId === song.id.videoId;
       });
-      console.log(filtered);
-      
+
       if (filtered.length) {
         console.log("filtered was found!!!!");
-        return;
+        return false;
       } else {
         return PlaylistsService.addSong(selectedPlaylist, song).then(
           addedSong => {
-            console.log("testing adding song confirmistion", addedSong);
-            store.commit({ type: "pushAddedSong", addedSong });
+            store.commit({ type: "pushAddedSong", addedSong })
+            return true;
           }
         );
       }
     },
 
     moveSong(store, payload) {
-      store.commit({type: "moveSong",song: payload.song,songIdx: payload.idx, parameter: payload.param });
-      // console.log(payload.song, payload.idx );
-      return PlaylistsService.updatePlaylist(store.state.selectedPlaylist)
-      .then(updatedPlaylist => {
-        console.log('Successfully updated');
-        
+      store.commit({
+        type: "moveSong",
+        song: payload.song,
+        songIdx: payload.idx,
+        parameter: payload.param
       });
+      // console.log(payload.song, payload.idx );
+      return PlaylistsService.updatePlaylist(store.state.selectedPlaylist).then(
+        updatedPlaylist => {
+          console.log("Successfully updated");
+        }
+      );
     }
 
     //  updateSelected(store, playlist ) {

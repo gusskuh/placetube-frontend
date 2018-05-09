@@ -7,7 +7,11 @@ import socketio from 'socket.io-client'
 import VueSocketio from 'vue-socket.io'
 import '../node_modules/@glidejs/glide/dist/css/glide.core.min.css'
 import '../node_modules/@glidejs/glide/dist/css/glide.theme.min.css'
+import SocialSharing from 'vue-social-sharing'
 
+ 
+
+Vue.use(SocialSharing);
 Vue.use(VueSocketio, socketio('http://localhost:3000'), store);
 Vue.use(VueYoutube);
 import "./css/style.css";
