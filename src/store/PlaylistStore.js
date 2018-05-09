@@ -45,6 +45,7 @@ export default {
         playlist => playlist._id === state.selectedPlaylist._id
       );
       playlistToUpdate.songs.push(addedSong);
+      state.selectedPlaylist.songs.push(addedSong);
     },
 
     deletePlaylist(state, { playlistToDelete }) {
@@ -207,24 +208,25 @@ export default {
       var selectedPlaylist = JSON.parse(
         JSON.stringify(store.state.selectedPlaylist)
       );
-      // console.log('lalalalalal',selectedPlaylist);
-      console.log('prrrrrrrrrrrrr',song);
+      // console.log('song',song);
       
       let filtered = selectedPlaylist.songs.filter(currSong => {
-        // console.log('curr Song!!!!',currSong);
+        console.log('curr Song',currSong);
+        console.log('curr Song',song);
         
         return currSong.videoId === song.id.videoId;
       });
-      console.log('filterrrrrrr', filtered);
+      console.log('filter', filtered);
       
       if (filtered.length) {
         console.log("filtered was found!!!!");
-        return;
+        return false;
       } else {
         return PlaylistsService.addSong(selectedPlaylist, song).then(
           addedSong => {
             console.log("testing adding song confirmistion", addedSong);
-            store.commit({ type: "pushAddedSong", addedSong });
+            store.commit({ type: "pushAddedSong", addedSong })
+            return true;
           }
         );
       }

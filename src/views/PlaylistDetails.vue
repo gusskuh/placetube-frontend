@@ -77,9 +77,10 @@ export default {
       },
       currSongNum: 0,
       selectedSong: 1,
-      playlist: [],
+      playlist: {
+        song: []
+      },
       currSongTime: 0,
-      timeInterval: 0,
       isAdmin: false
     };
   },
@@ -90,6 +91,7 @@ export default {
       .dispatch({ type: "loadPlaylist", store: this.playlistId })
       .then(selectedPlaylist => {
         this.playlist = selectedPlaylist;
+          console.log(this.playlist);
         if (
           this.loggedInUser &&
           this.loggedInUser._id === this.playlist.adminId
@@ -99,6 +101,7 @@ export default {
           this.$socket.emit("userJoined");
         }
       });
+    
   },
 
   computed: {
@@ -116,9 +119,7 @@ export default {
   methods: {
     stop() {
       this.player.pauseVideo();
-      // this.getTime();
-      clearInterval(this.timeInterval);
-      this.$socket.emit("currSongSec", this.currSongTime);
+        this.$socket.emit("pauseSong");
     },
     play() {
       this.player.playVideo();
@@ -161,24 +162,13 @@ export default {
         this.currSongTime,
         "small"
       );
-      // this.timeInterval = setInterval(() => {
-      //   this.getTime();
-      //   this.$socket.emit("currSongSec", this.currSongTime);
-      // }, 500);
-
-      // }
-      // else {
-      //   this.$socket.emit("currSongSec", this.currSongTime);
-      // }
-
-      // this.getTime();
     },
     deleteSong(videoId) {
       console.log("delete song", videoId);
       this.$store
         .dispatch({ type: "deleteSong", videoId })
-        .then(selectedPlaylist => {
-          console.log("song deleted");
+        .then(_ => {
+          this.$socket.emit("deleteSong",videoId);
         });
     },
     moveSong(song, idx, param) {
@@ -208,6 +198,21 @@ export default {
       console.log(currSongTime);
 
       // this.player.loadVideoById(this.selectedSong, currSongTime, "small");
+    },
+
+    deleteSong(videoId) {
+      console.log(videoId);
+      this.$store.dispatch({ type: "deleteSong", videoId })
+      
+
+    },
+
+    
+    pauseSong() {
+            this.player.pauseVideo();
+
+      
+
     },
 
     userJoined() {
@@ -296,7 +301,7 @@ export default {
 }
 
 .songs-list {
-  height: 60vh;
+  height: 52vh;
   overflow: scroll;
 }
 
