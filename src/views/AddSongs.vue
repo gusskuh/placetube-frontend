@@ -79,10 +79,10 @@ export default {
     addSong(song) {
       // if (this.selectedPlaylist.songs.includes(song)) console.log(1);
       
-      console.log("song to add", song);
+      // console.log("song to add", song);
       this.$store.dispatch({ type: "addSong", song })
-       .then( playlist => {
-         console.log('song added', playlist)
+       .then( song => {
+        //  console.log('song added', song)
          });
       // EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" })
     },

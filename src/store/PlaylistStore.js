@@ -207,10 +207,15 @@ export default {
       var selectedPlaylist = JSON.parse(
         JSON.stringify(store.state.selectedPlaylist)
       );
-      let filtered = store.state.selectedPlaylist.songs.filter(currSong => {
+      // console.log('lalalalalal',selectedPlaylist);
+      console.log('prrrrrrrrrrrrr',song);
+      
+      let filtered = selectedPlaylist.songs.filter(currSong => {
+        // console.log('curr Song!!!!',currSong);
+        
         return currSong.videoId === song.id.videoId;
       });
-      console.log(filtered);
+      console.log('filterrrrrrr', filtered);
       
       if (filtered.length) {
         console.log("filtered was found!!!!");
