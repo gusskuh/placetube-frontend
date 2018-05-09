@@ -1,6 +1,8 @@
 <template>
-<section class="search-page">
-            <h1>Search</h1>
+<section class="search-page"  style="margin-top: 159px">
+
+    <!-- ///////show back-to button only in desktop//////// -->
+    <!-- <img class="back-to" @click="$router.go(-1)" src="" alt=""> -->
             <form @submit.prevent>
                 <div class="inputs">
                 <input ref="searchBox" type="text" placeholder="search by name" v-model="filterBy.txt" @input="setFilter"  />
@@ -10,12 +12,13 @@
         <div v-for="playlist in showPlaylists" :key="playlist._id">
           <playlist-homeprev :playlist="playlist"></playlist-homeprev>
         </div>
-    </div>
+         </div>
         </section>
 </template>
 
 <script>
 import playlistHomeprev from "../components/playlist-homeprev";
+
 
 export default {
   name: "LoginPage",
@@ -105,4 +108,11 @@ button {
   justify-content: center;
   cursor: pointer;
 }
+
+.back-to {
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+}
+
 </style>

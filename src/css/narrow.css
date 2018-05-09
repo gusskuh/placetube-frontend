@@ -1,0 +1,64 @@
+
+/* //////////////////////toggle from mobile to larger screens///////////////////// */
+
+.nav{
+    display: none;
+}
+
+
+.top-menu {
+    width: 100%;
+    background: white;
+    position: absolute;
+    box-shadow: 0 2px 2px #00000063;
+    /* display: none; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search {
+    width: 60%;
+    max-width: 620px;
+    height: 36px;
+  }
+  
+  .top-menu-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    min-width: 230px;
+    width: 350px;
+    /* max-width: 500px;
+     width: 30%; */
+  }
+  
+  .top-menu-left > img {
+    height: 38px;
+  }
+  
+  .top-menu-right {
+    display: flex;
+    justify-content: space-around;
+    width: 350px;
+    /* min-width: 230px;
+    /* max-width: 500px; */
+    margin-left: 30px; 
+  }
+  
+  .app-info > h1 {
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: black;
+  }
+
+  .mobile-top-menu{
+      display: none;
+  }
+
+  /* /////////////////////////////////////////////////////////////// */
+
+
+  

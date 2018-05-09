@@ -1,3 +1,8 @@
+@import './desktop.css' (min-width: 1070px);
+@import './narrow.css' (min-width: 840px);
+@import './mobile.css' (max-width: 840px);
+
+
 html,
 body {
     margin: 0;
@@ -41,10 +46,6 @@ ul{
     height: 100%;
 }
 
-.nav {
-    grid-row: 11/ span 1;
-    grid-column: 1 / span 12;
-}
 
 .main-content {
     grid-row: 1/ span 10;

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="my-profile">
     <div class="profile-header">
        <button  @click="isEditing = !isEditing" type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
       <h1>My Playlists</h1>
@@ -120,6 +120,7 @@ export default {
 </script>
 
 <style scoped>
+
 .profile-header {
   position: absolute;
   width: 100%;
@@ -210,6 +211,8 @@ ul {
   margin: 0 auto;
 }
 
-
-
 </style>
+
+
+
+

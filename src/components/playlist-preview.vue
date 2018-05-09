@@ -59,6 +59,7 @@ export default {
     background:#FFFFFF;
     /* border-radius: 4px; */
     padding: 10px;
+     box-shadow: 0 0 2px #0000001f;
 }
 
 button {
