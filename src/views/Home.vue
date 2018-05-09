@@ -28,13 +28,23 @@ export default {
     return {};
   },
   created() {
-    this.$store.dispatch({ type: "loadPlaylists" });
+    this.$store.dispatch({ type: "loadPlaylists" }).then(()=>{
+
+      console.log("popopooooo",this.getListByViews);
+    
+    }) 
+  },
+  mounted() {
     
   },
   computed: {
     showPlaylists() {
       return this.$store.getters.homePlaylistsForDisplay;
-    }
+    },
+     getListByViews(){
+      return this.$store.getters.getListByViews;
+     }
+    
   },
   sockets: {
     

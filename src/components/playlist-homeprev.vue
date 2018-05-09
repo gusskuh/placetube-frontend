@@ -19,7 +19,20 @@ export default {
       this.$router.push(`/playlists/${this.playlist._id}`);
 
     },
-  }
+  },
+  // created(){
+  //    console.log("popopooooo",this.getListByViews);
+  //   console.log("kukukukukuo",this.getShuffledList);
+  // },
+  // computed: {
+  //    getListByViews(){
+  //     return this.$store.getters.getListByViews;
+  //    },
+  //    getShuffledList(){
+  //      return this.$store.getters.getShuffledList;
+  //    }
+
+  // },
 }
 </script>
 

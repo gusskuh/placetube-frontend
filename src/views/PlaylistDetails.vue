@@ -36,7 +36,7 @@
 
   </section>
 
-  <youtube height="100" width="100" ref="youtube" @ready="startPlay" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+  <youtube  v-if="playlist.songs.length" height="100" width="100" ref="youtube" @ready="startPlay" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
   <div class="songs-list">
      <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId"
      :class="{firstSong: idx === 0}">
@@ -77,7 +77,9 @@ export default {
       },
       currSongNum: 0,
       selectedSong: 1,
-      playlist: [],
+      playlist: {
+        songs:[]
+      },
       currSongTime: 0,
       timeInterval: 0,
       isAdmin: false
@@ -117,8 +119,7 @@ export default {
     stop() {
       this.player.pauseVideo();
       // this.getTime();
-      clearInterval(this.timeInterval);
-      this.$socket.emit("currSongSec", this.currSongTime);
+      this.$socket.emit("pauseSong");
     },
     play() {
       this.player.playVideo();
@@ -161,23 +162,12 @@ export default {
         this.currSongTime,
         "small"
       );
-      // this.timeInterval = setInterval(() => {
-      //   this.getTime();
-      //   this.$socket.emit("currSongSec", this.currSongTime);
-      // }, 500);
-
-      // }
-      // else {
-      //   this.$socket.emit("currSongSec", this.currSongTime);
-      // }
-
-      // this.getTime();
     },
     deleteSong(videoId) {
-      console.log("delete song", videoId);
       this.$store
         .dispatch({ type: "deleteSong", videoId })
-        .then(selectedPlaylist => {
+        .then(() => {
+           this.$socket.emit("deleteSong", videoId);
           console.log("song deleted");
         });
     },
@@ -220,6 +210,13 @@ export default {
     startPlay(currSongTime) {
       this.currSongTime = currSongTime;
       this.startPlay();
+    },
+    deleteSong(videoId) {
+      
+        this.$store.dispatch({ type: "deleteSong", videoId })
+    },
+    pauseSong(){
+      this.player.pauseVideo();
     }
   }
 };
