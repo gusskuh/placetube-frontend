@@ -78,13 +78,10 @@ export default {
       currSongNum: 0,
       selectedSong: 1,
       playlist: {
-<<<<<<< HEAD
         songs:[]
-=======
-        song: []
->>>>>>> 8155cdf31e80f4d567699e8f86dfe7388c6d0233
       },
       currSongTime: 0,
+      timeInterval: 0,
       isAdmin: false
     };
   },
@@ -95,7 +92,6 @@ export default {
       .dispatch({ type: "loadPlaylist", store: this.playlistId })
       .then(selectedPlaylist => {
         this.playlist = selectedPlaylist;
-          console.log(this.playlist);
         if (
           this.loggedInUser &&
           this.loggedInUser._id === this.playlist.adminId
@@ -105,7 +101,6 @@ export default {
           this.$socket.emit("userJoined");
         }
       });
-    
   },
 
   computed: {
@@ -123,12 +118,8 @@ export default {
   methods: {
     stop() {
       this.player.pauseVideo();
-<<<<<<< HEAD
       // this.getTime();
       this.$socket.emit("pauseSong");
-=======
-        this.$socket.emit("pauseSong");
->>>>>>> 8155cdf31e80f4d567699e8f86dfe7388c6d0233
     },
     play() {
       this.player.playVideo();
@@ -175,14 +166,9 @@ export default {
     deleteSong(videoId) {
       this.$store
         .dispatch({ type: "deleteSong", videoId })
-<<<<<<< HEAD
         .then(() => {
            this.$socket.emit("deleteSong", videoId);
           console.log("song deleted");
-=======
-        .then(_ => {
-          this.$socket.emit("deleteSong",videoId);
->>>>>>> 8155cdf31e80f4d567699e8f86dfe7388c6d0233
         });
     },
     moveSong(song, idx, param) {
@@ -214,21 +200,6 @@ export default {
       // this.player.loadVideoById(this.selectedSong, currSongTime, "small");
     },
 
-    deleteSong(videoId) {
-      console.log(videoId);
-      this.$store.dispatch({ type: "deleteSong", videoId })
-      
-
-    },
-
-    
-    pauseSong() {
-            this.player.pauseVideo();
-
-      
-
-    },
-
     userJoined() {
       if (this.isAdmin) {
         this.player.getCurrentTime().then(currTime => {
@@ -244,6 +215,7 @@ export default {
       
         this.$store.dispatch({ type: "deleteSong", videoId })
     },
+    
     pauseSong(){
       this.player.pauseVideo();
     }
@@ -322,7 +294,7 @@ export default {
 }
 
 .songs-list {
-  height: 52vh;
+  height: 60vh;
   overflow: scroll;
 }
 
