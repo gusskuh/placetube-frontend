@@ -124,10 +124,7 @@ export default {
     play() {
       this.player.playVideo();
       this.$socket.emit("resumeSong");
-<<<<<<< HEAD
-=======
 
->>>>>>> 7f0fa157441df017b9ddee6221511d71ffd4dc3e
     },
     ended() {
       // let currSong = this.selectedSong;
