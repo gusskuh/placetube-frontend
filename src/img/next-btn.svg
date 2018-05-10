@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="13px" height="16px" viewBox="0 0 13 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>skip-next</title>
+    <title>next</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Icons-AV" transform="translate(-88.000000, -131.000000)" fill="#FFFFFF">
-            <g id="skip-next" transform="translate(88.000000, 131.000000)">
-                <path d="M0,12 L8.5,6 L0,0 L0,12 L0,12 Z M10,0 L10,12 L12,12 L12,0 L10,0 L10,0 Z" id="Shape"></path>
+    <g id="Playlist" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-325.000000, -167.000000)">
+        <g id="playing" transform="translate(16.000000, 103.000000)">
+            <g id="next" transform="translate(304.000000, 60.000000)">
+                <g>
+                    <rect id="Rectangle-7" x="0" y="0" width="24" height="24"></rect>
+                    <path d="M10.7438118,7.71767234 C11.144463,8.00300499 11.5205782,8.27086376 11.8324327,8.49295784 L15.4646874,11.0797487 L15.4646874,11.0797487 C16.1783405,11.5879926 16.1785346,12.4118806 15.4646874,12.9202627 L7.2921833,18.7404929 C6.57853017,19.2487368 6,18.9876023 6,18.1567566 L6,5.84325472 C6,5.01262217 6.57833609,4.75113632 7.2921833,5.25951846 C7.2921833,5.25951846 7.55431009,5.44619787 7.96285547,5.73715254" id="Triangle-Copy-2" stroke="#4B4F5A" stroke-width="2" stroke-linecap="round"></path>
+                </g>
+                <path d="M17,5 L17,19" id="Line" stroke="#4B4F5A" stroke-width="2" stroke-linecap="round"></path>
             </g>
         </g>
     </g>

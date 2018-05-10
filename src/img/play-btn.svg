@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>play-circle-outline</title>
+    <title>play</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Icons-AV" transform="translate(-168.000000, -85.000000)" fill="#FFFFFF">
-            <g id="play-circle-outline" transform="translate(168.000000, 85.000000)">
-                <path d="M8,14.5 L14,10 L8,5.5 L8,14.5 L8,14.5 Z M10,0 C4.5,0 0,4.5 0,10 C0,15.5 4.5,20 10,20 C15.5,20 20,15.5 20,10 C20,4.5 15.5,0 10,0 L10,0 Z M10,18 C5.6,18 2,14.4 2,10 C2,5.6 5.6,2 10,2 C14.4,2 18,5.6 18,10 C18,14.4 14.4,18 10,18 L10,18 Z" id="Shape"></path>
+    <g id="Playlist" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-268.000000, -156.000000)">
+        <g id="playing" transform="translate(16.000000, 103.000000)">
+            <g id="play" transform="translate(252.000000, 53.000000)">
+                <circle id="Oval-7" fill="#FD4A6C" fill-rule="evenodd" cx="19" cy="19" r="19"></circle>
+                <path d="M23.028874,17.0572023 C23.5074785,17.3980511 24.4646874,18.0797487 24.4646874,18.0797487 L24.4646874,18.0797487 C25.1783405,18.5879926 25.1785346,19.4118806 24.4646874,19.9202627 L16.2921833,25.7404929 C15.5785302,26.2487368 15,25.9876023 15,25.1567566 L15,12.8432547 C15,12.0126222 15.5783361,11.7511363 16.2921833,12.2595185 L20.8324327,15.4929578" id="Triangle" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
             </g>
         </g>
     </g>

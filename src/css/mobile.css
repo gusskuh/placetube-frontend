@@ -2,6 +2,8 @@
 
 .nav {
     display: flex;
+    position: fixed;
+    width: 100%;
     /* display: none; */
     justify-content: space-around;
     align-items: center;
@@ -10,8 +12,6 @@
     background: white;
     bottom: 0;
     border-top: 1px solid #00000042;
-    grid-row: 11/ span 1;
-    grid-column: 1 / span 12;
     /* box-shadow: 2px 4px 10px 5px #0000005c; */
   }
   
@@ -23,10 +23,6 @@
   .nav img {
     height: 30px;
     margin-bottom: 4px;
-  }
-  
-  .nav a.router-link-exact-active {
-    color: #42b983;
   }
   
   p {
@@ -47,7 +43,7 @@
   .mobile-top-menu {
     width: 100%;
     background: white;
-    position: absolute;
+    position: fixed;
     display: flex;
     /* display: none; */
     flex-direction: column;
@@ -55,6 +51,7 @@
     align-items: flex-start;
     padding: 10px;
     box-shadow: 0 2px 2px #00000063;
+    z-index: 90;
   }
   
   .mobile-top-menu > img{

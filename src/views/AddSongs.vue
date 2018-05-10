@@ -1,6 +1,13 @@
 <template>
 <div class="add-songs">
+  <div class="top-page">
+    <div class="back-to-playlist"  @click="$router.go(-1)">
+      <img class="back-to" src="../img/goback-btn.svg" alt="">
+        back to playlist
+    </div>
   <h1>add songs</h1>
+  <button class="demo-btn">demo button</button>
+  </div>
   <form @submit.prevent="search">
   <input type="text" v-model="searchInput" @input="autoComplete" placeholder="search songs...">
   <ul class="search-auto-complete">
@@ -133,6 +140,7 @@ export default {
   color: black;
   width: 90%;
   border: 1px solid black;
+  max-width: 800px;
 }
 
 .search-auto-complete > li {
@@ -143,10 +151,13 @@ export default {
   background: #29212182;
 }
 
-.add-songs {
+.add-songs{
   width: 90%;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto;
+  padding-top: 80px;
+  max-width: 800px;
 }
 
 h1 {
@@ -196,4 +207,27 @@ input {
   margin: 10px;
   border-bottom: 1px solid black;
 }
+
+.top-page{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.demo-btn{
+  visibility: hidden;
+}
+
+@media(max-width: 840px){
+
+.add-songs{
+  padding-top: 0;
+}
+
+.songs {
+  height: 76%;
+}
+ 
+}
+
 </style>

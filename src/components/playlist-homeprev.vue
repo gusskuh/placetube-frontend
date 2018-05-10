@@ -4,7 +4,8 @@
       <section class="playlist-info">
            <img v-if="getUser" class="user-pic" :src="getUser.profileImg">
         <div class="playlist-info-txt">
-       <h5>{{playlist.playlistName}}, <span>tel aviv</span></h5>
+       <h5>{{playlist.playlistName}},</h5>
+       <span>{{playlist.loc}}</span>
        <p>views: {{playlist.views}}</p> 
        </div>
        </section>
@@ -122,10 +123,16 @@ span {
 
 h5 {
   font-size: 14px;
+  margin-bottom: 0;
 }
 
 p {
   font-size: 10px;
+  margin: 0;
+}
+
+span{
+  font-size: 12px;
 }
 
 @media (max-width: 840px) {

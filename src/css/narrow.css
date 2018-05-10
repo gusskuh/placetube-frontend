@@ -9,12 +9,14 @@
 .top-menu {
     width: 100%;
     background: white;
-    position: absolute;
+    position: fixed;
+    top:0;
     box-shadow: 0 2px 2px #00000063;
     /* display: none; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 100;
   }
   
   .search {
@@ -42,10 +44,12 @@
   .top-menu-right {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 350px;
     /* min-width: 230px;
     /* max-width: 500px; */
     margin-left: 30px; 
+    list-style: none;
   }
   
   .app-info > h1 {
