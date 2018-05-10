@@ -194,18 +194,12 @@ export default {
       });
     },
     playingNewSong() {
-<<<<<<< HEAD
       this.$store.dispatch({
         type: "updateSongz",
         currSong: this.playlist.songs[0]
       });
       this.startPlay();
     },
-=======
->>>>>>> 7f0fa157441df017b9ddee6221511d71ffd4dc3e
-
-      this.$store.dispatch({ type: "updateSongz", currSong: this.playlist.songs[0] });
-      this.startPlay();
     },
 
     userJoined() {
@@ -230,14 +224,11 @@ export default {
 
     resumeSong() {
       this.player.playVideo();
-<<<<<<< HEAD
     },
     addSong(songToAdd) {
       this.$store.dispatch({ type: "addSong", song:songToAdd });
-=======
->>>>>>> 7f0fa157441df017b9ddee6221511d71ffd4dc3e
     }
-  }
+  
 };
 </script>
 
