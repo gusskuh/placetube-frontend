@@ -86,12 +86,13 @@ export default {
       currSongNum: 0,
       selectedSong: 1,
       playlist: {
-        songs:[]
+        songs: []
       },
       currSongTime: 0,
       timeInterval: 0,
       isAdmin: false,
-      isPlayingNow: true
+      isPlayingNow: true,
+      isSongPlaying: false
     };
   },
   created() {
@@ -117,6 +118,7 @@ export default {
       return this.$refs.youtube.player;
     },
     showPlaylist() {
+            
       return this.$store.getters.playlistForDisplay;
     },
 
@@ -124,19 +126,21 @@ export default {
       return this.$store.getters.loggedinUser;
     }
   },
+
   methods: {
     stop() {
       this.player.pauseVideo();
-      // this.getTime();
+      this.isSongPlaying = false
       this.$socket.emit("pauseSong");
       this.isPlayingNow = false
     },
     play() {
       this.player.playVideo();
-      this.isPlayingNow = true
+      this.$socket.emit("resumeSong");
     },
     ended() {
       // let currSong = this.selectedSong;
+      this.currSongTime = 0;
       this.playNextSong();
     },
 
@@ -144,7 +148,7 @@ export default {
       this.$store
         .dispatch({ type: "updateSongz", currSong: this.playlist.songs[0] })
         .then(() => {
-          this.$socket.emit("playingNewSong", this.playlist.songs[0]);
+          this.$socket.emit("playingNewSong");
         });
       this.startPlay();
     },
@@ -161,10 +165,11 @@ export default {
     getTime() {
       this.player.getCurrentTime().then(currTime => {
         this.currSongTime = currTime;
-        // console.log(this.currSongTime);
       });
     },
-    isPlaying(input) {},
+    isPlaying(input) {
+      this.isSongPlaying = true
+    },
     startPlay() {
       // if (!this.currSongTime) {
       this.selectedSong = this.playlist.songs[0];
@@ -175,12 +180,10 @@ export default {
       );
     },
     deleteSong(videoId) {
-      this.$store
-        .dispatch({ type: "deleteSong", videoId })
-        .then(() => {
-           this.$socket.emit("deleteSong", videoId);
-          console.log("song deleted");
-        });
+      this.$store.dispatch({ type: "deleteSong", videoId }).then(() => {
+        this.$socket.emit("deleteSong", videoId);
+        console.log("song deleted");
+      });
     },
     moveSong(song, idx, param) {
       this.$store
@@ -199,19 +202,15 @@ export default {
         param: songInfo.param
       });
     },
-    playingNewSong(currSong) {
-      console.log("new song playing!!!");
-      this.$store.dispatch({ type: "updateSongz", currSong });
+    playingNewSong() {
+      this.$store.dispatch({
+        type: "updateSongz",
+        currSong: this.playlist.songs[0]
+      });
       this.startPlay();
     },
-
-    currSongSec(currSongTime) {
-      console.log(currSongTime);
-
-      // this.player.loadVideoById(this.selectedSong, currSongTime, "small");
-    },
-
     userJoined() {
+      
       if (this.isAdmin) {
         this.player.getCurrentTime().then(currTime => {
           this.$socket.emit("startPlay", currTime);
@@ -223,12 +222,18 @@ export default {
       this.startPlay();
     },
     deleteSong(videoId) {
-      
-        this.$store.dispatch({ type: "deleteSong", videoId })
+      this.$store.dispatch({ type: "deleteSong", videoId });
     },
-    
-    pauseSong(){
+
+    pauseSong() {
       this.player.pauseVideo();
+    },
+
+    resumeSong() {
+      this.player.playVideo();
+    },
+    addSong(songToAdd) {
+      this.$store.dispatch({ type: "addSong", song:songToAdd });
     }
   }
 };

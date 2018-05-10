@@ -8,12 +8,22 @@ import VueSocketio from 'vue-socket.io'
 import '../node_modules/@glidejs/glide/dist/css/glide.core.min.css'
 import '../node_modules/@glidejs/glide/dist/css/glide.theme.min.css'
 import SocialSharing from 'vue-social-sharing'
-
- 
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.use(SocialSharing);
-Vue.use(VueSocketio, socketio('http://localhost:3000'), store);
+let socketURL = 'http://localhost:3000'
+if (process.env.NODE_ENV !== "development") {
+  socketURL = "/";
+}
+Vue.use(VueSocketio, socketio(socketURL), store);
+// Vue.use(VueSocketio, socketio('https://warm-wildwood-96194.herokuapp.com/'), store);
 Vue.use(VueYoutube);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCGx1rM6KagyXvEoGB1OFr035ivngogIL4',
+    libraries: 'places', 
+  }
+})
 import "./css/style.css";
 import "./registerServiceWorker";
 

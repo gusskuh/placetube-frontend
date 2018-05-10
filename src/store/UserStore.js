@@ -2,7 +2,8 @@ import UserService from "../services/UserService.js";
 
 export default {
   state: {
-    loggedinUser: null
+    loggedinUser: null,
+    users:[]
   },
   mutations: {
     setUser(state, { user }) {
@@ -10,11 +11,17 @@ export default {
     },
     updateUser(state, {user}) {
       state.loggedinUser = user;
+    },
+    setUsers(state, { users }) {
+      state.users = users;
     }
   },
   getters: {
     loggedinUser(state) {
       return state.loggedinUser;
+    },
+    getUsers(state) {
+      return state.users;
     }
   },
   actions: {
@@ -39,6 +46,12 @@ export default {
       // console.log('&&&&&&&&&&&&&&&&&',user, newUrl);
       UserService.updateUser(user, newUrl).then(() => {
         store.commit({ type: "updateUser", user });
+      })
+    },
+
+    loadUsers(store) {
+      return UserService.getUsers().then(users => {
+        store.commit({type:'setUsers', users})
       })
     }
   }

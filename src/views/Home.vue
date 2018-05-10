@@ -16,6 +16,7 @@
        <playlist-homeprev class="playlist-preview" v-for="playlist in showPlaylists" :key="playlist._id" :playlist="playlist"></playlist-homeprev>
        </div>
   </div>
+  
 </template>
 
 <script>
@@ -38,7 +39,10 @@ export default {
   created() {
     this.$store.dispatch({ type: "loadPlaylists" }).then(()=>{
 
-      console.log("popopooooo",this.getListByViews);
+      // console.log("popopooooo",this.getListByViews);
+      // console.log("Teelllllllll",this.getListByLoc);
+      // console.log("0000000%%%%%%%%",this.getListIfBroadcasting);
+      // console.log("99992222333334444449995885873475",this.getListIfBroadcasting);
     
     }) 
   },
@@ -52,9 +56,14 @@ export default {
      getListByViews(){
       return this.$store.getters.getListByViews;
      },
-       getListByLocation(){
-      return this.$store.getters.getListByLoc;
-     }
+     getListByLocation() {
+       return this.$store.getters.getListByLoc;
+     },
+     getListIfBroadcasting() {
+        return this.$store.getters.getListIfBroadcasting;
+     },
+     
+    
   },
   sockets: {
     
