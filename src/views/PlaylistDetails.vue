@@ -32,11 +32,9 @@
   </div>
   </social-sharing>
 
-
-
   </section>
 
-  <youtube  v-if="playlist.songs.length" height="100" width="100" ref="youtube" @ready="startPlay" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
+  <youtube  v-if="playlist.songs.length" height="100" width="100" ref="youtube" @ready="startPlay" :player-vars="playerVars" @playing="isPlaying" @ended="ended" ></youtube>
   <div class="songs-list">
      <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId"
      :class="{firstSong: idx === 0}">
@@ -81,8 +79,8 @@ export default {
         songs:[]
       },
       currSongTime: 0,
-      timeInterval: 0,
-      isAdmin: false
+      isAdmin: false,
+      isSongPlaying: false
     };
   },
   created() {
@@ -108,6 +106,7 @@ export default {
       return this.$refs.youtube.player;
     },
     showPlaylist() {
+            
       return this.$store.getters.playlistForDisplay;
     },
 
@@ -115,17 +114,21 @@ export default {
       return this.$store.getters.loggedinUser;
     }
   },
+
   methods: {
     stop() {
       this.player.pauseVideo();
-      // this.getTime();
+      this.isSongPlaying = false
       this.$socket.emit("pauseSong");
     },
     play() {
       this.player.playVideo();
+      this.$socket.emit("resumeSong");
+
     },
     ended() {
       // let currSong = this.selectedSong;
+      this.currSongTime = 0;
       this.playNextSong();
     },
 
@@ -133,7 +136,7 @@ export default {
       this.$store
         .dispatch({ type: "updateSongz", currSong: this.playlist.songs[0] })
         .then(() => {
-          this.$socket.emit("playingNewSong", this.playlist.songs[0]);
+          this.$socket.emit("playingNewSong");
         });
       this.startPlay();
     },
@@ -150,10 +153,11 @@ export default {
     getTime() {
       this.player.getCurrentTime().then(currTime => {
         this.currSongTime = currTime;
-        // console.log(this.currSongTime);
       });
     },
-    isPlaying(input) {},
+    isPlaying(input) {
+      this.isSongPlaying = true
+    },
     startPlay() {
       // if (!this.currSongTime) {
       this.selectedSong = this.playlist.songs[0];
@@ -188,19 +192,14 @@ export default {
         param: songInfo.param
       });
     },
-    playingNewSong(currSong) {
-      console.log("new song playing!!!");
-      this.$store.dispatch({ type: "updateSongz", currSong });
+    playingNewSong() {
+
+      this.$store.dispatch({ type: "updateSongz", currSong: this.playlist.songs[0] });
       this.startPlay();
     },
 
-    currSongSec(currSongTime) {
-      console.log(currSongTime);
-
-      // this.player.loadVideoById(this.selectedSong, currSongTime, "small");
-    },
-
     userJoined() {
+      
       if (this.isAdmin) {
         this.player.getCurrentTime().then(currTime => {
           this.$socket.emit("startPlay", currTime);
@@ -218,6 +217,10 @@ export default {
     
     pauseSong(){
       this.player.pauseVideo();
+    },
+
+    resumeSong() {
+      this.player.playVideo();
     }
   }
 };

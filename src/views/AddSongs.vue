@@ -80,6 +80,7 @@ export default {
       // console.log("song to add", song);
       this.$store.dispatch({ type: "addSong", song }).then(isUpdated => {
         if (isUpdated) {
+        this.$socket.emit("addSong", song)
           EventBusService.$emit(SHOW_MSG, { txt: "song added", type: "success" })
         }
       });
@@ -117,6 +118,13 @@ export default {
       }, 10000);
     }
   },
+sockets: {
+addSong(songToAdd) {
+      this.$store.dispatch({ type: "addSong", songToAdd })
+    },
+      
+    },
+  
   components: {
     userMsg
   }
