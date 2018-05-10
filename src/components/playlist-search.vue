@@ -3,7 +3,7 @@
 
    <form @submit.prevent>
                 <div class="inputs">
-                <input ref="searchBox" type="text" placeholder="search by name" v-model="filterBy.txt" @input="setFilter"  />
+                <input class="search-bar" ref="searchBox" type="text" placeholder="search by name" v-model="filterBy.txt" @input="setFilter"  />
                 </div>
             </form>
                     
@@ -108,4 +108,5 @@ button {
   width: auto;
   cursor: pointer;
 }
+
 </style>

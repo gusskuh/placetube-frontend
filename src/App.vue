@@ -98,5 +98,9 @@ margin: 0;
     font-weight: bold;
   }
 
+  .search{
+    width: 460px;
+  }
+
 
 </style>

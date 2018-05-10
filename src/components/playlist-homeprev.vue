@@ -117,8 +117,10 @@ span {
 }
 
 .user-pic {
-  height: 30px;
-  margin-right: 10px;
+      height: 30px;
+    border-radius: 500%;
+    width: 30px;
+    margin-right: 10px;
 }
 
 h5 {
