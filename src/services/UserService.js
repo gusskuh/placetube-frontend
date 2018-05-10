@@ -1,4 +1,9 @@
-const BASE_URL = "http://127.0.0.1:3000";
+let BASE_URL = "http://127.0.0.1:3000";
+
+if (process.env.NODE_ENV !== "development") {
+  BASE_URL = "";
+}
+
 import axios from "axios";
 
 function login(user) {
@@ -21,8 +26,9 @@ function register(user) {
     .post(`${BASE_URL}/register`, user)
     .then(res => console.log(res.data))
     .catch(err => {
-      console.log(err)
-      throw new Error('Registration Failed')})
+      console.log(err);
+      throw new Error("Registration Failed");
+    });
 }
 
 function logout() {
@@ -40,13 +46,12 @@ function logout() {
 
 function updateUser(user, newUrl) {
   user.profileImg = newUrl;
-  console.log('update user from service ',user);
-  console.log('update newUrl from service ',newUrl);
-  console.log('update user._id from service ',user._id);
-  
+  console.log("update user from service ", user);
+  console.log("update newUrl from service ", newUrl);
+  console.log("update user._id from service ", user._id);
+
   return axios
-  
-  
+
     .put(`${BASE_URL}/${user._id}`, user)
     .then(res => {})
     .catch(err => {
@@ -54,9 +59,24 @@ function updateUser(user, newUrl) {
     });
 }
 
+function getUsers() {
+  console.log({
+    oldWay: BASE_URL+'/users',
+    newWay: `${BASE_URL}/users`,
+    BASE_URL
+  })
+  return axios
+    .get('/users')
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => console.log(err, "failed to load users!!!"));
+}
+
 export default {
   login,
   register,
   logout,
-  updateUser
+  updateUser,
+  getUsers
 };

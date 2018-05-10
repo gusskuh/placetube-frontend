@@ -11,7 +11,8 @@ export default {
       currViewers: 0,
       loc: "",
       logo: "",
-      songs: []
+      songs: [],
+      isBroadcasting: false
     },
     filterBy: {
       txt: ""
@@ -40,11 +41,17 @@ export default {
     },
     pushAddedSong(state, { addedSong }) {
       // state.playlists.find();
+      
+      
       var playlistToUpdate = state.playlists.find(
         playlist => playlist._id === state.selectedPlaylist._id
       );
+      console.log('stage #2');
       playlistToUpdate.songs.push(addedSong);
+      console.log('stage #3');
       state.selectedPlaylist.songs.push(addedSong);
+      console.log('stage #4');
+      // state.selectedPlaylist.songs.pop();
     },
 
     deletePlaylist(state, { playlistToDelete }) {
@@ -100,7 +107,6 @@ export default {
     },
 
     updateSongs(state, { currSong }) {
-      console.log("Mutationnnnnnnnnnnnnnnnnnnnnnnnnnn!!!!!!");
       state.selectedPlaylist.songs.shift();
       state.selectedPlaylist.songs.push(currSong);
     }
@@ -143,20 +149,26 @@ export default {
       let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
       return selectedPlaylists.sort((a, b) => {
         return b.views - a.views;
+      }).slice(0,9);
+    },
+    getListByLoc(state, getters) {
+      let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
+      let loc = 'Tel Aviv'
+      return selectedPlaylists.filter(playlist => {
+        return playlist.loc.toLowerCase().includes(loc.toLowerCase())
       });
     },
-    getListByLoc(state, getters, loc) {
+
+    getListIfBroadcasting(state, getters) {
       let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
-      return selectedPlaylists.sort((a, b) => {
-        return b.views - a.views;
-      });
+      return selectedPlaylists.filter(playlist => {
+        return playlist.isBroadcasting === "true";
+      })
     }
 },
 
   actions: {
     updateSongz(store, { currSong }) {
-      console.log("actionnnnnnnnnnnnnnnnn!!!!!!", currSong);
-
       store.commit({ type: "updateSongs", currSong });
       let updatedPlaylist = store.state.selectedPlaylist;
       return PlaylistsService.updatePlaylist(updatedPlaylist).then(playlist => {
@@ -236,7 +248,6 @@ export default {
         return PlaylistsService.addSong(selectedPlaylist, song).then(
           addedSong => {
             store.commit({ type: "pushAddedSong", addedSong })
-            return true;
           }
         );
       }

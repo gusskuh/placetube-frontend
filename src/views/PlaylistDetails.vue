@@ -78,7 +78,7 @@ export default {
       currSongNum: 0,
       selectedSong: 1,
       playlist: {
-        songs:[]
+        songs: []
       },
       currSongTime: 0,
       timeInterval: 0,
@@ -123,6 +123,7 @@ export default {
     },
     play() {
       this.player.playVideo();
+      this.$socket.emit("resumeSong");
     },
     ended() {
       // let currSong = this.selectedSong;
@@ -133,7 +134,7 @@ export default {
       this.$store
         .dispatch({ type: "updateSongz", currSong: this.playlist.songs[0] })
         .then(() => {
-          this.$socket.emit("playingNewSong", this.playlist.songs[0]);
+          this.$socket.emit("playingNewSong");
         });
       this.startPlay();
     },
@@ -164,12 +165,10 @@ export default {
       );
     },
     deleteSong(videoId) {
-      this.$store
-        .dispatch({ type: "deleteSong", videoId })
-        .then(() => {
-           this.$socket.emit("deleteSong", videoId);
-          console.log("song deleted");
-        });
+      this.$store.dispatch({ type: "deleteSong", videoId }).then(() => {
+        this.$socket.emit("deleteSong", videoId);
+        console.log("song deleted");
+      });
     },
     moveSong(song, idx, param) {
       this.$store
@@ -188,9 +187,11 @@ export default {
         param: songInfo.param
       });
     },
-    playingNewSong(currSong) {
-      console.log("new song playing!!!");
-      this.$store.dispatch({ type: "updateSongz", currSong });
+    playingNewSong() {
+      this.$store.dispatch({
+        type: "updateSongz",
+        currSong: this.playlist.songs[0]
+      });
       this.startPlay();
     },
 
@@ -212,12 +213,18 @@ export default {
       this.startPlay();
     },
     deleteSong(videoId) {
-      
-        this.$store.dispatch({ type: "deleteSong", videoId })
+      this.$store.dispatch({ type: "deleteSong", videoId });
     },
-    
-    pauseSong(){
+
+    pauseSong() {
       this.player.pauseVideo();
+    },
+
+    resumeSong() {
+      this.player.playVideo();
+    },
+    addSong(songToAdd) {
+      this.$store.dispatch({ type: "addSong", song:songToAdd });
     }
   }
 };

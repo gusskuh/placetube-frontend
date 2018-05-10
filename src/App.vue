@@ -41,6 +41,7 @@ export default {
       });
     }
     this.$store.dispatch({ type: "loadPlaylists" });
+    this.$store.dispatch({ type: "loadUsers" });
   },
 
   methods: {},

@@ -40,7 +40,8 @@ export default {
         urls: [],
         views: 0,
         currViewers: 0,
-        songs: []
+        songs: [],
+        isBroadcasting: false
       },
       cloudinary: {
         uploadPreset: "btaf97mm",
