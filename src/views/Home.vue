@@ -13,6 +13,7 @@
        <playlist-homeprev class="playlist-preview" v-for="playlist in showPlaylists" :key="playlist._id" :playlist="playlist"></playlist-homeprev>
        </div>
   </div>
+  
 </template>
 
 <script>

@@ -66,7 +66,7 @@ function getUsers() {
     BASE_URL
   })
   return axios
-    .get('/users')
+    .get(`${BASE_URL}/users`)
     .then(res => {
       return res.data;
     })
