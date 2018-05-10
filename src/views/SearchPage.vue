@@ -1,7 +1,7 @@
 <template>
   <section class="search-page" style="margin-top: 100px">
-    <button @click="renderSearchBar">By Name</button>
-    <button @click="renderMap">Map</button>
+    <button @click="renderSearchBar" :class="{ active: !shouldRenderMap }">By Name</button>
+    <button @click="renderMap" :class="{ active: shouldRenderMap }">Map</button>
     <playlist-map v-if="shouldRenderMap"></playlist-map>
     <playlist-search v-if="!shouldRenderMap"></playlist-search>
   </section>
@@ -18,7 +18,8 @@ export default {
   data() {
     return {
       shouldRenderMap: false,
-      query: ''
+      query: '',
+      isMobile: false,
     };
   },
 
@@ -68,16 +69,13 @@ export default {
 
 
 button {
-  height: 4em;
-  border-radius: 6px;
-  background: #4b74ff;
-  border: 0;
-  color: white;
+    background: #4b74ff00;
+    border: 0;
+    color: #dc3545;
+    outline: none;
 }
 
-.back-to {
-  height: 40px;
-  width: auto;
-  cursor: pointer;
+.active {
+  border-bottom: 2px solid #dc3545 
 }
 </style>

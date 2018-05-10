@@ -23,20 +23,22 @@ export default {
   data() {
     return {
       filterBy: {
-        txt: ''
-      },
+        txt: ""
+      }
     };
   },
 
-mounted() {
-     this.$refs.searchBox.focus(); 
+  mounted() {
+    this.$refs.searchBox.focus();
   },
 
   methods: {
     setFilter() {
-      this.$store.commit({type: "setPlaylistFilter",filter: { ...this.filterBy }});
-    },
-
+      this.$store.commit({
+        type: "setPlaylistFilter",
+        filter: { ...this.filterBy }
+      });
+    }
   },
   computed: {
     showPlaylists() {
@@ -50,7 +52,7 @@ mounted() {
   },
 
   components: {
-    playlistHomeprev,
+    playlistHomeprev
   }
 };
 </script>
@@ -65,9 +67,8 @@ mounted() {
   align-items: center;
   width: 90%;
   height: 100%;
-  color: black
+  color: black;
 }
-
 
 .inputs {
   display: flex;
@@ -82,6 +83,7 @@ input {
   padding-left: 6px;
   font-size: 14px;
   width: 90vw;
+  outline: none;
 }
 
 button {
@@ -106,5 +108,4 @@ button {
   width: auto;
   cursor: pointer;
 }
-
 </style>

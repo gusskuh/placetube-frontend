@@ -8,12 +8,7 @@ import VueSocketio from 'vue-socket.io'
 import '../node_modules/@glidejs/glide/dist/css/glide.core.min.css'
 import '../node_modules/@glidejs/glide/dist/css/glide.theme.min.css'
 import SocialSharing from 'vue-social-sharing'
-<<<<<<< HEAD
-
-Vue.use(require('vue-moment'));
-=======
 import * as VueGoogleMaps from 'vue2-google-maps'
->>>>>>> 7f0fa157441df017b9ddee6221511d71ffd4dc3e
 
 Vue.use(SocialSharing);
 let socketURL = 'http://localhost:3000'
