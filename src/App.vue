@@ -11,7 +11,9 @@
               <h1> Connecting music with places</h1>
           </div>
       </div>
-      <input class="search" type="text">
+      <form @submit.prevent="moveToSearchPage">
+      <input ref="search" class="search" type="text" v-model="query" @input="print">
+      </form>
           <ul class="top-menu-right">
             <li><router-link to="/"><img class="nav-btn" src="./img/home-btn.svg" alt=""><br/><p>Home</p></router-link> </li>
               <li><router-link to='/search'><img class="nav-btn" src="./img/search-btn.svg" alt=""><br/><p>Search</p></router-link></li>
@@ -31,7 +33,14 @@
 </template>
 
 <script>
+import EventBusService from "./services/EventBusService.js";
+
 export default {
+  data() {
+    return {
+      query: ""
+    };
+  },
   created() {
     if (localStorage.User) {
       // console.log(loggedinUser);
@@ -44,7 +53,17 @@ export default {
     this.$store.dispatch({ type: "loadUsers" });
   },
 
-  methods: {},
+  methods: {
+    moveToSearchPage() {
+      EventBusService.$emit("searchForQuery", this.query )
+      this.$router.push('/search')
+      console.log(this.query);
+    },
+
+    print() {
+      console.log(this.query);
+    }
+  },
   computed: {
     loggedinUser() {
       return this.$store.getters.loggedinUser;
@@ -79,8 +98,5 @@ h1 {
 
 /* //////////////////////////mobile///////////////////////// */
 
-
-
 /* ////////////////////////////desktop/////////////////////////////// */
-
 </style>

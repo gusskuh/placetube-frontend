@@ -1,58 +1,54 @@
 <template>
-<section class="search-page"  style="margin-top: 159px">
-
-    <!-- ///////show back-to button only in desktop//////// -->
-    <!-- <img class="back-to" @click="$router.go(-1)" src="" alt=""> -->
-            <form @submit.prevent>
-                <div class="inputs">
-                <input ref="searchBox" type="text" placeholder="search by name" v-model="filterBy.txt" @input="setFilter"  />
-                </div>
-            </form>
-            <div class="playlist-container">
-        <div v-for="playlist in showPlaylists" :key="playlist._id">
-          <playlist-homeprev :playlist="playlist"></playlist-homeprev>
-        </div>
-         </div>
-        </section>
+  <section class="search-page" style="margin-top: 100px">
+    <button @click="renderSearchBar">By Name</button>
+    <button @click="renderMap">Map</button>
+    <playlist-map v-if="shouldRenderMap"></playlist-map>
+    <playlist-search v-if="!shouldRenderMap"></playlist-search>
+  </section>
 </template>
 
 <script>
-import playlistHomeprev from "../components/playlist-homeprev";
-
+import playlistMap from "../components/playlist-map";
+import playlistSearch from "../components/playlist-search";
+import EventBusService from "../services/EventBusService.js";
 
 export default {
-  name: "LoginPage",
+  name: "SearchPage",
 
   data() {
     return {
-      filterBy: {
-        txt: ''
-      },
+      shouldRenderMap: false,
+      query: ''
     };
   },
 
-  mounted() {
-     this.$refs.searchBox.focus(); 
+  created() {
+    EventBusService.$on("searchForQuery", query => {
+      this.query = query
+
+    })
+    
+    
+
+
+
   },
 
   methods: {
-    setFilter() {
-      this.$store.commit({type: "setPlaylistFilter",filter: { ...this.filterBy }});
-    }
-  },
-  computed: {
-    showPlaylists() {
-      return this.$store.getters.filteredPlaylistsForDisplay;
-    }
-  },
+    renderMap() {
+      this.shouldRenderMap = true;
+      // console.log(this.query);
+      
+    },
 
-  destroyed() {
-    this.filterBy.txt = "";
-    this.setFilter();
+    renderSearchBar() {
+      this.shouldRenderMap = false;
+    }
   },
 
   components: {
-    playlistHomeprev
+    playlistMap,
+    playlistSearch
   }
 };
 </script>
@@ -61,36 +57,15 @@ export default {
 .search-page {
   margin: 0 auto;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: flex-start; */
+  /* align-items: center; */
   width: 90%;
   height: 100%;
+  color: black;
 }
 
-.sign-in {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-  width: 90%;
-}
-
-.inputs {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-input {
-  margin-bottom: 30px;
-  height: 3em;
-  border-radius: 6px;
-  padding-left: 6px;
-  font-size: 14px;
-  width: 90vw;
-}
 
 button {
   height: 4em;
@@ -100,19 +75,9 @@ button {
   color: white;
 }
 
-.playlist-container {
-  display: flex;
-  margin-top: 90px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
 .back-to {
   height: 40px;
   width: auto;
   cursor: pointer;
 }
-
 </style>

@@ -46,12 +46,8 @@ export default {
       var playlistToUpdate = state.playlists.find(
         playlist => playlist._id === state.selectedPlaylist._id
       );
-      console.log('stage #2');
       playlistToUpdate.songs.push(addedSong);
-      console.log('stage #3');
       state.selectedPlaylist.songs.push(addedSong);
-      console.log('stage #4');
-      // state.selectedPlaylist.songs.pop();
     },
 
     deletePlaylist(state, { playlistToDelete }) {
@@ -74,7 +70,6 @@ export default {
       console.log("set selected playlist", selectedPlaylist);
     },
     deleteSong(state, { videoId }) {
-      // console.log('***&&&$$$$$&#&#&#&#&#&#&&##', videoId);
       let playlistToUpdate = state.playlists.find(
         playlist => playlist._id === state.selectedPlaylist._id
       );
