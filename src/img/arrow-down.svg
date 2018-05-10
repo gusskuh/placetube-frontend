@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="293px" height="166px" viewBox="0 0 293 166" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>caret-arrow-up</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="caret-arrow-up" transform="translate(146.500000, 83.000000) scale(1, -1) translate(-146.500000, -83.000000) " fill="#4B4F5A" fill-rule="nonzero">
+            <path d="M286.935,134.287 L159.028,6.381 C155.415,2.764 151.133,0.957 146.181,0.957 C141.229,0.957 136.948,2.764 133.331,6.381 L5.424,134.287 C1.807,137.904 0,142.186 0,147.134 C0,152.082 1.807,156.367 5.424,159.981 C9.045,163.598 13.326,165.406 18.274,165.406 L274.087,165.406 C279.036,165.406 283.32,163.598 286.935,159.981 C290.548,156.368 292.362,152.083 292.362,147.134 C292.362,142.185 290.548,137.904 286.935,134.287 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -18,7 +18,16 @@
     </div>
     <div class="profile-content" v-if="!isEditing && showUserName">
       <div class="profile" v-if="!selectedPlaylist">
-    
+        <div class="user-details-desktop">
+      <section class="details-desktop">
+          <img class="user-pic-desktop" :src='showUserName.profileImg' alt="profile image">
+        <div class="user-name-desktop">
+          <h2>{{showUserName.userName}}</h2>
+          <!-- <Button @click="moveToEditPage">Create Playlist</Button> -->
+          <button  @click="moveToEditPage" type="button" class="btn btn-danger">Create Playlist</button>
+        </div>
+        </section>
+    </div>
       <playlist-preview v-for="playlist in PlayListsByUserId" :key="playlist._id" :playlist="playlist"></playlist-preview>
       
 
@@ -119,16 +128,49 @@ export default {
 
 <style scoped>
 
+.my-profile{
+  height: 100%;
+}
+
+.user-details-desktop{
+    display: flex;
+    max-width: 600px;
+    justify-content: space-between;
+    height: 10%;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.details-desktop{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user-name-desktop{
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+.user-name-desktop > h2{
+ color:black;
+ font-size: 40px;
+}
+
 .profile-header {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 50px;
+  top:80px;
   background-color: black;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-around;
-   top:0
 }
 
 .user-name > button {
@@ -143,10 +185,7 @@ export default {
   line-height: 10px;
 }
 
-.profile-content {
-  margin: 20px;
-  margin-top: 70px;
-}
+
 
 h1{
   margin: 0;
@@ -156,18 +195,9 @@ h1{
 h2{
   margin: 0;
   font-size:1.4rem;
+  color:white;
 }
 
-
-
-.user-details {
-  position: sticky;
-  padding: 10px 20px 10px 20px;
-  top:50px;
-  background: #0e0921f5;
-  display: flex;
-  justify-content: center;
-}
 
 .details{
   display: flex;
@@ -189,8 +219,14 @@ ul {
 }
 
 .user-pic{
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.user-pic-desktop{
+   width: 180px;
+  height: 180px;
   border-radius: 50%;
 }
 
@@ -208,6 +244,42 @@ ul {
   align-items: center; 
   margin: 0 auto;
 }
+
+  .profile-content {
+      margin: 80px 20px 100px 20px;
+}
+
+@media(max-width: 840px){
+.profile-header {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  top:0;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.user-details {
+  position: fixed;
+  width: 100%;
+  top:50px;
+  padding: 10px 20px 10px 20px;
+  background: #0e0921f5;
+  display: flex;
+  justify-content: center;
+}
+
+.user-details-desktop{
+    display: none;
+}
+
+ .profile-content {
+  margin: 180px 20px 100px 20px;
+}
+
+ }
 
 </style>
 

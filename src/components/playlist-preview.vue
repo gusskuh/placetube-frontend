@@ -7,8 +7,8 @@
         <p>{{playlist.createdAt}}</p>
          </div>
          <div class="control">
-        <Button @click="moveToEditPage(playlist)">Edit</Button>
-        <button @click="deletePlaylist(playlist)">Del</button>
+        <i @click="moveToEditPage(playlist)" class="far fa-edit"></i>
+        <i @click="deletePlaylist(playlist)" class="far fa-trash-alt"></i>
          <!-- <div class="btn-group mr-2" role="group" aria-label="Second group">
           <button type="button" class="btn btn-secondary">Delete</button>
           <button type="button" class="btn btn-secondary">Edit</button>
@@ -44,13 +44,32 @@ export default {
 
 .control {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-self: flex-end;
+}
+
+.control > i{
+  padding: 16px;
+  font-size: 20px;
+  background:#f1f1f1;
+  border-radius: 10px;
+  transition: all .3s;
+  /* width: 60px;
+  height: 60px; */
+}
+
+.control > i:first-child{
+margin-right: 10px;
+}
+
+
+.control > i:hover{
+  background:#d4d2d2;
 }
 
 .playlist-content{
     display: flex;
-    max-width: 600px;
+    max-width: 700px;
     height: 10%;
     cursor: pointer;
     margin: 0 auto;
@@ -107,4 +126,21 @@ h4{
     width: 250px;
     height: 150px;
 }
+
+
+@media(max-width: 840px){
+
+.control > i{
+  padding: 10px;
+  font-size: 20px;
+  background:#f1f1f1;
+  border-radius: 10px;
+  transition: all .3s;
+  width: 40px;
+  
+}
+
+}
+
+
 </style>

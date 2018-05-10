@@ -143,7 +143,7 @@ export default {
       let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
       return selectedPlaylists.sort((a, b) => {
         return b.views - a.views;
-      });
+      }).slice(0,8);
     },
     getListByLoc(state, getters, loc) {
       let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));

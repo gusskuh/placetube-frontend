@@ -4,7 +4,8 @@
       <section class="playlist-info">
            <img class="user-pic" src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" alt="">
         <div class="playlist-info-txt">
-       <h5>{{playlist.playlistName}}, <span>tel aviv</span></h5>
+       <h5>{{playlist.playlistName}},</h5>
+       <span>{{playlist.loc}}</span>
        <p>views: {{playlist.views}}</p> 
        </div>
        </section>
@@ -127,10 +128,16 @@ span{
 
 h5{
   font-size: 14px;
+  margin-bottom: 0;
 }
 
 p{
   font-size: 10px;
+  margin: 0;
+}
+
+span{
+  font-size: 12px;
 }
 
 @media(max-width: 840px){
