@@ -107,7 +107,7 @@ span {
   width: 100%;
   margin: 0 auto;
   height: 30%;
-  background:#cec0c085;
+  background:#d6cbcb2b;
   padding-left: 10px;
 }
 
