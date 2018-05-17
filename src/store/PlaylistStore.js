@@ -154,6 +154,10 @@ export default {
       });
     },
 
+    getFilterBy(state, getters) {
+      return state.filterBy
+    },
+
     getListIfBroadcasting(state, getters) {
       let selectedPlaylists = JSON.parse(JSON.stringify(state.playlists));
       return selectedPlaylists.filter(playlist => {

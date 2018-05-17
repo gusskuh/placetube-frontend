@@ -3,7 +3,13 @@
     <button @click="renderSearchBar" :class="{ active: !shouldRenderMap }">By Name</button>
     <button @click="renderMap" :class="{ active: shouldRenderMap }">Map</button>
     <playlist-map v-if="shouldRenderMap"></playlist-map>
-    <playlist-search v-if="!shouldRenderMap"></playlist-search>
+    <playlist-search v-if="!filterBy.txt"></playlist-search>
+    <div class="playlist-container">
+        <div v-for="playlist in showPlaylists" :key="playlist._id">
+          <playlist-homeprev :playlist="playlist"></playlist-homeprev>
+
+        </div>
+         </div>
   </section>
 </template>
 
@@ -11,6 +17,7 @@
 import playlistMap from "../components/playlist-map";
 import playlistSearch from "../components/playlist-search";
 import EventBusService from "../services/EventBusService.js";
+import playlistHomeprev from "../components/playlist-homeprev";
 
 export default {
   name: "SearchPage",
@@ -18,28 +25,26 @@ export default {
   data() {
     return {
       shouldRenderMap: false,
-      query: '',
-      isMobile: false,
     };
   },
 
-  created() {
-    EventBusService.$on("searchForQuery", query => {
-      this.query = query
+  created() {},
 
-    })
-    
-    
-
-
-
+  destroyed() {
+    this.$store.commit({ type: "setPlaylistFilter", filter: { txt: "" } });
+  },
+  computed: {
+    showPlaylists() {
+      return this.$store.getters.filteredPlaylistsForDisplay;
+    },
+    filterBy() {
+      return this.$store.getters.getFilterBy;
+    }
   },
 
   methods: {
     renderMap() {
       this.shouldRenderMap = true;
-      // console.log(this.query);
-      
     },
 
     renderSearchBar() {
@@ -49,7 +54,8 @@ export default {
 
   components: {
     playlistMap,
-    playlistSearch
+    playlistSearch,
+    playlistHomeprev
   }
 };
 </script>
@@ -67,15 +73,14 @@ export default {
   color: black;
 }
 
-
 button {
-    background: #4b74ff00;
-    border: 0;
-    color: #dc3545;
-    outline: none;
+  background: #4b74ff00;
+  border: 0;
+  color: #dc3545;
+  outline: none;
 }
 
 .active {
-  border-bottom: 2px solid #dc3545 
+  border-bottom: 2px solid #dc3545;
 }
 </style>

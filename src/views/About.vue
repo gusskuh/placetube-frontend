@@ -115,5 +115,67 @@ div.about-item-info-pic {
 .about-item-info-pic.img-first {
   background-image: url('https://d33wubrfki0l68.cloudfront.net/9d49a8dfa3dac6d9c4d10794494af5d2741f319e/6d773/img/features/voting.jpg');
 }
+
+h1 {
+  margin: 10px 0;
+}
+
+.about-item-body-info p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+@media(max-width: 840px) {
+
+.about-page-container {
+  margin-top: 20px;
+  font-size: 25px;
+
+}
+ 
+ .about-item-header h1 {
+   font-size: 25px;
+ }
+
+ .about-item-header {
+  margin-bottom: 30px;
+}
+
+.about-item-body {
+  margin-bottom: 20px;
+}
+
+.about-item-header p {
+  font-size: 0.6em;
+}
+
+ .about-item-info h1 {
+   font-size: 20px;
+   margin: 0;
+ }
+
+ .about-item-details.img-first {
+  padding: 20px 0 20px 15px;
+}
+
+.about-item-details p {
+  font-size: 12px;
+
+}
+
+.about-item-details.p-first {
+  padding: 20px 10px 20px 0;
+}
+
+div.about-item-info-pic {
+  height: auto;
+}
+
+.about-page-container {
+  margin-bottom: 90px;
+}
+
+ 
+}
 </style>
 

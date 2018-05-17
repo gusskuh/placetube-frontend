@@ -1,19 +1,20 @@
 <template>
-<section class="playlist-search">
+  <section class="playlist-search">
 
-   <form @submit.prevent>
-                <div class="inputs">
-                <input class="search-bar" ref="searchBox" type="text" placeholder="search by name" v-model="filterBy.txt" @input="setFilter"  />
-                </div>
-            </form>
-                    
-            <div class="playlist-container">
-        <div v-for="playlist in showPlaylists" :key="playlist._id">
-          <playlist-homeprev :playlist="playlist"></playlist-homeprev>
+    <form @submit.prevent="setFilter">
+      <div class="inputs">
+        <input ref="searchBox" class="search-bar" placeholder="search by name" type="text" v-model="filterBy.txt">
+      </div>
 
-        </div>
-         </div>
-        </section>
+    </form>
+
+    <div class="playlist-container">
+      <div class="playlist-views-preview" v-for="playlist in showPlaylists" :key="playlist._id">
+        <playlist-homeprev :playlist="playlist"></playlist-homeprev>
+
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -46,10 +47,10 @@ export default {
     }
   },
 
-  destroyed() {
-    this.filterBy.txt = "";
-    this.setFilter();
-  },
+  // destroyed() {
+  //   this.filterBy.txt = "";
+  //   this.setFilter();
+  // },
 
   components: {
     playlistHomeprev
@@ -103,10 +104,5 @@ button {
   cursor: pointer;
 }
 
-.back-to {
-  height: 40px;
-  width: auto;
-  cursor: pointer;
-}
 
 </style>

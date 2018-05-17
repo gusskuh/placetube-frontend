@@ -11,7 +11,7 @@
           </div>
       </div>
       <form @submit.prevent="moveToSearchPage">
-      <input ref="search" class="search" type="text" v-model="query" @input="print">
+      <input ref="search" class="search" type="text" v-model="filterBy.txt">
       </form>
           <ul class="top-menu-right">
             <li><router-link to="/"><i class="fas fa-home nav-btn"></i><br/><p>Home</p></router-link> </li>
@@ -36,7 +36,9 @@ import EventBusService from "./services/EventBusService.js";
 export default {
   data() {
     return {
-      query: ""
+      filterBy: {
+        txt: ""
+      }
     };
   },
   created() {
@@ -53,19 +55,26 @@ export default {
 
   methods: {
     moveToSearchPage() {
-      EventBusService.$emit("searchForQuery", this.query )
-      this.$router.push('/search')
-      console.log(this.query);
+      if (!this.filterBy.txt) return;
+      else {
+
+        this.setFilter()
+        this.filterBy.txt = '';
+        this.$router.push('/search')
+      }
     },
 
-    print() {
-      console.log(this.query);
+    setFilter() {
+      this.$store.commit({
+        type: "setPlaylistFilter",
+        filter: { ...this.filterBy }
+      });
     }
   },
   computed: {
     loggedinUser() {
       return this.$store.getters.loggedinUser;
-    }
+    },
   }
 };
 </script>
