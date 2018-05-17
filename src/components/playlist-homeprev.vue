@@ -107,6 +107,8 @@ span {
   width: 100%;
   margin: 0 auto;
   height: 30%;
+  /* background: #ffe7e7;
+  padding-left: 10px; */
 }
 
 .logo {

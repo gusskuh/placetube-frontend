@@ -10,8 +10,16 @@
               <h1> Connecting music with places</h1>
           </div>
       </div>
-      <form @submit.prevent="moveToSearchPage">
-      <input ref="search" class="search" type="text" v-model="query" @input="print">
+      <form class="search-box" @submit.prevent="moveToSearchPage">
+      <!-- <input ref="search" class="search" type="text" v-model="query" @input="print" placeholder="search"> -->
+    <div class="input-group">
+    <input class="search-input" ref="search" type="text" v-model="query" @input="print" placeholder="search">
+    <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">
+      <i class="fas fa-search"></i>
+    </button>
+         </div>
+     </div>
       </form>
           <ul class="top-menu-right">
             <li><router-link to="/"><i class="fas fa-home nav-btn"></i><br/><p>Home</p></router-link> </li>
@@ -98,8 +106,24 @@ margin: 0;
     font-weight: bold;
   }
 
-  .search{
-    width: 460px;
+/* /////////////////search box///////////////// */
+
+  .search-box{
+    width: 100%;
+    max-width: 660px;
+  }
+
+  .input-group{
+    width: 100%;
+  }
+
+  .search-input{
+      padding-left: 10px;
+      width:calc(100% - 38px);
+  }
+
+  .input-group-append{
+     width: 38px;
   }
 
 

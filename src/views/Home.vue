@@ -15,6 +15,9 @@
           <h1 class="recomended-playlists">Recomended</h1>
        <playlist-homeprev class="playlist-preview" v-for="playlist in showPlaylists" :key="playlist._id" :playlist="playlist"></playlist-homeprev>
        </div>
+       <div class="footer">
+         <h5>@ 2018 Jukebox</h5>
+         </div>
   </div>
   
 </template>
@@ -77,11 +80,21 @@ h1{
   color: black;
 }
 
+.footer{
+  width: 100%;
+  background: white;
+  border-top: 1px solid #0000005e;
+}
+
+.footer > h5{
+  margin:0;
+  padding: 10px;
+}
+
 .home {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100%;
 }
 
 .app-info > h1 {
@@ -104,8 +117,8 @@ h1{
 
 .playlist-preview {
   width: 90%;
-  grid-row: span 3;
-  grid-column: span 3;
+  grid-row: span 4;
+  grid-column: span 4;
 }
 
 /* .playlist-views-preview{
@@ -115,7 +128,7 @@ h1{
 } */
 
 .near-playlists{
-  grid-row:  2 / span 3;
+  grid-row:  2 / span 4;
   grid-column: span 12;
   display: flex;
   justify-content: center;
@@ -135,22 +148,25 @@ h1{
   grid-column: span 12;
   font-size: 25px;
   align-items: center;
+  border-bottom: 1px solid #00000040;
 }
 
 .playlists-header{
   font-size: 25px;
   display: flex;
   align-items: center;
-  grid-row:  5 / span 1;
+  grid-row:  6 / span 1;
   grid-column: span 12;
+  border-bottom: 1px solid #00000040;
 }
 
 .recomended-playlists{
   font-size: 25px;
   display: flex;
   align-items: center;
-  grid-row:  12 / span 1;
+  grid-row:  15 / span 1;
   grid-column: span 12;
+  border-bottom: 1px solid #00000040;
 }
 
 @media(max-width: 840px){
@@ -182,9 +198,9 @@ h1{
     width: 100%;
 }
 
-.playlist-preview {
-  border-bottom: 1px solid black;
-}
+/* .playlist-preview {
+   border-bottom: 1px solid #00000047;
+} */
 
 .recomended-playlists{
    grid-row:  48 / span 1;

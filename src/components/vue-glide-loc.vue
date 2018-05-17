@@ -44,7 +44,7 @@ export default {
   computed: {
     count(){
       if (window.innerWidth < 840) return 1
-      else return 4
+      else return 3
     },
      getListByLocation(){
       return this.$store.getters.getListByLoc;
