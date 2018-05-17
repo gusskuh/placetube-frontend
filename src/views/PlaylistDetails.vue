@@ -2,11 +2,18 @@
  <div class="playlist">
    <div class="playlist-header">
      <img class="back-to" @click="$router.go(-1)" src="../img/goback-btn.svg" alt="">
-     <h2>{{playlist.playlistName}}</h2>
+     <h2>{{playlist.playlistName}}, <span style="font-weight:200;">{{playlist.loc}}</span></h2>
      <span class="demo-span"></span>
    </div>
    <section class="top-page"> 
-       <img class="playingSong-img" v-if="selectedSong" :src='selectedSong.url' alt="">
+        <div class="playingSong-img" :style="{ backgroundImage: 'url(' + selectedSong.url + ')' }">
+          <div class="control-panel">
+       <img class="skip-btns" @click.stop="playSong(currSongNum-1)" src="../img/prev-btn.svg" alt="">
+      <img v-if="!isPlayingNow" class="main-btn"  @click.stop="play()" src="../img/play-btn.svg" alt="">
+      <img v-if="isPlayingNow" class="main-btn" @click.stop="stop" src="../img/stop-btn.svg" alt="">
+      <img class="skip-btns" @click.stop="playSong(currSongNum+1)" src="../img/next-btn.svg" alt="">
+         </div>
+           </div>
           <div class="playingSong-info">
           <h1  v-if="selectedSong" >{{selectedSong.title}}</h1>
   <router-link to="/myProfile/addSongs"><p class="add-songs-btn">add songs</p></router-link>
@@ -27,47 +34,29 @@
       </network>
   </div>
   </social-sharing> 
-      <div class="control-panel">
-       <img class="skip-btns" @click.stop="playSong(currSongNum-1)" src="../img/prev-btn.svg" alt="">
-       <!-- <div class="main-btns"> -->
-      <img v-if="!isPlayingNow" class="main-btn"  @click.stop="play()" src="../img/play-btn.svg" alt="">
-      <img v-if="isPlayingNow" class="main-btn" @click.stop="stop" src="../img/stop-btn.svg" alt="">
-        <!-- </div> -->
-      <img class="skip-btns" @click.stop="playSong(currSongNum+1)" src="../img/next-btn.svg" alt="">
-      
-   </div>
   </div>
   </section>
 
   <youtube  v-if="playlist.songs.length" height="0" width="0" ref="youtube" @ready="startPlay" :player-vars="playerVars" @playing="isPlaying" @ended="ended" @paused="isPlaying('stop playing')"></youtube>
-  <!-- <section class="playlist-main"> -->
   <div class="songs-list">
      <div class="song-preview" v-for="(song, idx) in showPlaylist.songs" :key="song.videoId"
      :class="{firstSong: idx === 0}">
        <div class="song-left">
         <img class="songImg" :src="song.url" alt="">
-       <p @click="playSong(song, idx)">{{song.title}}</p>
+       <p @click="playSong(song, idx)">{{idx+1}}. {{song.title}}</p>
        </div>
        <div class="song-right">
        <img  v-if="idx !== 0" :disabled="idx === 1" @click="moveSong(song, idx, -1)" class="move-btn" src="../img/arrow-up.svg" alt="">
        <img  v-if="idx !== 0" :disabled="idx === showPlaylist.songs.length-1" @click="moveSong(song, idx, 1)" class="move-btn" src="../img/arrow-down.svg" alt="">
-       <!-- <button v-if="idx !== 0" :disabled="idx === 1" @click="moveSong(song, idx, -1)">▲</button>
-       <button v-if="idx !== 0" :disabled="idx === showPlaylist.songs.length-1" @click="moveSong(song, idx, 1)">▼</button> -->
-       <button v-if="isAdmin && idx !== 0" @click="deleteSong(song.videoId)" type="button" class="btn btn-link btn-sm">Remove</button>
-       <!-- <button v-if="isAdmin && idx !== 0" @click="deleteSong(song.videoId)">delete</button> -->
+        <img v-if="isAdmin && idx !== 0" @click="deleteSong(song.videoId)" class="move-btn" style="height:30px;" src="../img/delete-btn.svg" alt="">
+         <div v-if="idx === 0">
+        <h5 class="song-playing-now" v-if="isPlayingNow">Now Playing</h5>
+        <h5 class="song-playing-now" v-if="!isPlayingNow">Paused</h5>
+        </div>
+       <!-- <button v-if="isAdmin && idx !== 0" @click="deleteSong(song.videoId)" type="button" class="btn btn-link btn-sm">Remove</button> -->
        </div>
        </div>
   </div>
-  <!-- </section> -->
-    <!-- <div class="control-panel">
-       <img class="skip-btns" @click.stop="playSong(currSongNum-1)" src="../img/prev-btn.svg" alt="">
-       <div class="main-btns">
-      <img class="main-btn"  @click.stop="play()" src="../img/play-btn.svg" alt="">
-      <img  class="main-btn" @click.stop="stop" src="../img/stop-btn.svg" alt="">
-        </div>
-      <img class="skip-btns" @click.stop="playSong(currSongNum+1)" src="../img/next-btn.svg" alt="">
-      
-   </div> -->
   </div>
 </template>
 
@@ -137,7 +126,7 @@ export default {
     play() {
       this.player.playVideo();
       this.$socket.emit("resumeSong");
-
+      this.isPlayingNow = true;
     },
     ended() {
       // let currSong = this.selectedSong;
@@ -261,7 +250,12 @@ export default {
 .playlist-header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  align-items: center;
+  margin: 20px 0 20px 0;
+  border-bottom: 2px solid #00000052;
+  padding: 4px;
+  border-bottom: 2px solid #00000052;
+  background: white;
 }
 
 .top-page{
@@ -274,7 +268,33 @@ export default {
 
 .songs-list {
     overflow: scroll;
-    height: calc(65% - 66px);
+    height: 50vh;
+    background: white;
+    box-shadow: 0 0 6px #0000003d;
+    border: 1px solid #0000004d;
+}
+
+.song-playing-now{
+      margin-right: 20px;
+    margin-bottom: 0px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 10px;
+    color: red;
+     width: 140px;
+}
+
+.playingSong-img{   
+  height: 100%;
+  width: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-shadow: 0 0 6px #000000d4;
 }
 
 .control-panel {
@@ -282,38 +302,40 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 200px;
+  /* max-width: 200px; */
   height: 60px;
+  background:#422424d9;
 }
 
-.playingSong-img{    
-  object-fit: cover;
-  overflow: hidden;
-  height: 100%;
-  width: 300px;
-  border-radius: 4px;
-}
 
 .playingSong-info{
   /* width: 300px; */
   font-size: 12px;
-  padding-left: 10px;
+  margin-left: 10px;
   width: 60%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 0 6px #0000002e;
+  padding: 10px;
+   background: white;
+  border: 1px solid #0000004d;
 }
 
 .playingSong-info h1{
     font-size: 20px;
     text-align: center;
-    /* width: 200px; */
+    width: 100%;
+    overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .add-songs-btn{
-    padding: 6px 16px 6px 16px;
+    padding: 4px 20px 4px 20px;
     border: 1px solid black;
     border-radius: 30px;
     color: black;
@@ -331,8 +353,9 @@ a{
   display: flex;
   justify-content: space-between;
   margin-bottom: 6px;
-  /* padding: 0 8px 0 8px; */
+  padding: 6px;
   font-size: 12px;
+  border-bottom: 1px solid #00000054;
 }
 
 .songs-preview > .firstSong{
@@ -360,10 +383,13 @@ border-radius: 10px;
 }
 
 .song-left p {
-  text-overflow: clip (default);
   height: 60px;
   padding-left: 10px;
   text-align: left;
+      overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .main-btns {
@@ -384,7 +410,7 @@ border-radius: 10px;
 }
 
 .skip-btns {
-  height: 40px;
+  height: 30px;
   width: auto;
   margin-left: 20px;
   margin-right: 20px;
@@ -394,6 +420,8 @@ border-radius: 10px;
   height: 28px;
   width: auto;
   cursor: pointer;
+  align-self: center;
+  margin-right: 10px;
 }
 
 .firstSong {
@@ -415,10 +443,25 @@ border-radius: 10px;
 
 .songs-list {
     padding-bottom: 60px;
+    height: calc(60% - 84px);
 }
 
-.playlist-header {
-  padding: 14px;
+.playlist-header h2{
+  font-size: 30px;
+  margin: 0;
+}
+ 
+}
+
+
+@media(max-width:420px){
+
+.playlist-header h2{
+  font-size: 24px;
+}
+
+.back-to{
+  height: 20px;
 }
  
 }

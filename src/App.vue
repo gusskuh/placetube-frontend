@@ -10,8 +10,15 @@
               <h1> Connecting music with places</h1>
           </div>
       </div>
-      <form @submit.prevent="moveToSearchPage">
-      <input ref="search" class="search" type="text" v-model="filterBy.txt">
+      <form class="search-box" @submit.prevent="moveToSearchPage">
+    <div class="input-group">
+    <input class="search-input" ref="search" type="text" v-model="filterBy.txt" placeholder="search">
+    <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">
+      <i class="fas fa-search"></i>
+    </button>
+         </div>
+     </div>
       </form>
           <ul class="top-menu-right">
             <li><router-link to="/"><i class="fas fa-home nav-btn"></i><br/><p>Home</p></router-link> </li>
@@ -57,10 +64,9 @@ export default {
     moveToSearchPage() {
       if (!this.filterBy.txt) return;
       else {
-
-        this.setFilter()
-        this.filterBy.txt = '';
-        this.$router.push('/search')
+        this.setFilter();
+        this.filterBy.txt = "";
+        this.$router.push("/search");
       }
     },
 
@@ -74,42 +80,55 @@ export default {
   computed: {
     loggedinUser() {
       return this.$store.getters.loggedinUser;
-    },
+    }
   }
 };
 </script>
 
 <style scoped>
-
-p{
-margin: 0;
+p {
+  margin: 0;
 }
 
 .nav-btn {
-  font-size: 30px
+  font-size: 30px;
 }
 
- .nav a {
-    color: #2c3e50;
-  }
+.nav a {
+  color: #2c3e50;
+}
 
 .nav a.router-link-exact-active {
-   color: #dc3545;
-    font-weight: bold;
-  }
+  color: #dc3545;
+  font-weight: bold;
+}
 
-  .top-menu-right a {
-    color: #2c3e50;
-  }
+.top-menu-right a {
+  color: #2c3e50;
+}
 
-  .top-menu-right a.router-link-exact-active {
-    color: #dc3545;
-    font-weight: bold;
-  }
+.top-menu-right a.router-link-exact-active {
+  color: #dc3545;
+  font-weight: bold;
+}
 
-  .search{
-    width: 460px;
-  }
+/* /////////////////search box///////////////// */
 
+.search-box {
+  width: 100%;
+  max-width: 660px;
+}
 
+.input-group {
+  width: 100%;
+}
+
+.search-input {
+  padding-left: 10px;
+  width: calc(100% - 38px);
+}
+
+.input-group-append {
+  width: 38px;
+}
 </style>
