@@ -267,7 +267,7 @@ export default {
 }
 
 .songs-list {
-    overflow: scroll;
+    overflow-y: scroll;
     height: 50vh;
     background: white;
     box-shadow: 0 0 6px #0000003d;
@@ -433,7 +433,26 @@ border-radius: 10px;
   border-radius: 4px;
 }
 
+/* ////////////////////scroll-bar/////////////////////////// */
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
 
 @media(max-width: 840px){
 

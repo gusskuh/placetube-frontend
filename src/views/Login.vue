@@ -8,9 +8,10 @@
                 </div>
                 <button type="submit" :disabled="!this.user.email || !this.user.password">Log in</button>
             </form>
-
-            dont have an account?
+             <div class="register">
+            <p>dont have an account?</p>
             <router-link to="/register">Register</router-link>
+            </div>
             <user-msg></user-msg>
 
 
@@ -65,6 +66,7 @@ export default {
   align-items: center;
   height: 100%;
   width: 90%;
+  max-width: 600px;
 }
 
 .sign-in {
@@ -95,4 +97,13 @@ button {
   border: 0;
   color: white;
 }
+
+@media(max-width: 840px){
+  
+.register{
+  margin-bottom: 90px;
+}
+ 
+}
+
 </style>

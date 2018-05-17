@@ -142,5 +142,15 @@ h4{
 
 }
 
+ @media(max-width: 560px){
+   
+
+.control > i{
+    padding: 10px;
+    font-size: 15px;
+}
+
+ }
+
 
 </style>

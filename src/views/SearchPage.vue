@@ -1,7 +1,9 @@
 <template>
   <section class="search-page" style="margin-top: 100px">
+    <div class="search-filter">
     <button @click="renderSearchBar" :class="{ active: !shouldRenderMap }">By Name</button>
     <button @click="renderMap" :class="{ active: shouldRenderMap }">Map</button>
+    </div>
     <playlist-map v-if="shouldRenderMap"></playlist-map>
     <playlist-search v-if="!filterBy.txt"></playlist-search>
     <div class="playlist-container">
@@ -61,13 +63,14 @@ export default {
 </script>
 
 <style scoped>
+
+.search-filter{
+display: flex;
+}
+
 .search-page {
   margin: 0 auto;
   padding: 20px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: flex-start; */
-  /* align-items: center; */
   width: 90%;
   height: 100%;
   color: black;
